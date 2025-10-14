@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --account=rrg-guanuofa
 #SBATCH --gpus=h100:1
-#SBATCH --mem=128G
+#SBATCH --mem=256G
 #SBATCH --time=7-0
 #SBATCH --job-name=esm-step-3-15B-divide5-no-matrix-dirpath
 #SBATCH --output=output/esm_step_3_15B-divide5-no_matrix_dirpath_%j.out

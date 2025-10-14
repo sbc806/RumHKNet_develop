@@ -159,8 +159,7 @@ python -u run.py \
   --matrix_add_special_token \
   --no_token_type_embeddings \
   --no_position_embeddings \
-  --use_rotary_position_embeddings \
-  --divide_classification_weight 5
+  --use_rotary_position_embeddings
 
 
 

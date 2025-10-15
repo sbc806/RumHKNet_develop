@@ -160,7 +160,8 @@ python -u run.py \
   --no_token_type_embeddings \
   --no_position_embeddings \
   --use_rotary_position_embeddings \
-  --divide_classification_weight 5
+  --divide_classification_weight 5 \
+  --embedding_input_size 5120 \
 
 
 

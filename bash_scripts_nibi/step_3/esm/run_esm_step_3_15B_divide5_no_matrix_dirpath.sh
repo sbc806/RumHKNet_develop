@@ -4,7 +4,7 @@
 #SBATCH --mem=256G
 #SBATCH --time=7-0
 #SBATCH --job-name=esm-step-3-15B-divide5-no-matrix-dirpath
-#SBATCH --output=output/esm_step_3_15B-divide5-no_matrix_dirpath_%j.out
+#SBATCH --output=output/esm_step_3_15B_divide5_no_matrix_dirpath_%j.out
 #SBATCH --err=output/esm_step_3_15B_divide5_no_matrix_dirpath_%j.err
 
 

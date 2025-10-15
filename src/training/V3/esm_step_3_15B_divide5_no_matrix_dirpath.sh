@@ -161,7 +161,7 @@ python -u run.py \
   --no_position_embeddings \
   --use_rotary_position_embeddings \
   --divide_classification_weight 5 \
-  --embedding_input_size 5120 \
+  --embedding_input_size 5120
 
 
 

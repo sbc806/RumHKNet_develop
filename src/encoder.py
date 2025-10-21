@@ -39,6 +39,7 @@ def complete_embedding_matrix_esm(
         matrix_add_special_token,
         embedding_complete,
         embedding_complete_seg_overlap,
+        version,
         device
 ):
     if init_emb is not None and embedding_complete and ("representations" in embedding_type or "matrix" in embedding_type):
@@ -81,7 +82,7 @@ def complete_embedding_matrix_esm(
                                                                                repr_layers=[-1],
                                                                                truncation_seq_length=truncation_seq_length,
                                                                                device=device,
-                                                                               version="3B",
+                                                                               version=llm_step,
                                                                                matrix_add_special_token=False
                                                                                )
                             # 有seq overlap 所以要截取
@@ -99,7 +100,7 @@ def complete_embedding_matrix_esm(
                                                                                repr_layers=[-1],
                                                                                truncation_seq_length=truncation_seq_length,
                                                                                device=device,
-                                                                               version="3B",
+                                                                               version=llm_step,
                                                                                matrix_add_special_token=False
                                                                                )
                             # 有seq overlap 所以要截取
@@ -120,7 +121,7 @@ def complete_embedding_matrix_esm(
                                                                                repr_layers=[-1],
                                                                                truncation_seq_length=truncation_seq_length,
                                                                                device=device,
-                                                                               version="3B",
+                                                                               version=llm_step,
                                                                                matrix_add_special_token=False
                                                                                )
                             # 有seq overlap 所以要截取
@@ -138,7 +139,7 @@ def complete_embedding_matrix_esm(
                                                                                repr_layers=[-1],
                                                                                truncation_seq_length=truncation_seq_length,
                                                                                device=device,
-                                                                               version="3B",
+                                                                               version=llm_step,
                                                                                matrix_add_special_token=False
                                                                                )
                             # 有seq overlap 所以要截取
@@ -172,7 +173,7 @@ def complete_embedding_matrix_esm(
                             repr_layers=[-1],
                             truncation_seq_length=truncation_seq_length,
                             device=device,
-                            version="3B",
+                            version=llm_step,
                             matrix_add_special_token=False
                         )
 
@@ -199,7 +200,7 @@ def complete_embedding_matrix_esm(
                             repr_layers=[-1],
                             truncation_seq_length=truncation_seq_length,
                             device=device,
-                            version="3B",
+                            version=llm_step,
                             matrix_add_special_token=False
                         )
                         last_seg_emb = last_seg_emb[-really_len:, :]
@@ -216,7 +217,7 @@ def complete_embedding_matrix_esm(
                                                                                        repr_layers=[-1],
                                                                                        truncation_seq_length=truncation_seq_length,
                                                                                        device=device,
-                                                                                       version="3B",
+                                                                                       version=llm_step,
                                                                                        matrix_add_special_token=False
                                                                                        )
                         first_seg_emb = first_seg_emb[:really_len, :]
@@ -400,7 +401,7 @@ class Encoder(object):
                         embedding_type=embedding_type,
                         repr_layers=[-1],
                         truncation_seq_length=truncation_seq_length,
-                        version="3B",
+                        version=self.llm_step,
                         matrix_add_special_token=self.matrix_add_special_token,
                         device=self.device
                     )
@@ -416,6 +417,7 @@ class Encoder(object):
                             matrix_add_special_token=self.matrix_add_special_token,
                             embedding_complete=self.embedding_complete,
                             embedding_complete_seg_overlap=self.embedding_complete_seg_overlap,
+                            version=self.llm_step,
                             device=self.device
                         )
             else:

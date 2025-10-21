@@ -387,6 +387,7 @@ def predict_embedding(sample,
         else:
             protein_seq = protein_seq[:truncation_seq_length]
     if global_model is None or global_alphabet is None or global_version is None or global_version != version or global_layer_size is None:
+        print("version and truncation_seq_length:", version, truncation_seq_length)
         if version == "15B":
             llm_name = "esm2_t48_15B_UR50D"
             global_layer_size = 48

@@ -70,13 +70,13 @@ max_steps=-1
 ## batch size for one GPU
 batch_size=8
 ## 最大学习速率(peak learning rate)
-learning_rate=2e-4
+learning_rate=2e-3
 ## data loading buffer size
 buffer_size=10240
 ## tokenizer dir
 tokenizer_dir="step_1"
 ## positive weight
-pos_weight=0.37
+pos_weight=0.4
 
 # model building time
 time_str=$(date "+%Y%m%d%H%M%S")
@@ -98,7 +98,7 @@ python run_seq_only.py \
   --seq_subword \
   --codes_file ../subword/$tokenizer_dir/$codes_file \
   --label_filepath ../kinases_dataset/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/label.txt  \
-  --output_dir ../models_037/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/$MODEL_TYPE/$INPUT_TYPE/$time_str \
+  --output_dir ../models_lr2e3/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/$MODEL_TYPE/$INPUT_TYPE/$time_str \
   --log_dir ../logs/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/$MODEL_TYPE/$INPUT_TYPE/$time_str \
   --tb_log_dir ../tb-logs/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/$MODEL_TYPE/$INPUT_TYPE/$time_str \
   --config_path ../config/$MODEL_TYPE/$CONFIG_NAME \

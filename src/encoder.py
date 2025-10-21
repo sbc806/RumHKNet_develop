@@ -246,6 +246,7 @@ def complete_embedding_matrix_esm(
 class Encoder(object):
     def __init__(self,
                  llm_type,
+                 llm_step,
                  llm_dirpath,
                  input_type,
                  trunc_type,
@@ -259,6 +260,7 @@ class Encoder(object):
                  **kwargs):
         print("------Encoder------")
         self.llm_type = llm_type
+        self.llm_step = llm_step
         self.llm_dirpath = llm_dirpath
         self.input_type = input_type
         self.trunc_type = trunc_type

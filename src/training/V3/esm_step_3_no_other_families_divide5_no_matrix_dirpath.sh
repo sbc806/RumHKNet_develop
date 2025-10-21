@@ -4,7 +4,7 @@ export CUDA_VISIBLE_DEVICES=0
 seed=1211
 
 # for dataset
-DATASET_NAME="extra_p_133_class_v3"
+DATASET_NAME="step_3_no_other_families"
 DATASET_TYPE="protein"
 # for task
 TASK_TYPE="multi_class"
@@ -99,7 +99,7 @@ python -u run.py \
   --seq_subword \
   --codes_file ../subword/$tokenizer_dir/$codes_file \
   --label_filepath ../kinases_dataset/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/label.txt  \
-  --output_dir ../models_esm_step_3/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/$MODEL_TYPE/$INPUT_TYPE/$time_str \
+  --output_dir ../models_esm_step_3_no_other_families/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/$MODEL_TYPE/$INPUT_TYPE/$time_str \
   --log_dir ../logs/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/$MODEL_TYPE/$INPUT_TYPE/$time_str \
   --tb_log_dir ../tb-logs/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/$MODEL_TYPE/$INPUT_TYPE/$time_str \
   --config_path ../config/$MODEL_TYPE/$CONFIG_NAME \

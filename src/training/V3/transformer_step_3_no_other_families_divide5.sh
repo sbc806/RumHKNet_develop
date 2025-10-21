@@ -4,7 +4,7 @@ export CUDA_VISIBLE_DEVICES=0
 seed=1211
 
 # for dataset
-DATASET_NAME="extra_p_133_class_v3"
+DATASET_NAME="step_3_no_other_families"
 DATASET_TYPE="protein"
 # for task
 TASK_TYPE="multi_class"

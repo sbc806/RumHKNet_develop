@@ -3,9 +3,9 @@
 #SBATCH --gpus=h100:1
 #SBATCH --mem=128G
 #SBATCH --time=7-0
-#SBATCH --job-name=esm-step-3-divide5-no-matrix-dirpath
-#SBATCH --output=output/esm_step_3_divide5_no_matrix_dirpath_%j.out
-#SBATCH --err=output/esm_step_3_divide5_no_matrix_dirpath_%j.err
+#SBATCH --job-name=esm-step-3-8M-divide5-no-matrix-dirpath
+#SBATCH --output=output/esm_step_3_8M_divide5_no_matrix_dirpath_%j.out
+#SBATCH --err=output/esm_step_3_8M_divide5_no_matrix_dirpath_%j.err
 
 
 module load python/3.11
@@ -18,8 +18,8 @@ source TEST/bin/activate
 
 
 cd ../sbc806/RumHKNet/src/training/V3
-cat esm_step_3_divide5_no_matrix_dirpath.sh > /home/schen123/projects/rrg-guanuofa/schen123/kinases/sbc806/RumHKNet/bash_scripts_nibi/step_3/esm/output/esm_step_3_divide5_no_matrix_dirpath_$SLURM_JOB_ID.txt
-./esm_step_3_divide5_no_matrix_dirpath.sh
+cat esm_step_3_8M_divide5_no_matrix_dirpath.sh > /home/schen123/projects/rrg-guanuofa/schen123/kinases/sbc806/RumHKNet/bash_scripts_nibi/step_3/esm/output/esm_step_3_8M_divide5_no_matrix_dirpath_$SLURM_JOB_ID.txt
+./esm_step_3_8M_divide5_no_matrix_dirpath.sh
 
 
 deactivate

@@ -49,7 +49,7 @@ MATRIX_POOLING_TYPE="value_attention"
 ### embedding llm
 llm_version="esm2"
 llm_type="esm"
-llm_step="3B"
+llm_step="8M"
 
 # for training
 ## max epochs

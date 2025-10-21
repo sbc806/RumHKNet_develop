@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --account=rrg-guanuofa
 #SBATCH --gpus-per-node=h100:1
-#SBATCH --mem=64G
+#SBATCH --mem=32G
 #SBATCH --time=4-0
 #SBATCH --job-name=transformer-step-3-no-other-families-divide5
 #SBATCH --output=output/transformer_step_3_no_other_families_divide5_%j.out

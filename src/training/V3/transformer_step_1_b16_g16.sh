@@ -57,7 +57,7 @@ llm_step="3B"
 ## max epochs
 num_train_epochs=50
 ## accumulation gradient steps
-gradient_accumulation_steps=8
+gradient_accumulation_steps=16
 # 间隔多少个step在log文件中写入信息（实际上是gradient_accumulation_steps与logging_steps的最小公倍数, 这里是4000）
 logging_steps=4000
 ## checkpoint的间隔step数。-1表示按照epoch粒度保存checkpoint
@@ -68,7 +68,7 @@ warmup_steps=8000
 ## -1自动计算
 max_steps=-1
 ## batch size for one GPU
-batch_size=8
+batch_size=16
 ## 最大学习速率(peak learning rate)
 learning_rate=2e-4
 ## data loading buffer size
@@ -76,7 +76,7 @@ buffer_size=10240
 ## tokenizer dir
 tokenizer_dir="step_1"
 ## positive weight
-pos_weight=0.37
+pos_weight=0.4
 
 # model building time
 time_str=$(date "+%Y%m%d%H%M%S")

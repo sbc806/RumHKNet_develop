@@ -384,7 +384,7 @@ class Encoder(object):
                     repr_layers=[-1],
                     truncation_seq_length=truncation_seq_length,
                     matrix_add_special_token=self.matrix_add_special_token,
-                    version="3B",
+                    version=self.llm_step,
                     device=self.device
                 )
                 while embedding_info is None:

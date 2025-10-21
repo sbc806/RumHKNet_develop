@@ -403,6 +403,10 @@ def predict_embedding(sample,
             llm_name = "esm2_t30_150M_UR50D"
             global_layer_size = 30
             global_model, global_alphabet = pretrained.load_model_and_alphabet("esm2_t30_150M_UR50D")
+        elif version == "8M":
+            llm_name = "esm2_t6_8M_UR50D"
+            global_layer_size = 6
+            global_model, global_alphabet = pretrained.load_model_and_alphabet("esm2_t6_8M_UR50D")
         else:
             raise Exception("not support this version=%s" % version)
         print("LLM: %s, version: %s, layer_idx: %d, device: %s" % (llm_name, version, global_layer_size, str(device)))

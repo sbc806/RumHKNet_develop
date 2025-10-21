@@ -309,6 +309,8 @@ class Encoder(object):
         else:
             self.matrix_embedding_exists = False
 
+        print("Encoder version:", self.llm_step)
+                     
         if local_rank == -1 and not use_cpu and torch.cuda.is_available():
             device = torch.device("cuda")
         elif torch.cuda.is_available() and local_rank > -1:

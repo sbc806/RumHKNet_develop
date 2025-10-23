@@ -5,7 +5,7 @@ export CUDA_VISIBLE_DEVICES=0
 seed=1211
 
 # for dataset
-DATASET_NAME="extra_p_2_class_v3"
+DATASET_NAME="step_1"
 DATASET_TYPE="protein"
 # for task
 TASK_TYPE="binary_class"
@@ -83,9 +83,9 @@ time_str=$(date "+%Y%m%d%H%M%S")
 
 cd ../..
 python run_seq_only.py \
-  --train_data_dir ../kinases_dataset/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/train/ \
-  --dev_data_dir ../kinases_dataset/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/dev/ \
-  --test_data_dir ../kinases_dataset/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/test/ \
+  --train_data_dir ../unique_filtered_overlap/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/train/ \
+  --dev_data_dir ../unique_filtered_overlap/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/dev/ \
+  --test_data_dir ../unique_filtered_overlap/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/test/ \
   --buffer_size $buffer_size \
   --dataset_name $DATASET_NAME \
   --dataset_type $DATASET_TYPE \
@@ -97,8 +97,8 @@ python run_seq_only.py \
   --label_type $LABEL_TYPE \
   --seq_subword \
   --codes_file ../subword/$tokenizer_dir/$codes_file \
-  --label_filepath ../kinases_dataset/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/label.txt  \
-  --output_dir ../models_037/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/$MODEL_TYPE/$INPUT_TYPE/$time_str \
+  --label_filepath ../unique_filtered_overlap/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/label.txt  \
+  --output_dir ../models_step_1_unique_filtered_overlap/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/$MODEL_TYPE/$INPUT_TYPE/$time_str \
   --log_dir ../logs/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/$MODEL_TYPE/$INPUT_TYPE/$time_str \
   --tb_log_dir ../tb-logs/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/$MODEL_TYPE/$INPUT_TYPE/$time_str \
   --config_path ../config/$MODEL_TYPE/$CONFIG_NAME \

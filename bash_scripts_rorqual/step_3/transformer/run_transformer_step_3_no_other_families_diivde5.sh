@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --account=def-guanuofa
-#SBATCH --gpus-per-node=h100:1
+#SBATCH --gpus-per-node=h100_3g.40gb:1
 #SBATCH --mem=32G
 #SBATCH --time=4-0
 #SBATCH --job-name=transformer-step-3-no-other-families-divide5

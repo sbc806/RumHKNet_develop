@@ -39,6 +39,6 @@ non_kinases_preprocessed/*
 bash_scripts*/step_1/both/output/
 bash_scripts*/step_2/both/output/
 bash_scripts*/step_3/both/output/
-bash_scripts*/step_1/both/output/
-bash_scripts*/step_2/both/output/
+bash_scripts*/step_1/both/code_copies/
+bash_scripts*/step_2/both/code_copies/
 bash_scripts*/step_3/both/code_copies/

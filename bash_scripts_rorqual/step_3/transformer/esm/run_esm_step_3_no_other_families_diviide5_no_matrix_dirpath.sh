@@ -18,7 +18,7 @@ source TEST/bin/activate
 
 
 cd ../sbc806_2/RumHKNet/src/training/V3
-cat esm_step_3_no_other_families_divide5_no_matrix_dirpath.sh > /home/schen123/links/projects/def-guanuofa/schen123/kinases/sbc806_2/RumHKNet/bash_scripts_nibi/step_3/esm/output/esm_step_3_no_other_families_divide5_no_matrix_dirpath_$SLURM_JOB_ID.txt
+cat esm_step_3_no_other_families_divide5_no_matrix_dirpath.sh > /home/schen123/links/projects/def-guanuofa/schen123/kinases/sbc806_2/RumHKNet/bash_scripts_rorqual/step_3/esm/output/esm_step_3_no_other_families_divide5_no_matrix_dirpath_$SLURM_JOB_ID.txt
 ./esm_step_3_no_other_families_divide5_no_matrix_dirpath.sh
 
 

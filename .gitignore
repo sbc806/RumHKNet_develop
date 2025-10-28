@@ -36,3 +36,9 @@ bash_scripts*/step_2/esm/code_copies/
 bash_scripts*/step_3/esm/code_copies/
 unique_filtered_overlap/*
 non_kinases_preprocessed/*
+bash_scripts*/step_1/both/output/
+bash_scripts*/step_2/both/output/
+bash_scripts*/step_3/both/output/
+bash_scripts*/step_1/both/output/
+bash_scripts*/step_2/both/output/
+bash_scripts*/step_3/both/code_copies/

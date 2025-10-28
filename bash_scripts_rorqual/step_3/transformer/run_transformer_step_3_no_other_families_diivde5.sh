@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --account=rrg-guanuofa
+#SBATCH --account=def-guanuofa
 #SBATCH --gpus-per-node=h100:1
 #SBATCH --mem=32G
 #SBATCH --time=4-0
@@ -10,15 +10,15 @@
 
 module load python/3.11
 module load scipy-stack
-module load gcc arrow/21.0.0
+module load gcc arrow/19.0.1
 
 
-cd /home/schen123/projects/rrg-guanuofa/schen123/kinases/virtual_environments
+cd /home/schen123/links/projects/def-guanuofa/schen123/kinases/virtual_environments
 source TEST/bin/activate
 
 
-cd ../sbc806/RumHKNet/src/training/V3
-cat transformer_step_3_no_other_families_divide5.sh > /home/schen123/projects/rrg-guanuofa/schen123/kinases/sbc806/RumHKNet/bash_scripts_nibi/step_3/transformer/output/transformer_step_3_no_other_families_divide5_$SLURM_JOB_ID.txt
+cd ../sbc806_2/RumHKNet/src/training/V3
+cat transformer_step_3_no_other_families_divide5.sh > /home/schen123/links/projects/def-guanuofa/schen123/kinases/sbc806_2/RumHKNet/bash_scripts_nibi/step_3/transformer/output/transformer_step_3_no_other_families_divide5_$SLURM_JOB_ID.txt
 ./transformer_step_3_no_other_families_divide5.sh
 
 

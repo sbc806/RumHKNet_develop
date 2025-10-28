@@ -18,7 +18,7 @@ source TEST/bin/activate
 
 
 cd ../sbc806_2/RumHKNet/src/training/V3
-cat transformer_step_3_no_other_families_divide5.sh > /home/schen123/links/projects/def-guanuofa/schen123/kinases/sbc806_2/RumHKNet/bash_scripts_nibi/step_3/transformer/output/transformer_step_3_no_other_families_divide5_$SLURM_JOB_ID.txt
+cat transformer_step_3_no_other_families_divide5.sh > /home/schen123/links/projects/def-guanuofa/schen123/kinases/sbc806_2/RumHKNet/bash_scripts_rorqual/step_3/transformer/output/transformer_step_3_no_other_families_divide5_$SLURM_JOB_ID.txt
 ./transformer_step_3_no_other_families_divide5.sh
 
 

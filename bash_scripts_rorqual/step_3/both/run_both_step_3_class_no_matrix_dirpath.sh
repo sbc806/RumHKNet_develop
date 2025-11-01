@@ -3,9 +3,9 @@
 #SBATCH --gpus=h100:1
 #SBATCH --mem=200G
 #SBATCH --time=7-0
-#SBATCH --job-name=both-step-2-class-no-matrix-dirpath
-#SBATCH --output=output/both_step_2_class_no_matrix_dirpath_%j.out
-#SBATCH --err=output/both_step_2_class_no_matrix_dirpath_%j.err
+#SBATCH --job-name=both-step-3-class-no-matrix-dirpath
+#SBATCH --output=output/both_step_3_class_no_matrix_dirpath_%j.out
+#SBATCH --err=output/both_step_3_class_no_matrix_dirpath_%j.err
 
 
 module load python/3.11
@@ -18,8 +18,9 @@ source TEST/bin/activate
 
 
 cd ../sbc806_2/RumHKNet/src/training/V3
-cat both_step_2_class_no_matrix_dirpath.sh > /home/schen123/links/projects/def-guanuofa/schen123/kinases/sbc806_2/RumHKNet/bash_scripts_rorqual/step_2/both/output/both_step_2_class_no_matrix_dirpath_$SLURM_JOB_ID.txt
-./both_step_2_class_no_matrix_dirpath.sh
+cat both_step_3_class_no_matrix_dirpath.sh > /home/schen123/links/projects/def-guanuofa/schen123/kinases/sbc806_2/RumHKNet/bash_scripts_rorqual/step_3/both/output/both_step_3_class_no_matrix_dirpath_$SLURM_JOB_ID.txt
+./both_step_3_class_no_matrix_dirpath.sh
 
 
 deactivate
+

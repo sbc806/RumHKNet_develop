@@ -17,7 +17,7 @@ cd /home/schen123/links/projects/def-guanuofa/schen123/kinases/virtual_environme
 source TEST/bin/activate
 
 
-cd ../sbc806_2/RumHKNet/src/training/V3
+cd ../sbc806_3/RumHKNet/src/training/V3
 cat both_step_3_family_filtered_no_matrix_dirpath.sh > /home/schen123/links/projects/def-guanuofa/schen123/kinases/sbc806_3/RumHKNet/bash_scripts_rorqual/step_3/both/output/both_step_3_family_filtered_no_matrix_dirpath_$SLURM_JOB_ID.txt
 ./both_step_3_family_filtered_no_matrix_dirpath.sh
 

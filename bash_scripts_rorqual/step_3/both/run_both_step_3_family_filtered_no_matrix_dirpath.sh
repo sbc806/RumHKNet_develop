@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --account=def-guanuofa
 #SBATCH --gpus=h100:1
-#SBATCH --mem=200G
+#SBATCH --mem=80G
 #SBATCH --time=7-0
 #SBATCH --job-name=both-step-3-family-filtered-no-matrix-dirpath
 #SBATCH --output=output/both_step_3_family_filtered_no_matrix_dirpath_%j.out

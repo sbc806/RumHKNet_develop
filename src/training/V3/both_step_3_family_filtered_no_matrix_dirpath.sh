@@ -14,7 +14,7 @@ LABEL_TYPE="extra_p_133_class"
 # for input
 ## seq, vector, matrix, seq_matrix, seq_vector
 ### sequence + embedding channels
-INPUT_TYPE="seq"
+INPUT_TYPE="seq_matrix"
 ## single or pair
 INPUT_MODE="single"
 TRUNC_TYPE="right"

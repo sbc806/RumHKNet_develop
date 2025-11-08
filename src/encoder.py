@@ -18,10 +18,10 @@ sys.path.append(".")
 sys.path.append("..")
 sys.path.append("../src")
 try:
-    from llm.esm.predict_embedding import predict_embedding as predict_embedding_esm
+    from esm.predict_embedding import predict_embedding as predict_embedding_esm
     from utils import calc_emb_filename_by_seq_id
 except ImportError as e:
-    from src.llm.esm.predict_embedding import predict_embedding as predict_embedding_esm
+    from src.esm.predict_embedding import predict_embedding as predict_embedding_esm
     from src.utils import calc_emb_filename_by_seq_id
 
 

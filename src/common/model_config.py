@@ -13,7 +13,7 @@
 from transformers.configuration_utils import PretrainedConfig
 
 
-class LucaConfig(PretrainedConfig):
+class RumHKNetConfig(PretrainedConfig):
     def __init__(self,
                  num_labels: int = 2,
                  vocab_size: int = 39,

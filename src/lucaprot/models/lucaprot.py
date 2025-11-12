@@ -284,7 +284,10 @@ class LucaProt(BertPreTrainedModel):
                 self.classifier = nn.Linear(output_size, config.num_labels)
             self.output = nn.Sigmoid()
         else:
-            self.classifier = nn.Linear(output_size, config.num_labels)
+            if args.num_batch > 1:
+                self.classifier = nn.Linear(output_size+args.num_batch, config.num_labels)
+            else:
+                self.classifier = nn.Linear(output_size, config.num_labels)
             if self.num_labels > 1:
                 self.output = nn.Softmax(dim=-1)
             else:

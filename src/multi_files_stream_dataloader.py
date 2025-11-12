@@ -217,11 +217,15 @@ class MultiFilesStreamLoader(object):
                     })
 
             else:
+                batch = None
                 if len(row) == 3:
                     seq_id, seq, label = row[0:3]
                     seq_type, vector_filename, matrix_filename = "prot", None, None
                 elif len(row) == 4:
                     seq_id, seq_type, seq, label = row[0:4]
+                    vector_filename, matrix_filename = None, None
+                elif len(row) == 5:
+                    seq_id, seq_type, seq, label, batch = row[0:5]
                     vector_filename, matrix_filename = None, None
                 elif len(row) == 6:
                     seq_id, seq_type, seq, vector_filename, matrix_filename, label = row[0:6]
@@ -235,6 +239,10 @@ class MultiFilesStreamLoader(object):
                 if not self.inference:
                     res.update({
                         "label": label
+                    })
+                if batch is not None:
+                    res.update({
+                        "batch": batch
                     })
                 if self.input_type in ["vector", "seq_vector"]:
                     res.update({

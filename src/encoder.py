@@ -440,7 +440,8 @@ class Encoder(object):
                       seq,
                       vector_filename=None,
                       matrix_filename=None,
-                      label=None):
+                      label=None,
+                      batch=None):
         seq_type = seq_type.strip().lower()
 
         # for embedding vector

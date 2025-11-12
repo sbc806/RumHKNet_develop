@@ -700,7 +700,7 @@ class BatchConverter(object):
                     matrices.append(item["matrix"])
                 if item["label"] is not None:
                     labels.append(item["label"])
-                if "batch" in item:
+                if item["batch"] is not None:
                     batches.append(item["batch"])
             print("Batches:", batches)
             # embedding 矩阵有特殊字符，如果不使用则去掉首尾的特殊字符
@@ -730,7 +730,7 @@ class BatchConverter(object):
                     "matrices": encoded_matrices,
                     "matrix_attention_masks": matrix_attention_masks,
                     "labels": labels if labels is not None and len(labels) > 0 else None,
-                    "batches": batches if len(batches) > 0 else None
+                    "batches": batches if batches is not None and len(batches) > 0 else None
                 })
                 if self.batch_with_seq_ids:
                     res.update({

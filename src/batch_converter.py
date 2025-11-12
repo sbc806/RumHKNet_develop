@@ -702,7 +702,11 @@ class BatchConverter(object):
                     labels.append(item["label"])
                 if item["batch"] is not None:
                     batches.append(item["batch"])
+
+            if len(batches) > 0:
+                batches = torch.tensor([int(batch) for batch in batches], dtype=torch.int64)
             print("Batches:", batches)
+            
             # embedding 矩阵有特殊字符，如果不使用则去掉首尾的特殊字符
             new_matrices = []
             if matrices:

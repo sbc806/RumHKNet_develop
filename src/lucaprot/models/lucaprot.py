@@ -578,6 +578,10 @@ class LucaProt(BertPreTrainedModel):
             embedding_info["concat_pooled_vec"] = pooled_output.clone().cpu().detach().numpy()
 
         # Create batch tensor
+        batches = torch.tensor(batches)
+        batches_one_hot = torch.zeros(len(batches), self.num_batches, dtype=int)
+        selected_one_hot = nn.functional.one_hot(batches[batches>=0], self.num_batches)
+        batches_one_hot[batches>=0] = selected_one_hot
         
         logits = self.classifier(pooled_output)
         if self.output:

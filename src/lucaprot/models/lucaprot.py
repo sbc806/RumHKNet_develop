@@ -277,6 +277,7 @@ class LucaProt(BertPreTrainedModel):
 
         # output layer
         self.output_mode = args.output_mode
+        self.num_batches = args.num_batches
         if args and args.sigmoid:
             if args.output_mode in ["binary_class", "binary-class"]:
                 self.classifier = nn.Linear(output_size, 1)
@@ -284,8 +285,8 @@ class LucaProt(BertPreTrainedModel):
                 self.classifier = nn.Linear(output_size, config.num_labels)
             self.output = nn.Sigmoid()
         else:
-            if args.num_batch > 1:
-                self.classifier = nn.Linear(output_size+args.num_batch, config.num_labels)
+            if args.num_batches > 1:
+                self.classifier = nn.Linear(output_size+args.num_batches, config.num_labels)
             else:
                 self.classifier = nn.Linear(output_size, config.num_labels)
             if self.num_labels > 1:
@@ -415,6 +416,7 @@ class LucaProt(BertPreTrainedModel):
             matrices=None,
             matrix_attention_masks=None,
             labels=None,
+            batches=None,
             output_attentions=None,
             output_hidden_states=None,
             return_dict=None,
@@ -575,6 +577,8 @@ class LucaProt(BertPreTrainedModel):
         if return_embedding:
             embedding_info["concat_pooled_vec"] = pooled_output.clone().cpu().detach().numpy()
 
+        # Create batch tensor
+        
         logits = self.classifier(pooled_output)
         if self.output:
             output = self.output(logits)

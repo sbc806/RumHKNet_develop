@@ -688,6 +688,7 @@ class BatchConverter(object):
             vectors = []
             matrices = []
             labels = []
+            batches = None
             for item in raw_batch:
                 seq_ids.append(item["seq_id"])
                 seq_types.append(item["seq_type"])
@@ -699,6 +700,8 @@ class BatchConverter(object):
                     matrices.append(item["matrix"])
                 if item["label"] is not None:
                     labels.append(item["label"])
+                if "batch" in item:
+                    batches.append(item["batch"])
             # embedding 矩阵有特殊字符，如果不使用则去掉首尾的特殊字符
             new_matrices = []
             if matrices:
@@ -725,7 +728,8 @@ class BatchConverter(object):
                     "vectors": encoded_vectors,
                     "matrices": encoded_matrices,
                     "matrix_attention_masks": matrix_attention_masks,
-                    "labels": labels if labels is not None and len(labels) > 0 else None
+                    "labels": labels if labels is not None and len(labels) > 0 else None,
+                    "batches": batches if len(batches) > 0 else None
                 })
                 if self.batch_with_seq_ids:
                     res.update({

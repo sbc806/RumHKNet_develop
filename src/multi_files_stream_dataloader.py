@@ -241,6 +241,7 @@ class MultiFilesStreamLoader(object):
                         "label": label
                     })
                 if batch is not None:
+                    print("Adding batch to res")
                     res.update({
                         "batch": batch
                     })

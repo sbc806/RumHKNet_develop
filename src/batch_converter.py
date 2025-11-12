@@ -688,7 +688,7 @@ class BatchConverter(object):
             vectors = []
             matrices = []
             labels = []
-            batches = None
+            batches = []
             for item in raw_batch:
                 seq_ids.append(item["seq_id"])
                 seq_types.append(item["seq_type"])
@@ -702,6 +702,7 @@ class BatchConverter(object):
                     labels.append(item["label"])
                 if "batch" in item:
                     batches.append(item["batch"])
+            print("Batches:", batches)
             # embedding 矩阵有特殊字符，如果不使用则去掉首尾的特殊字符
             new_matrices = []
             if matrices:

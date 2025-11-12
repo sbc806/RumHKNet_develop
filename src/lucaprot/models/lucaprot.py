@@ -275,6 +275,7 @@ class LucaProt(BertPreTrainedModel):
         # dropout layer
         self.dropout = nn.Dropout(config.hidden_dropout_prob)
 
+        self.device = args.device
         # output layer
         self.output_mode = args.output_mode
         self.num_batches = args.num_batches
@@ -580,9 +581,9 @@ class LucaProt(BertPreTrainedModel):
 
         # Create batch tensor
         if batches is not None:
-            batches_one_hot = torch.zeros(len(batches), self.num_batches, dtype=torch.int64)
-            selected_one_hot = nn.functional.one_hot(batches[batches>=0], self.num_batches)
-            batches_one_hot[batches>=0] = selected_one_hot
+            batches_one_hot = torch.zeros(len(batches.to(self.device), self.num_batches, dtype=torch.int64)
+            selected_one_hot = nn.functional.one_hot(batches.to(self.device)[batches.to(self.device)>=0], self.num_batches)
+            batches_one_hot[batches.to(self.device)>=0] = selected_one_hot
 
             pooled_output = torch.concat((pooled_output, batches_one_hot), axis=-1)
         

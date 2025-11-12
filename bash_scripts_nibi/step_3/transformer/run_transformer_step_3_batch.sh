@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --account=rrg-guanuofa
-#SBATCH --gpus-per-node=nvidia_h100_80gb_hbm3_2g.20gb:1
-#SBATCH --mem=16G
+#SBATCH --gpus-per-node=nvidia_h100_80gb_hbm3_2g.40gb:1
+#SBATCH --mem=25G
 #SBATCH --time=3-0
 #SBATCH --job-name=transformer-step-3-batch
 #SBATCH --output=output/transformer_step_3_batch_%j.out
@@ -23,4 +23,5 @@ cat transformer_step_3_batch.sh > /home/schen123/projects/rrg-guanuofa/schen123/
 
 
 deactivate
+
 

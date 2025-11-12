@@ -218,6 +218,7 @@ class MultiFilesStreamLoader(object):
 
             else:
                 batch = None
+                print("len(row)":, len(row))
                 if len(row) == 3:
                     seq_id, seq, label = row[0:3]
                     seq_type, vector_filename, matrix_filename = "prot", None, None

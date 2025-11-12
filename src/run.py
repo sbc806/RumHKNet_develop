@@ -317,6 +317,7 @@ def get_args():
                         help='whether no token type embeddings')
 
     parser.add_argument('--divide_classification_weight', default=1, type=int, help='number to divide classification weights by')
+    parser.add_argument('--num_batches', default=-1, type=int, help='the number of batches')
     args = parser.parse_args()
     return args
 

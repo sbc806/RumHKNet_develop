@@ -581,7 +581,7 @@ class LucaProt(BertPreTrainedModel):
 
         # Create batch tensor
         if batches is not None:
-            batches_one_hot = torch.zeros(len(batches.to(self.device), self.num_batches, dtype=torch.int64)
+            batches_one_hot = torch.zeros(len(batches), self.num_batches, dtype=torch.int64).to(self.device)
             selected_one_hot = nn.functional.one_hot(batches.to(self.device)[batches.to(self.device)>=0], self.num_batches)
             batches_one_hot[batches.to(self.device)>=0] = selected_one_hot
 

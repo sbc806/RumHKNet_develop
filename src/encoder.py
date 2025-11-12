@@ -493,7 +493,8 @@ class Encoder(object):
             "seq_type": seq_type,
             "vector": vector,
             "matrix": matrix,
-            "label": label
+            "label": label,
+            "batch": batch
         }
 
     def encode_pair(self,

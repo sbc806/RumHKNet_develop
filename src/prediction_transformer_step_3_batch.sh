@@ -1,5 +1,5 @@
 # Multi-Class Classification
-export CUDA_VISIBLE_DEVICES="0,1,2,3"
+# export CUDA_VISIBLE_DEVICES="0"
 python prediction_v2.py \
     --seq_type prot \
     --input_file ../test_data/example_positives.fasta \
@@ -7,7 +7,7 @@ python prediction_v2.py \
     --llm_truncation_seq_length 10240 \
     --model_path .. \
     --save_path ../predicted_results/test_data/example_positives_fine_grained_predicted.csv \
-    --dataset_name extra_p_31_class_v3 \
+    --dataset_name extra_p_133_class_v3 \
     --dataset_type protein \
     --task_type multi_class \
     --task_level_type seq_level \

@@ -17,9 +17,10 @@ cd /home/schen123/projects/rrg-guanuofa/schen123/kinases/virtual_environments
 source TEST/bin/activate
 
 
-cd ../sbc806_2/RumHKNet/src/training/V3
+cd ../sbc806/RumHKNet/src/training/V3
 cat transformer_step_1_non_kinases_preprocessed.sh > /home/schen123/projects/rrg-guanuofa/schen123/kinases/sbc806/RumHKNet/bash_scripts_nibi/step_1/transformer/output/transformer_step_1_non_kinases_preprocessed_$SLURM_JOB_ID.txt
 ./transformer_step_1_non_kinases_preprocessed.sh
 
 
 deactivate
+

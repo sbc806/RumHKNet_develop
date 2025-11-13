@@ -2,7 +2,7 @@
 #SBATCH --account=rrg-guanuofa
 #SBATCH --gpus-per-node=h100_3g.40gb:1
 #SBATCH --mem=32G
-#SBATCH --time=4-0
+#SBATCH --time=3-0
 #SBATCH --job-name=transformer-step-1-non-kinases-preprocessed
 #SBATCH --output=output/transformer_step_1_non_kinases_preprocessed_%j.out
 #SBATCH --err=output/transformer_step_1_non_kinases_preprocessed_%j.err

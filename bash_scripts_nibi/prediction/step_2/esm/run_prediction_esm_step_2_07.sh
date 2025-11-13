@@ -2,7 +2,7 @@
 #SBATCH --account=rrg-guanuofa
 #SBATCH --gpus-per-node=nvidia_h100_80gb_hbm3_2g.20gb:1
 #SBATCH --mem=32G
-#SBATCH --time=3:0:0
+#SBATCH --time=1-0
 #SBATCH --job-name=prediction-esm-step-2
 #SBATCH --output=output/prediction_esm_step_2_%j.out
 #SBATCH --er=output/prediction_esm_step_2_%j.err
@@ -22,3 +22,4 @@ cd ../sbc806/RumHKNet/src/
 
 
 deactivate
+

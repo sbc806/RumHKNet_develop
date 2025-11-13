@@ -1,7 +1,9 @@
 # Binary Classification
 export CUDA_VISIBLE_DEVICES="0"
 dir_path="/home/schen123/projects/rrg-guanuofa/schen123/kinases"
-threshold=$2
+threshold=$1
+echo $threshold
+
 python prediction_v2.py \
     --seq_type prot \
     --input_file $dir_path/test_data/step_2/extra_p_2_class_v3_kinases_only/train.fasta \
@@ -16,7 +18,7 @@ python prediction_v2.py \
     --input_mode single \
     --time_str 20250913223115 \
     --step 142912 \
-    --threshold 0.2 \
+    --threshold $threshold \
     --print_per_num 100000 \
     --truncation_seq_length 10240 \
     --emb_dir $dir_path/embeddings/step_2/esm \
@@ -39,7 +41,7 @@ python prediction_v2.py \
     --input_mode single \
     --time_str 20250913223115 \
     --step 142912 \
-    --threshold 0.2 \
+    --threshold $threshold \
     --print_per_num 100000 \
     --truncation_seq_length 10240 \
     --emb_dir $dir_path/embeddings/step_2/esm \
@@ -59,7 +61,7 @@ python prediction_v2.py \
     --input_mode single \
     --time_str 20250913223115 \
     --step 142912 \
-    --threshold 0.2 \
+    --threshold $threshold \
     --print_per_num 100000 \
     --truncation_seq_length 10240 \
     --emb_dir $dir_path/embeddings/step_2/esm \

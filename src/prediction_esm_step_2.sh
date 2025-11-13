@@ -4,7 +4,7 @@ dir_path="/home/schen123/projects/rrg-guanuofa/schen123/kinases"
 threshold=$1
 echo $threshold
 
-python prediction_v2.py \
+python -u prediction_v2.py \
     --seq_type prot \
     --input_file $dir_path/test_data/step_2/extra_p_2_class_v3_kinases_only/train.fasta \
     --model_path $dir_path/models_trained/step_2/esm \
@@ -27,7 +27,7 @@ python prediction_v2.py \
 # Binary Classification
 export CUDA_VISIBLE_DEVICES="0"
 dir_path="/home/schen123/projects/rrg-guanuofa/schen123/kinases"
-python prediction_v2.py \
+python -u prediction_v2.py \
     --seq_type prot \
     --input_file $dir_path/test_data/step_2/extra_p_2_class_v3_kinases_only/dev.fasta \
     --model_path $dir_path/models_trained/step_2/esm \
@@ -47,7 +47,7 @@ python prediction_v2.py \
     --emb_dir $dir_path/embeddings/step_2/esm \
     --gpu_id 0
 
-python prediction_v2.py \
+python -u prediction_v2.py \
     --seq_type prot \
     --input_file $dir_path/test_data/step_2/extra_p_2_class_v3_kinases_only/test.fasta \
     --model_path $dir_path/models_trained/step_2/esm \

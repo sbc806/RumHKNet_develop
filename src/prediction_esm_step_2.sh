@@ -5,7 +5,7 @@ python prediction_v2.py \
     --seq_type prot \
     --input_file $dir_path/test_data/step_2/examples.fasta \
     --llm_truncation_seq_length 10240 \
-    --model_path $dir_path/models_trained/step_2 \
+    --model_path $dir_path/models_trained/step_2/esm \
     --save_path $dir_path/predicted_results/test_data/step_2/examples_predicted.csv \
     --dataset_name extra_p_2_class_v3_kinases_only \
     --dataset_type protein \
@@ -14,8 +14,8 @@ python prediction_v2.py \
     --model_type lucaprot \
     --input_type matrix \
     --input_mode single \
-    --time_str 20240924203640 \
-    --step 264284 \
+    --time_str 20250913223115 \
+    --step 142912 \
     --threshold 0.2 \
     --per_num 10000 \
     --gpu_id -1

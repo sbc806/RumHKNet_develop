@@ -13,7 +13,7 @@ module load scipy-stack
 module load gcc arrow/21.0.0
 
 
-cd /home/schen123/projects/def-guanuofa/schen123/kinases/virtual_environments
+cd /home/schen123/projects/rrg-guanuofa/schen123/kinases/virtual_environments
 source TEST/bin/activate
 
 

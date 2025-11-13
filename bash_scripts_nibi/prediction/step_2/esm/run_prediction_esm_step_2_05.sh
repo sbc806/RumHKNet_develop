@@ -2,7 +2,7 @@
 #SBATCH --account=rrg-guanuofa
 #SBATCH --gpus-per-node=nvidia_h100_80gb_hbm3_3g.40gb:1
 #SBATCH --mem=32G
-#SBATCH --time=3-0
+#SBATCH --time=7-0
 #SBATCH --job-name=prediction-esm-step-2
 #SBATCH --output=output/prediction_esm_step_2_%j.out
 #SBATCH --er=output/prediction_esm_step_2_%j.err

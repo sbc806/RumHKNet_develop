@@ -614,7 +614,8 @@ def run(
     lucapcycle_args.step = step
     lucapcycle_args.threshold = threshold
     lucapcycle_args.gpu_id = gpu_id
-
+    lucapcycle_args.num_batches = -1
+    
     if not hasattr(lucapcycle_args, "embedding_complete"):
         lucapcycle_args.embedding_complete = False
 

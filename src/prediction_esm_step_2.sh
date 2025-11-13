@@ -1,6 +1,7 @@
 # Binary Classification
 export CUDA_VISIBLE_DEVICES="0"
 dir_path="/home/schen123/projects/rrg-guanuofa/schen123/kinases"
+threshold=$2
 python prediction_v2.py \
     --seq_type prot \
     --input_file $dir_path/test_data/step_2/extra_p_2_class_v3_kinases_only/train.fasta \

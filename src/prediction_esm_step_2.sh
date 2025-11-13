@@ -5,7 +5,7 @@ python prediction_v2.py \
     --seq_type prot \
     --input_file $dir_path/test_data/step_2/examples.fasta \
     --llm_truncation_seq_length 10240 \
-    --model_path .. \
+    --model_path $dir_path/models_trained/step_2 \
     --save_path $dir_path/predicted_results/test_data/step_2/examples_predicted.csv \
     --dataset_name extra_p_2_class_v3_kinases_only \
     --dataset_type protein \

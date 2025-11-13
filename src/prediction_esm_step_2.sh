@@ -1,5 +1,5 @@
 # Binary Classification
-# export CUDA_VISIBLE_DEVICES="0"
+export CUDA_VISIBLE_DEVICES="0"
 dir_path="/home/schen123/projects/rrg-guanuofa/schen123/kinases"
 python prediction_v2.py \
     --seq_type prot \
@@ -17,4 +17,4 @@ python prediction_v2.py \
     --step 142912 \
     --threshold 0.2 \
     --print_per_num 10000 \
-    --gpu_id -1
+    --gpu_id 0

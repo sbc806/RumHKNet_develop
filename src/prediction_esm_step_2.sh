@@ -5,7 +5,7 @@ python prediction_v2.py \
     --seq_type prot \
     --input_file $dir_path/test_data/step_2/examples.fasta \
     --model_path $dir_path/models_trained/step_2/esm \
-    --save_path $dir_path/predicted_results/test_data/step_2/examples_predicted.csv \
+    --save_path $dir_path/predicted_results/test_data/step_2/esm/examples_predicted.csv \
     --dataset_name extra_p_2_class_v3_kinases_only \
     --dataset_type protein \
     --task_type binary_class \

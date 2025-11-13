@@ -1,5 +1,5 @@
 # Binary Classification
-export CUDA_VISIBLE_DEVICES="0,1,2,3"
+# export CUDA_VISIBLE_DEVICES="0"
 python prediction_v2.py \
     --seq_type prot \
     --input_file ../test_data/examples.fasta \
@@ -12,7 +12,7 @@ python prediction_v2.py \
     --task_type binary_class \
     --task_level_type seq_level \
     --model_type lucaprot \
-    --input_type seq_matrix \
+    --input_type matrix \
     --input_mode single \
     --time_str 20240924203640 \
     --step 264284 \

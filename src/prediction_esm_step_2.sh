@@ -17,4 +17,6 @@ python prediction_v2.py \
     --step 142912 \
     --threshold 0.2 \
     --print_per_num 10000 \
+    --truncation_seq_length 10240 \
+    --emb_dir $dir_path/embeddings/step_2/esm \
     --gpu_id 0

@@ -579,7 +579,7 @@ def run(
         model_path, dataset_name, dataset_type, task_type, model_type, input_type, time_str
     )
 
-    lucapcycle_args = torch.load(os.path.join(model_dir, "training_args.bin"))
+    lucapcycle_args = torch.load(os.path.join(model_dir, "training_args.bin"), weights_only=False)
     print("LucaPCycle Args:")
     print(lucapcycle_args.__dict__)
     print("*" * 50)

@@ -2,7 +2,7 @@
 #SBATCH --account=rrg-guanuofa
 #SBATCH --gpus=h100:1
 #SBATCH --mem=100G
-#SBATCH --time=3-0
+#SBATCH --time=5-0
 #SBATCH --job-name=both-step-3-family-filtered-4-1-no-matrix-dirpath
 #SBATCH --output=output/both_step_3_family_filtered_4_1_no_matrix_dirpath_%j.out
 #SBATCH --err=output/both_step_3_family_filtered_4_1_no_matrix_dirpath_%j.err
@@ -23,3 +23,4 @@ cat both_step_3_family_filtered_4_1_no_matrix_dirpath.sh > /home/schen123/projec
 
 
 deactivate
+

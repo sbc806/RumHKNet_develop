@@ -77,7 +77,7 @@ tokenizer_dir=step_3
 weight=13,212,7,8,21,31,3,10,4,27,28,3,363,589,6,2,20,1,4,37,32,179,17,30,14,110,1.2,4,12,11,64
 weight=1
 # weight=20,14,30,2,600,20,1,13,10,18,6,1,8,32,4,4,11,64,7,3,4,180,30,12,3,110,27,28,369,37,215
-weight=0.51,1.01,0.25,0.68,1.10,3.55,5.53,9.22,13.30,68.14
+weight=0.549,1.098,0.272,0.739,1.199,3.856,6.007,10.031,14.475,74.072,0.555
 
 # model building time
 time_str=$(date "+%Y%m%d%H%M%S")
@@ -160,3 +160,4 @@ python -u run.py \
   --no_token_type_embeddings \
   --no_position_embeddings \
   --use_rotary_position_embeddings
+

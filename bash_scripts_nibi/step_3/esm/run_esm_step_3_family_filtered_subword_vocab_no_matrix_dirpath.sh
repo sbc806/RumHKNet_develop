@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --account=def-guanuofa
 #SBATCH --gpus=nvidia_h100_80gb_hbm3_3g.40gb:1
-#SBATCH --mem=70G
+#SBATCH --mem=80G
 #SBATCH --time=7-0
 #SBATCH --job-name=esm-step-3-family-filtered-subword-vocab-no-matrix-dirpath
 #SBATCH --output=output/esm_step_3_family_filtered_subword_vocab_no_matrix_dirpath_%j.out

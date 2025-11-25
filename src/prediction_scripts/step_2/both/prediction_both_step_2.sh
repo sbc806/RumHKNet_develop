@@ -1,6 +1,6 @@
 # Binary Classification
 export CUDA_VISIBLE_DEVICES="0"
-dir_path="/home/schen123/projects/def-guanuofa/schen123/kinases"
+dir_path="/home/schen123/projects/rrg-guanuofa/schen123/kinases"
 threshold=$1
 echo $threshold
 

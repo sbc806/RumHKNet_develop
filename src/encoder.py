@@ -430,8 +430,8 @@ class Encoder(object):
             dirpath_list = self.vector_dirpath if embedding_type in ["bos", "vector"] else self.matrix_dirpath
             dirpath = dirpath_list[0]
             emb_filepath = os.path.join(dirpath, emb_filename)
-            torch.save(embedding_info, emb_filepath)
-            self.seq_id_2_emb_filename[seq_id] = emb_filename
+            # torch.save(embedding_info, emb_filepath)
+            # self.seq_id_2_emb_filename[seq_id] = emb_filename
         return embedding_info
 
     def encode_single(self,

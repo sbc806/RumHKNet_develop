@@ -1,1 +1,4 @@
-
+cp run_prediction_both_step_1_five_sequences.sh run_prediction_both_step_1_$1_0.sh
+cp run_prediction_both_step_1_five_sequences.sh run_prediction_both_step_1_$1_1.sh
+cp run_prediction_both_step_1_five_sequences.sh run_prediction_both_step_1_$1_2.sh
+cp run_prediction_both_step_1_five_sequences.sh run_prediction_both_step_1_$1_3.sh

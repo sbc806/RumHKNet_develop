@@ -5,7 +5,7 @@
 #SBATCH --time=3-0
 #SBATCH --job-name=prediction-both-step-1-035-2
 #SBATCH --output=output/prediction_both_step_1_035_2_%j.out
-#SBATCH --er=output/prediction_both_step_1_035_2_%j.err
+#SBATCH --err=output/prediction_both_step_1_035_2_%j.err
 
 
 module load python/3.11

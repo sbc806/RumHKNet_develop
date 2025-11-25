@@ -17,7 +17,7 @@ python -u prediction_v2.py \
     --input_type seq_matrix \
     --input_mode single \
     --time_str 20251113091546 \
-    --step 482736 \
+    --step 428736 \
     --threshold $threshold \
     --print_per_num 100000 \
     --truncation_seq_length 10240 \
@@ -25,6 +25,7 @@ python -u prediction_v2.py \
     --gpu_id 0 \
     --seq_id_idx 0 \
     --seq_idx 2
+
 
 
 

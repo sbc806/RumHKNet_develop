@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --account=def-guanuofa
+#SBATCH --account=rrg-guanuofa
 #SBATCH --gpus-per-node=nvidia_h100_80gb_hbm3_3g.40gb:1
 #SBATCH --mem=64G
 #SBATCH --time=3-0

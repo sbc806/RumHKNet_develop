@@ -5,7 +5,7 @@
 #SBATCH --time=0:10:0
 #SBATCH --job-name=prediction-both-step-1-five-sequences
 #SBATCH --output=output/prediction_both_step_1_five_sequences_%j.out
-#SBATCH --er=output/prediction_both_step_1_five_sequences_%j.err
+#SBATCH --err=output/prediction_both_step_1_five_sequences_%j.err
 
 
 module load python/3.11

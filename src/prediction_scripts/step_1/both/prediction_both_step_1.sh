@@ -7,9 +7,9 @@ echo $threshold
 python -u prediction_v2.py \
     --seq_type prot \
     --input_file $dir_path/predictions/predictions_datasets/step_1/both/$3.csv \
-    --model_path $dir_path/models_trained/step_2/esm \
+    --model_path $dir_path/sbc806/RumHKNet/models_step_1_both \
     --save_path $dir_path/predicted_results/step_1/both/$3_predicted_$2.csv \
-    --dataset_name extra_p_2_class_v3_kinases_only \
+    --dataset_name step_1_non_kinases_preprocessed \
     --dataset_type protein \
     --task_type binary_class \
     --task_level_type seq_level \
@@ -23,3 +23,4 @@ python -u prediction_v2.py \
     --truncation_seq_length 10240 \
     --emb_dir $dir_path/embeddings/step_1/esm \
     --gpu_id 0
+

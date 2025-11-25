@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --account=def-guanuofa
 #SBATCH --gpus-per-node=h100_2g.20gb:1
-#SBATCH --mem=64G
+#SBATCH --mem=32G
 #SBATCH --time=0:10:0
 #SBATCH --job-name=prediction-both-step-2-five-sequences
 #SBATCH --output=output/prediction_both_step_2_five_sequences_%j.out

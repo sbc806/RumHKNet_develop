@@ -2,7 +2,7 @@
 #SBATCH --account=def-guanuofa
 #SBATCH --gpus-per-node=h100_2g.20gb:1
 #SBATCH --mem=32G
-#SBATCH --time=0:10:0
+#SBATCH --time=3-0
 #SBATCH --job-name=prediction-both-step-2-02-2
 #SBATCH --output=output/prediction_both_step_2_02_2_%j.out
 #SBATCH --er=output/prediction_both_step_2_02_2_%j.err

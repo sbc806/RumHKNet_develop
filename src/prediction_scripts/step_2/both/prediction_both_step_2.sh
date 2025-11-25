@@ -1,15 +1,15 @@
 # Binary Classification
 export CUDA_VISIBLE_DEVICES="0"
-dir_path="/home/schen123/projects/rrg-guanuofa/schen123/kinases"
+dir_path="/home/schen123/links/projects/def-guanuofa/schen123/kinases"
 threshold=$1
 echo $threshold
 
 python -u prediction_v2.py \
     --seq_type prot \
     --input_file $dir_path/predictions/predictions_dataset/step_2/$3.csv \
-    --model_path $dir_path/sbc806/RumHKNet/models_step_1_both \
+    --model_path $dir_path/sbc806_3/RumHKNet/models_step_1_both \
     --save_path $dir_path/predicted_results/step_2/both/$3_predicted_$2.csv \
-    --dataset_name step_1_non_kinases_preprocessed \
+    --dataset_name extra_p_2_class_v3_kinases_only \
     --dataset_type protein \
     --task_type binary_class \
     --task_level_type seq_level \
@@ -25,6 +25,7 @@ python -u prediction_v2.py \
     --gpu_id 0 \
     --seq_id_idx 0 \
     --seq_idx 2
+
 
 
 

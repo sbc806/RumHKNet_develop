@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --account=rrg-guanuofa
+#SBATCH --account=def-guanuofa
 #SBATCH --gpus-per-node=nvidia_h100_80gb_hbm3_3g.40gb:1
 #SBATCH --mem=64G
 #SBATCH --time=1:0:0
@@ -22,3 +22,4 @@ cd ../sbc806/RumHKNet/src/
 
 
 deactivate
+

@@ -16,7 +16,7 @@ python -u prediction_v2.py \
     --model_type lucaprot \
     --input_type seq_matrix \
     --input_mode single \
-    --time_str 20251113091546 \
+    --time_str 20251114152942 \
     --step 374392 \
     --threshold $threshold \
     --print_per_num 100000 \

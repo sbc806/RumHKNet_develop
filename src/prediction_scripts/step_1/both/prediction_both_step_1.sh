@@ -14,13 +14,14 @@ python -u prediction_v2.py \
     --task_type binary_class \
     --task_level_type seq_level \
     --model_type lucaprot \
-    --input_type matrix \
+    --input_type seq_matrix \
     --input_mode single \
-    --time_str 20250913223115 \
-    --step 142912 \
+    --time_str 20251113091546 \
+    --step 374392 \
     --threshold $threshold \
     --print_per_num 100000 \
     --truncation_seq_length 10240 \
     --emb_dir $dir_path/embeddings/step_1/esm \
     --gpu_id 0
+
 

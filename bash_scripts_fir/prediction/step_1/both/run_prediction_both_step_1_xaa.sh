@@ -1,11 +1,11 @@
 #!/bin/bash
 #SBATCH --account=def-guanuofa
-#SBATCH --gpus-per-node=nvidia_h100_80gb_hbm3_3g.40gb:1
+#SBATCH --gpus-per-node=nvidia_h100_80gb_hbm3_2g.20gb:1
 #SBATCH --mem=64G
-#SBATCH --time=0:10:0
+#SBATCH --time=7-0
 #SBATCH --job-name=prediction-both-step-1-xaa-new-sequences
-#SBATCH --output=output/prediction_both_step_1_xaa_02_%j.out
-#SBATCH --err=output/prediction_both_step_1_five_sequences_%j.err
+#SBATCH --output=output/prediction_both_step_1_xaa_new_02_%j.out
+#SBATCH --err=output/prediction_both_step_1_xaa_new_02_%j.err
 
 
 module load python/3.11
@@ -22,5 +22,6 @@ cd ../sbc806/RumHKNet/src/
 
 
 deactivate
+
 
 

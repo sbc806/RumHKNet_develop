@@ -12,7 +12,7 @@ module load python/3.11
 module load scipy-stack
 module load gcc arrow/19.0.1
 
-cd /home/schen123/links/projects/def-guanuofa/schen123/kinases/virtual_environments
+cd /home/schen123/projects/def-guanuofa/schen123/kinases/virtual_environments
 source TEST/bin/activate
 
 
@@ -22,4 +22,5 @@ cd ../sbc806/RumHKNet/src/
 
 
 deactivate
+
 

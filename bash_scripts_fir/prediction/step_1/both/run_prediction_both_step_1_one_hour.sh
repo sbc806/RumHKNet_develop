@@ -5,7 +5,7 @@
 #SBATCH --time=1:0:0
 #SBATCH --job-name=prediction-both-step-1-one-hour
 #SBATCH --output=output/prediction_both_step_1_one_hour_%j.out
-#SBATCH --er=output/prediction_both_step_1_five_sequences_%j.err
+#SBATCH --er=output/prediction_both_step_1_one_gour_%j.err
 
 
 module load python/3.11
@@ -22,6 +22,7 @@ cd ../sbc806/RumHKNet/src/
 
 
 deactivate
+
 
 
 

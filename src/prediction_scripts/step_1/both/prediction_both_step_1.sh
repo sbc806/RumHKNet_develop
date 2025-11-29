@@ -20,7 +20,7 @@ python -u prediction_v2.py \
     --step 374392 \
     --threshold $threshold \
     --print_per_num 100000 \
-    --truncation_seq_length 10240 \
+    --truncation_seq_length 3432 \
     --emb_dir $dir_path/embeddings/step_1/esm \
     --gpu_id 0 \
     --seq_id_idx 0 \

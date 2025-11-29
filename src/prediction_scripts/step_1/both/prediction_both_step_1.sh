@@ -6,9 +6,9 @@ echo $threshold
 
 python -u prediction_v2.py \
     --seq_type prot \
-    --input_file $dir_path/predictions/predictions_dataset/step_1/$3$4.csv \
+    --input_file $dir_path/predictions/predictions_dataset/step_1/$3.csv \
     --model_path $dir_path/sbc806/RumHKNet/models_step_1_both \
-    --save_path $dir_path/predictions/predicted_results/step_1/both/$3_predicted_$2.csv \
+    --save_path $dir_path/predictions/predicted_results/step_1/both/$3_predicted_$2$4.csv \
     --dataset_name step_1_non_kinases_preprocessed \
     --dataset_type protein \
     --task_type binary_class \

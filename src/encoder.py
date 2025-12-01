@@ -474,7 +474,6 @@ class Encoder(object):
                 elif seq_type not in ["protein", "prot", "gene"]:
                     raise Exception("now not support embedding of the seq_type=%s" % seq_type)
                 else:
-                    print("Getting embedding:",seq_id,seq_type,len(seq))
                     matrix = self.__get_embedding__(seq_id, seq_type, seq, "matrix")
             elif isinstance(matrix_filename, str):
                 for matrix_dir in self.matrix_dirpath:

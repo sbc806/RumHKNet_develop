@@ -430,6 +430,7 @@ def predict_embedding(sample,
 
     converter = BatchConverter(global_alphabet, truncation_seq_length)
     protein_ids, raw_seqs, tokens = converter([[protein_id, protein_seq]])
+    print(protein_ids.shape)
     embeddings = {}
     with torch.no_grad():
         # if torch.cuda.is_available():

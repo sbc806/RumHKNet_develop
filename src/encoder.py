@@ -487,7 +487,7 @@ class Encoder(object):
                 raise Exception("matrix is not filepath-str and np.ndarray")
 
         seq = seq.strip().upper()
-        print(matrix.shape)
+        print("matrix:",matrix.shape)
         return {
             "seq_id": seq_id,
             "seq": seq,

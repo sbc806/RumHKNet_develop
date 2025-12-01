@@ -380,6 +380,7 @@ class Encoder(object):
                 else:
                     truncation_seq_length = self.seq_max_length - int(self.prepend_bos) - int(self.append_eos)
                     truncation_seq_length = min(seq_len, truncation_seq_length)
+                print("predict:",truncation_seq_length)
                 embedding_info, processed_seq_len = predict_embedding_esm(
                     sample=[seq_id, seq],
                     trunc_type=self.trunc_type,
@@ -397,7 +398,6 @@ class Encoder(object):
                     truncation_seq_length = (truncation_seq_length + int(self.prepend_bos) + int(self.append_eos)) * 0.95 \
                                             - int(self.prepend_bos) - int(self.append_eos)
                     truncation_seq_length = int(truncation_seq_length)
-                    print(truncation_seq_length)
                     embedding_info, processed_seq_len = predict_embedding_esm(
                         sample=[seq_id, seq],
                         trunc_type=self.trunc_type,
@@ -409,7 +409,7 @@ class Encoder(object):
                         device=self.device
                     )
                     if embedding_info is not None and self.embedding_complete:
-                        print(truncation_seq_length)
+                        print("Complete:",truncation_seq_length)
                         embedding_info = complete_embedding_matrix_esm(
                             seq_id=seq_id,
                             seq_type=seq_type,

@@ -409,7 +409,6 @@ class Encoder(object):
                         device=self.device
                     )
                     if embedding_info is not None and self.embedding_complete:
-                        print("Complete:",truncation_seq_length)
                         embedding_info = complete_embedding_matrix_esm(
                             seq_id=seq_id,
                             seq_type=seq_type,

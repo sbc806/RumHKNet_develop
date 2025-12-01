@@ -513,7 +513,7 @@ def predict_embedding_multiple(samples,
     if len(sample) > 2:
         protein_id, protein_seq = sample[:,0], sample[:,2]
     else:
-        protein_id, protein_seq = sample[:,0], sample[1]
+        protein_id, protein_seq = sample[:,0], sample[:,1]
     protein_seq = clean_seq(protein_id, protein_seq)
     if len(protein_seq) > truncation_seq_length:
         if trunc_type == "left":

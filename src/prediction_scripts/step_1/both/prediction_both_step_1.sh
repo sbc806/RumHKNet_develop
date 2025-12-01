@@ -3,7 +3,7 @@ export CUDA_VISIBLE_DEVICES="0"
 dir_path="/home/schen123/scratch/kinases"
 threshold=$1
 echo $threshold
-truncation_seq_length=$3
+truncation_seq_length=$4
 echo $truncation_seq_length
 extra=$5
 echo $extra

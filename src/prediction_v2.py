@@ -499,7 +499,7 @@ def create_encoder_batch_convecter(
         "llm_dirpath": lucapcycle_args.llm_dirpath,
         "input_type": lucapcycle_args.input_type,
         "trunc_type": lucapcycle_args.trunc_type,
-        "seq_max_length": lucapcycle_args.truncation_seq_length if hasattr(lucapcycle_args, "truncation_seq_length") else lucapcycle_args.seq_max_length,
+        "seq_max_length": lucapcycle_args.truncation_matrix_length,
         "prepend_bos": True,
         "append_eos": True,
         "vector_dirpath": lucapcycle_args.vector_dirpath,
@@ -525,8 +525,8 @@ def create_encoder_batch_convecter(
         seq_tokenizer=seq_tokenizer,
         no_position_embeddings=lucapcycle_args.no_position_embeddings,
         no_token_type_embeddings=lucapcycle_args.no_token_type_embeddings,
-        truncation_seq_length=lucapcycle_args.truncation_seq_length if hasattr(lucapcycle_args, "truncation_seq_length") else lucapcycle_args.seq_max_length,
-        truncation_matrix_length=lucapcycle_args.truncation_matrix_length if hasattr(lucapcycle_args, "truncation_matrix_length") else lucapcycle_args.matrix_max_length,
+        truncation_seq_length=lucapcycle_args.truncation_seq_length,
+        truncation_matrix_length=lucapcycle_args.truncation_matrix_length,
         trunc_type=lucapcycle_args.trunc_type if hasattr(lucapcycle_args, "trunc_type") else "right",
         ignore_index=lucapcycle_args.ignore_index,
         non_ignore=lucapcycle_args.non_ignore,
@@ -799,7 +799,8 @@ def run_args():
                         help="the seq embedding save dir in advance. default: None")
     parser.add_argument("--truncation_seq_length", default=4096, type=int,
                         help="the truncation seq length for LLM, default: 4096")
-
+    parser.add_argument("--truncation_matrix_length", default=4096, type=int,
+                        help="the truncation matrix length for LLM, default:4096")
     # for the trained model checkpoint
     parser.add_argument("--model_path", default="..", type=str,
                         help="the model dir. default: ../")
@@ -920,6 +921,7 @@ if __name__ == "__main__":
                     batch_results = run(
                         batch_data,
                         args.truncation_seq_length,
+                        args.truncation_matrix_length,
                         args.model_path,
                         args.dataset_name,
                         args.dataset_type,
@@ -945,6 +947,7 @@ if __name__ == "__main__":
                 batch_results = run(
                     batch_data,
                     args.truncation_seq_length,
+                    args.truncation_matrix_length,
                     args.model_path,
                     args.dataset_name,
                     args.dataset_type,
@@ -976,6 +979,7 @@ if __name__ == "__main__":
         results = run(
             data,
             args.truncation_seq_length,
+            args.truncation_matrix_length,
             args.model_path,
             args.dataset_name,
             args.dataset_type,

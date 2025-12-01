@@ -429,6 +429,7 @@ class LucaProt(BertPreTrainedModel):
         if self.has_seq_encoder:
             # calc for sequence
             if input_ids is not None:
+                print("input_ids:",input_ids.shape)
                 seq_outputs = self.seq_encoder(
                     input_ids,
                     attention_mask=seq_attention_masks,

@@ -220,7 +220,7 @@ class BertEmbeddings(nn.Module):
                     torch.zeros(self.position_ids.size(), dtype=torch.long),
                     persistent=False,
                 )
-
+        print("Initialized BertEmbeddings")
     def forward(
             self,
             input_ids: Optional[torch.LongTensor] = None,

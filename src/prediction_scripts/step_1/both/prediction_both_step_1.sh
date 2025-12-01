@@ -7,6 +7,7 @@ truncation_seq_length=$3
 echo $truncation_seq_length
 extra=$5
 echo $extra
+
 python -u prediction_v2.py \
     --seq_type prot \
     --input_file $dir_path/predictions/predictions_dataset/step_1/$3.csv \

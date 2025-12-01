@@ -429,6 +429,7 @@ class LucaProt(BertPreTrainedModel):
         if self.has_seq_encoder:
             # calc for sequence
             if input_ids is not None:
+                print("input_ids:",input_ids.shape)
                 seq_outputs = self.seq_encoder(
                     input_ids,
                     attention_mask=seq_attention_masks,
@@ -508,6 +509,7 @@ class LucaProt(BertPreTrainedModel):
         if self.has_embedding_encoder:
             if return_embedding:
                 matrices_copy = matrices.clone()
+                print("Using embedding_encoder")
                 if matrix_attention_masks is not None:
                     # (B, Seq_len) -> (B, Seq_len, 1)
                     max_mask = 1.0 - matrix_attention_masks

@@ -535,7 +535,7 @@ class BatchConverter(object):
                 labels = torch.tensor(new_labels, dtype=torch.int64)
         else:
             labels = None
-
+        print("encoded_matrices:",encoded_matrices.shape)
         return input_ids, \
                position_ids, \
                token_type_ids, \

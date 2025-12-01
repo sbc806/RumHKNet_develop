@@ -22,6 +22,7 @@ import argparse
 from datetime import datetime
 from collections import OrderedDict
 from subword_nmt.apply_bpe import BPE
+from torch.utils.data import DataLoader
 from transformers import BertConfig, BertTokenizer
 sys.path.append(".")
 sys.path.append("..")

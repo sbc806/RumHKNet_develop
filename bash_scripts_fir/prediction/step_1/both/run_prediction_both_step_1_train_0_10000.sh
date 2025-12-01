@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --account=def-guanuofa
-#SBATCH --gpus-per-node=nvidia_h100_80gb_hbm3_2g.20gb:1
-#SBATCH --mem=40G
-#SBATCH --time=1-0
+#SBATCH --gpus-per-node=nvidia_h100_80gb_hbm3_1g.80gb:1
+#SBATCH --mem=64G
+#SBATCH --time=7-0
 #SBATCH --job-name=prediction-both-step-1-train-0-10000
 #SBATCH --output=output/prediction_both_step_1_train_0_10000_%j.out
 #SBATCH --er=output/prediction_both_step_1_train_0_10000_%j.err

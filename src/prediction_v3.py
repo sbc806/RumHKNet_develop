@@ -184,26 +184,27 @@ def predict_probs(
         batch_convecter,
         seq_batch
     )
-    """
+    batch_features,cur_sample_num=to_device(device,batch_features)
     model.to(args.device)
-    if isinstance(batch_features, list):
-        probs = []
-        for cur_batch_features in batch_features:
-            cur_probs = model(**cur_batch_features)[1]
-            if cur_probs.is_cuda:
-                cur_probs = cur_probs.detach().cpu().numpy()
-            else:
-                cur_probs = cur_probs.detach().numpy()
-            probs.append(cur_probs)
+    # if isinstance(batch_features, list):
+        # probs = []
+        # for cur_batch_features in batch_features:
+            # cur_probs = model(**cur_batch_features)[1]
+            # if cur_probs.is_cuda:
+                # cur_probs = cur_probs.detach().cpu().numpy()
+            # else:
+                # cur_probs = cur_probs.detach().numpy()
+            # probs.append(cur_probs)
+    # else:
+    probs = model(**batch_features)[1]
+    if probs.is_cuda:
+        probs = probs.detach().cpu().numpy()
     else:
-        probs = model(**batch_features)[1]
-        if probs.is_cuda:
-            probs = probs.detach().cpu().numpy()
-        else:
-            probs = probs.detach().numpy()
-    """
+        probs = probs.detach().numpy()
+    
     # return batch_info, probs, seq_lens
-    return 0, 1, 2
+    # return 0, 1, 2
+    return probs
 
 
 def predict_seq_level_binary_class(

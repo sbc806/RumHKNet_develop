@@ -613,7 +613,7 @@ def predict_embedding_multiple(seq_batch,
             if len(embeddings) > 1:
                 return embeddings, processed_seq_len
             elif len(embeddings) == 1:
-                return list(embeddings.items())[0][1], processed_seq_len, tokens, seq_len
+                return list(embeddings.items())[0][1], processed_seq_len, tokens[:, 1: truncate_late + 1]
             else:
                 return None, None
         except RuntimeError as e:

@@ -514,9 +514,9 @@ def predict_embedding_multiple(samples,
     # protein_seq = clean_seq(protein_id, protein_seq)
     # if len(protein_seq) > truncation_seq_length:
     if trunc_type == "left":
-        protein_seq = [samples["seq"].iloc[i][:,-truncation_seq_length[i]:] for i in range(0, len(samples))]
+        protein_seq = samples["seq"].str[-truncation_seq_length:]
     else:
-        protein_seq = [samples["seq"][:,:truncation_seq_length[i]] for i in range(0, len(samples))]
+        protein_seq = samples["seq"].str[:truncation_seq_length]
     if global_model is None or global_alphabet is None or global_version is None or global_version != version or global_layer_size is None:
         if version == "15B":
             llm_name = "esm2_t48_15B_UR50D"
@@ -527,14 +527,14 @@ def predict_embedding_multiple(samples,
             global_layer_size = 36
             # global_model, global_alphabet = pretrained.load_model_and_alphabet("esm2_t36_3B_UR50D")
 
-            model_name = "esm2_t36_3B_UR50D"
-            url = f"https://dl/fbaipublicfiles.com/fair-esm/regression/{model_name}.pt"
-            fn = Path(url).name
-            model_data = torch.load(
-                f"{torch.hub.get_dir()}/checkpoints/{fn}",
-                map_location="cpu",
-                weights_only=False
-            )
+            # model_name = "esm2_t36_3B_UR50D"
+            # url = f"https://dl/fbaipublicfiles.com/fair-esm/regression/{model_name}.pt"
+            # fn = Path(url).name
+            # model_data = torch.load(
+                # f"{torch.hub.get_dir()}/checkpoints/{fn}",
+                # map_location="cpu",
+                # weights_only=False
+            # )
 
             model_name = "esm2_t36_3B_UR50D"
             url = f"https://dl.fbaipublicfiles.com/fair-esm/regression/{model_name}-contact-regression.pt"

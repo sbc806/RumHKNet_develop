@@ -360,7 +360,8 @@ def predict_embedding(sample,
                       truncation_seq_length=4094,
                       device=None,
                       version="3B",
-                      matrix_add_special_token=False):
+                      matrix_add_special_token=False,
+                     seq_len=None):
     '''
     use sequence to predict protein embedding matrix or vector(bos)
     :param sample: [protein_id, protein_sequence]
@@ -596,7 +597,8 @@ def predict_embedding_multiple(seq_batch,
         tokens = tokens.to(device=device, non_blocking=True)
         try:
             out = global_model(tokens, repr_layers=repr_layers, return_contacts=False)
-            seq_len = seq_batch["seq"].str.len()
+            if seq_len is None:
+                seq_len = seq_batch["seq"].str.len()
             truncate_len = min(truncation_seq_length, max(seq_len))
             processed_seq_len = truncate_len + 2
             if "representations" in embedding_type or "matrix" in embedding_type:

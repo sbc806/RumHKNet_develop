@@ -206,11 +206,12 @@ def predict_probs(
 
 
 def predict_seq_level_binary_class(
-        file_path,
-    chunk_size,
+        args,
+    lucapcycle_args,
         encoder,
         batch_convecter,
-        model
+        model,
+        args
 ):
     """
     predict the seq level binary-class classification task
@@ -650,12 +651,11 @@ def run(
     label_id_2_name = {idx: name for idx, name in enumerate(label_list)}
 
     # Step 3: prediction
-    predict_seq_level_binary_class(args.file_path,
-                                   args.chunk_size,
+    predict_seq_level_binary_class(args,
                                    lucapcycle_args,
                                    encoder,
                                    batch_convecter,
-                                   lucabase_model,
+                                   lucabase_model
                                   )
     """
     if lucapcycle_args.task_level_type in ["seq_level", "seq-level"] and task_type in ["binary_class", "binary-class"]:

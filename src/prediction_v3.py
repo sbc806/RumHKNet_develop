@@ -32,21 +32,21 @@ try:
     from common.multi_label_metrics import relevant_indexes
     from common.alphabet import Alphabet
     from encoder import Encoder
-    from batch_converter import BatchConverter
+    # from batch_converter import BatchConverter
+    from batch_converter_multiple import BatchConverterMultiple
     from lucaprot.models.lucaprot import LucaProt
     from utils import available_gpu_id, load_labels, download_trained_checkpoint_lucapcycle
     from file_operator import csv_reader, fasta_reader, csv_writer, tsv_reader
-    from multi_files_stream_dataloader import MultiFilesStreamDataloader
 except ImportError:
     from src.utils import to_device
     from src.common.multi_label_metrics import relevant_indexes
     from src.common.alphabet import Alphabet
     from src.encoder import Encoder
-    from src.batch_converter import BatchConverter
+    # from src.batch_converter import BatchConverter
+    from src.batch_converter_multiple import BatchConverterMultiple
     from src.lucaprot.models.lucaprot import LucaProt
     from src.utils import available_gpu_id, load_labels, download_trained_checkpoint_lucapcycle
     from src.file_operator import csv_reader, fasta_reader, csv_writer, tsv_reader
-    from src.multi_files_stream_dataloder import MultiFilesStreamDataloader
 
 
 def transform_one_sample_2_feature(

@@ -510,16 +510,13 @@ def predict_embedding_multiple(samples,
     global global_model, global_alphabet, global_version, global_layer_size
     assert "bos" in embedding_type or "representations" in embedding_type \
            or "matrix" in embedding_type or "vector" in embedding_type or "contacts" in embedding_type
-    if len(sample) > 2:
-        protein_id, protein_seq = sample[:,0], sample[:,2]
-    else:
-        protein_id, protein_seq = sample[:,0], sample[:,1]
+    
     # protein_seq = clean_seq(protein_id, protein_seq)
     # if len(protein_seq) > truncation_seq_length:
     if trunc_type == "left":
-        protein_seq = protein_seq[:,-truncation_seq_length:]
+        protein_seq = [samples["seq"].iloc[i][:,-truncation_seq_length[i]:] for i in range(0, len(samples))]
     else:
-        protein_seq = protein_seq[:,:truncation_seq_length]
+        protein_seq = [samples["seq"][:,:truncation_seq_length[i]] for i in range(0, len(samples))]
     if global_model is None or global_alphabet is None or global_version is None or global_version != version or global_layer_size is None:
         if version == "15B":
             llm_name = "esm2_t48_15B_UR50D"

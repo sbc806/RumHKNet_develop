@@ -211,8 +211,7 @@ def predict_seq_level_binary_class(
     lucapcycle_args,
         encoder,
         batch_convecter,
-        model,
-        args
+        model
 ):
     """
     predict the seq level binary-class classification task

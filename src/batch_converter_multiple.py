@@ -440,7 +440,7 @@ class BatchConverterMultiple(object):
                 # batch_size=batch_size,
                 # matrices=matrices
             # )
-            matrix_max_length = self.__matrix_encode__(batch_size=batch_size, matrices=matrices)
+            matrix_attention_masks, matrix_max_length = self.__matrix_encode__(batch_size=batch_size, matrices=matrices)
             max_length = min(max_length, matrix_max_length)
             matrix_part_of_input = True
 
@@ -465,13 +465,24 @@ class BatchConverterMultiple(object):
         # vector
 
         # matrix
-        matrices = torch.tensor(matrices, dtype=torch.float32)
-        matrices[tokens == 2] = 0
-        matrices[tokens ==1] = 0
-        
+        if self.matrix_add_special_token and self.matrix.prepend_bos and self.matrix.append_eos:
+            real_matrix_len = matrices.shape[1] - 2
+            real_matrix_len = min(real_matrix_length, self.truncation_matrix_length)
+            matrices = torch.tensor(matrices, dtype=torch.float32)
+            matrices = matrices[:,:real_matrix_len]
+            tokens = tokens[:,:real_matrix_len]
+            
+            matrices[tokens == 2] = 0
+            matrices[tokens == 1] = 0
+
+            matrix_attention_masks[tokens == 2] = 0
+            matrix_attention_masks[tokens == 1] = 0
+        else:
+            sys.exit("Should be self.matrix_add_special_token and self.matrix.prepend_bos and self.matrix.append_eos")
+        """
         for sample_idx in range(batch_size):
             # seq
-            """
+            
             if seq_part_of_input:
                 if self.seq_prepend_bos:
                     input_ids[sample_idx, 0] = self.cls_idx
@@ -508,7 +519,7 @@ class BatchConverterMultiple(object):
                         token_type_ids[sample_idx, pos_idx] = type_value
 
                 seq_attention_masks[sample_idx, 0: cur_len] = 1
-                """
+                
                 
             # vector
             if vector_part_of_input:
@@ -559,7 +570,7 @@ class BatchConverterMultiple(object):
                                          label_size=self.label_size,
                                          output_mode=self.output_mode,
                                          label=labels[sample_idx]))
-
+        """
         if new_labels is not None and new_labels:
             if self.output_mode in ["regression"]:
                 labels = torch.tensor(new_labels, dtype=torch.float32)

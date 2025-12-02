@@ -235,7 +235,7 @@ def predict_seq_level_binary_class(
             preds = (probs >= args.threshold).astype(int).flatten()
             seq_ids = seq_ids + list(chunk["seq_id"])
             seqs = seqs + list(chunk["seq"])
-            probs = all_probs + probs
+            probs = all_probs + list(probs.flatten())
             preds = all_preds + list(preds)
     pd.DataFrame({"seq_id":seq_ids,"seq":seqs,"prob":all_probs,"pred":all_preds}).to_csv(args.save_path)
         # torch.cuda.empty_cache()

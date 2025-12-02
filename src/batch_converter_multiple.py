@@ -598,7 +598,8 @@ class BatchConverterMultiple(object):
     def __call__(self, raw_batch: dict):
         batch_size = len(raw_batch["seq"])
         # pair
-        if "seq_id_a" in raw_batch[0] and "seq_id_b" in raw_batch[0]:
+        if False:
+        # if "seq_id_a" in raw_batch[0] and "seq_id_b" in raw_batch[0]:
             res = {}
             seq_ids_a = []
             seq_types_a = []

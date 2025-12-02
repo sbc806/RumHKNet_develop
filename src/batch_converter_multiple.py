@@ -401,7 +401,7 @@ class BatchConverterMultiple(object):
         return filled_matrices, attention_masks, max_len
         # return attention_masks, max_len
 
-    def __call_single__(self, batch_size, seq_types, seqs, vectors, matrices, tokens, labels):
+    def __call_single__(self, batch_size, seq_types, seqs, vectors, matrices, tokens, seq_len, labels):
         max_length = sys.maxsize
         input_ids, position_ids, token_type_ids, seq_attention_masks = None, None, None, None
         seq_part_of_input = False
@@ -476,7 +476,7 @@ class BatchConverterMultiple(object):
             encoded_matrices[tokens == 1] = 0
 
             if filled_matrices.shape[1] < matrices.shape[1]:
-                selected_sequences = np.where(np.minimum(filled_matrices.shape[1], [len(seq) for seq in seq]) == filled_matrices.shape[1]])[0]
+                selected_sequences = np.where(np.minimum(filled_matrices.shape[1], seq_len) == filled_matrices.shape[1]])[0]
                 encoded_matrices[:,selected_sequences,-1] = matrices[:, selected_sequences, -1]
             
             matrix_attention_masks[tokens == 2] = 0
@@ -756,6 +756,7 @@ class BatchConverterMultiple(object):
             seqs = raw_batch["seq"]
             matrices = raw_batch["matrix"]
             tokens = raw_batch["esm2_tokens"]
+            seq_len = raw_batch["seq_len"]
             
             if len(batches) > 0:
                 batches = torch.tensor([int(batch) for batch in batches], dtype=torch.int64)
@@ -777,7 +778,7 @@ class BatchConverterMultiple(object):
                 if new_matrices and len(new_matrices) > 0:
                     matrices = new_matrices
             input_ids, position_ids, token_type_ids, seq_attention_masks, encoded_vectors, encoded_matrices, matrix_attention_masks, num_sentences, sentence_length, labels = self.__call_single__(
-                batch_size, seq_types, seqs, vectors, matrices, tokens, labels=labels)
+                batch_size, seq_types, seqs, vectors, matrices, tokens, seq_len, labels=labels)
 
             if not hasattr(self, "max_sentences") or self.max_sentences is None:
                 res.update({

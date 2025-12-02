@@ -705,6 +705,7 @@ class BatchConverterMultiple(object):
             
             seq_ids = raw_batch["seq_id"]
             seq_types = raw_batch["seq_type"]
+            seqs = raw_batch["seq"]
             matrices = raw_batch["matrix"]
             
             if len(batches) > 0:
@@ -713,15 +714,17 @@ class BatchConverterMultiple(object):
             # embedding 矩阵有特殊字符，如果不使用则去掉首尾的特殊字符
             new_matrices = []
             if matrices:
-                for seq_idx, seq_type in enumerate(seq_types):
+                for seq_idx, seq_type in enumerate(seq_types[0:2]):
                     if "molecule" in seq_type:
                         if self.atom_matrix_add_special_token \
                                 and (not self.atom_matrix_prepend_bos or not self.atom_matrix_append_eos):
                             new_matrices.append(matrices[seq_idx][1:-1])
+                            sys.exit("Reached line molecule")
                     else:
                         if self.matrix_add_special_token \
                                 and (not self.matrix_prepend_bos or not self.matrix_append_eos):
                             new_matrices.append(matrices[seq_idx][1:-1])
+                            sys.exit("Reached line 726")
                 if new_matrices and len(new_matrices) > 0:
                     matrices = new_matrices
             input_ids, position_ids, token_type_ids, seq_attention_masks, encoded_vectors, encoded_matrices, matrix_attention_masks, num_sentences, sentence_length, labels = self.__call_single__(

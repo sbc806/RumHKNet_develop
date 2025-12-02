@@ -31,4 +31,5 @@ python -u prediction_v3.py \
     --seq_id_idx 0 \
     --seq_idx 2 \
     --matrix_embedding_exists \
-    --chunk_size 100
+    --chunk_size 200
+

@@ -332,7 +332,7 @@ class EncoderMultiple(object):
               )
         print("-" * 50)
 
-    def __get_embedding_multiple__(self, seq_batch):
+    def __get_embedding_multiple__(self, seq_batch, embedding_type):
         # Expects seq_batch which
         # First column should be seq_id
         # Second column should be seq_type
@@ -424,7 +424,7 @@ class EncoderMultiple(object):
                 # matrix = matrix_filename
             # else:
                 # raise Exception("matrix is not filepath-str and np.ndarray")
-            matrix, tokens = self.__get_embedding_multiple__(seq_batch)
+            matrix, tokens = self.__get_embedding_multiple__(seq_batch, "matrix")
             
         # seq = seq.strip().upper()
         seq_id = seq_batch["seq_id"].tolist()

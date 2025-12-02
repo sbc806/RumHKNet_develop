@@ -391,22 +391,22 @@ class BatchConverterMultiple(object):
         attention_masks.fill_(0)
         return filled_matrices, attention_masks, max_len
 
-    def __call_single__(self, batch_size, seq_types, seqs, vectors, matrices, labels):
+    def __call_multiple__(self, batch_size, seq_types, seqs, vectors, matrices, labels):
         max_length = sys.maxsize
         input_ids, position_ids, token_type_ids, seq_attention_masks = None, None, None, None
         seq_part_of_input = False
         if seqs:
-            new_seqs = []
-            for seq_idx, seq_type in enumerate(seq_types):
-                if seq_type == "prot":
-                    new_seqs.append(seqs[seq_idx].upper())
-                else:
-                    raise Exception("not support the seq_type=%s" % seq_type)
+            # new_seqs = []
+            # for seq_idx, seq_type in enumerate(seq_types):
+                # if seq_type == "prot":
+                    # new_seqs.append(seqs[seq_idx].upper())
+                # else:
+                    # raise Exception("not support the seq_type=%s" % seq_type)
 
             # seq_encoded_list没有加特殊字符，input_ids标志位来占位， seq_max_length 根据标志位来加特殊字符长度
-            seq_encoded_list, input_ids, position_ids, token_type_ids, seq_attention_masks, seq_max_length = self.__seq_encode__(
+            seq_encoded_list, input_ids, position_ids, token_type_ids, seq_attention_masks, seq_max_length = self.__seq_encode_multiple__(
                 batch_size=batch_size,
-                seqs=new_seqs
+                seqs=pd.Series(seqs).str.upper().tolist()
             )
             max_length = min(max_length, seq_max_length)
             seq_part_of_input = True

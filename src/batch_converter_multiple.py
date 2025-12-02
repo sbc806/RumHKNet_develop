@@ -23,7 +23,7 @@ except ImportError:
     from src.utils import gene_seq_replace
 
 
-class BatchConverter(object):
+class BatchConverterMultiple(object):
 
     def __init__(self,
                  task_level_type,
@@ -48,7 +48,7 @@ class BatchConverter(object):
                  matrix_append_eos=None,
                  matrix_add_special_token=None,
                  **kwargs):
-        print("------BatchConverter------")
+        print("------BatchConverterMultiple------")
         print("BatchConverter, kwargs:")
         print(kwargs)
         self.task_level_type = task_level_type
@@ -689,20 +689,24 @@ class BatchConverter(object):
             matrices = []
             labels = []
             batches = []
-            for item in raw_batch:
-                seq_ids.append(item["seq_id"])
-                seq_types.append(item["seq_type"])
-                if item["seq"] is not None:
-                    seqs.append(item["seq"])
-                if item["vector"] is not None:
-                    vectors.append(item["vector"])
-                if item["matrix"] is not None:
-                    matrices.append(item["matrix"])
-                if item["label"] is not None:
-                    labels.append(item["label"])
-                if item["batch"] is not None:
-                    batches.append(item["batch"])
-
+            # for item in raw_batch:
+                # seq_ids.append(item["seq_id"])
+                # seq_types.append(item["seq_type"])
+                # if item["seq"] is not None:
+                    # seqs.append(item["seq"])
+                # if item["vector"] is not None:
+                    # vectors.append(item["vector"])
+                # if item["matrix"] is not None:
+                    # matrices.append(item["matrix"])
+                # if item["label"] is not None:
+                    # labels.append(item["label"])
+                # if item["batch"] is not None:
+                    # batches.append(item["batch"])
+            
+            seq_ids = raw_batch["seq_id"]
+            seq_types = raw_batch["seq_type"]
+            matrices = raw_batch["matrix"]
+            
             if len(batches) > 0:
                 batches = torch.tensor([int(batch) for batch in batches], dtype=torch.int64)
                 

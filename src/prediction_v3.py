@@ -628,7 +628,7 @@ def run(
         seq_subword,
         seq_tokenizer
     )
-
+"""
     # embedding in advance
     if not matrix_embedding_exists and gpu_id > -1:
         # 先to cpu
@@ -653,7 +653,7 @@ def run(
 
     label_list = load_labels(lucapcycle_args.label_filepath)
     label_id_2_name = {idx: name for idx, name in enumerate(label_list)}
-
+"""
     # Step 3: prediction
     predict_seq_level_binary_class(args,
                                    lucapcycle_args,

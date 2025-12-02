@@ -342,7 +342,8 @@ class BatchConverterMultiple(object):
         # attention_masks.fill_(0)
         attention_masks = torch.tensor(attention_masks, dtype=torch.int64)
         input_ids = None
-        return seq_encoded_list, input_ids, position_ids, token_type_ids, attention_masks, max_len
+        # return seq_encoded_list, input_ids, position_ids, token_type_ids, attention_masks, max_len
+        return seq_encoded_list, input_ids, position_ids, token_type_ids, attention_masks, None
 
     def __vector_encode__(self, batch_size, vectors):
         """

@@ -636,32 +636,32 @@ def run(
         seq_subword,
         seq_tokenizer
     )
-"""
+    
     # embedding in advance
-    if not matrix_embedding_exists and gpu_id > -1:
+    # if not matrix_embedding_exists and gpu_id > -1:
         # 先to cpu
-        lucabase_model.to(torch.device("cpu"))
-        assert lucapcycle_args.emb_dir is not None
-        if not os.path.exists(lucapcycle_args.emb_dir):
-            os.makedirs(lucapcycle_args.emb_dir)
-        for item in sequences:
-            seq_id = item[0]
-            seq_type = item[1]
-            seq = item[2]
-            encoder.__get_embedding__(
-                seq_id=seq_id,
-                seq_type=seq_type,
-                seq=seq,
-                embedding_type="matrix" if "matrix" in input_type else "vector"
-            )
-            torch.cuda.empty_cache()
-        encoder.matrix_embedding_exists = True
+        # lucabase_model.to(torch.device("cpu"))
+        # assert lucapcycle_args.emb_dir is not None
+        # if not os.path.exists(lucapcycle_args.emb_dir):
+            # os.makedirs(lucapcycle_args.emb_dir)
+        # for item in sequences:
+            # seq_id = item[0]
+            # seq_type = item[1]
+            # seq = item[2]
+            # encoder.__get_embedding__(
+                # seq_id=seq_id,
+                # seq_type=seq_type,
+                # seq=seq,
+                # embedding_type="matrix" if "matrix" in input_type else "vector"
+            # )
+            # torch.cuda.empty_cache()
+        # encoder.matrix_embedding_exists = True
         # embedding 完之后to device
-        lucabase_model.to(lucapcycle_args.device)
+        # lucabase_model.to(lucapcycle_args.device)
 
-    label_list = load_labels(lucapcycle_args.label_filepath)
-    label_id_2_name = {idx: name for idx, name in enumerate(label_list)}
-"""
+    # label_list = load_labels(lucapcycle_args.label_filepath)
+    # label_id_2_name = {idx: name for idx, name in enumerate(label_list)}
+
     # Step 3: prediction
     predicted_results=predict_seq_level_binary_class(args,
                                    lucapcycle_args,

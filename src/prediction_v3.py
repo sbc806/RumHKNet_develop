@@ -148,7 +148,7 @@ def transform_one_sample_2_feature(
 
 def transform_multiple_sample_2_feature(device, encoder, batch_converter, seq_batch):
     encoder_output=encoder.encode_multiple(seq_batch)
-    batch_features=batch_converter.batch_multiple(encoder_output)
+    batch_features=batch_converter(encoder_output)
     batch_features,cur_sample_num=to_device(device,batch_features)
     return batch_features
 

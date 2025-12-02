@@ -332,46 +332,15 @@ class Encoder(object):
               )
         print("-" * 50)
 
-    def __get_embedding__(self, seq_id, seq_type, seq, embedding_type):
+    def __get_embedding_multiple__(self, seq_batch):
+        # Expects seq_batch which
+        # First column should be seq_id
+        # Second column should be seq_type
+        # Third column should be seq
         embedding_saved = False
-        seq_type = seq_type.strip().lower()
-        if "prot" not in seq_type and "gene" not in seq_type:
-            raise Exception("Not support this seq_type=%s" % seq_type)
+        
         embedding_info = None
-        if seq_id in self.seq_id_2_emb_filename:
-            emb_filename = self.seq_id_2_emb_filename[seq_id]
-            try:
-                dirpath_list = self.vector_dirpath if embedding_type in ["bos", "vector"] else self.matrix_dirpath
-                for dirpath in dirpath_list:
-                    emb_filepath = os.path.join(dirpath, emb_filename)
-                    if os.path.exists(emb_filepath):
-                        embedding_info = torch.load(emb_filepath, weights_only=False)
-                        embedding_saved = True
-                        return embedding_info
-            except Exception as e:
-                print(e)
-                embedding_info = None
-        elif embedding_type in ["bos", "vector"] and self.vector_dirpath is not None \
-                or embedding_type not in ["bos", "vector"] and self.matrix_dirpath is not None:
-            emb_filename = calc_emb_filename_by_seq_id(seq_id, embedding_type)
-            try:
-                dirpath_list = self.vector_dirpath if embedding_type in ["bos", "vector"] else self.matrix_dirpath
-                for dirpath in dirpath_list:
-                    emb_filepath = os.path.join(dirpath, emb_filename)
-                    if os.path.exists(emb_filepath):
-                        embedding_info = torch.load(emb_filepath)
-                        self.seq_id_2_emb_filename[seq_id] = emb_filename
-                        return embedding_info
-            except Exception as e:
-                print(e)
-                embedding_info = None
-
-        # if embedding_info is None:
-            # if self.matrix_embedding_exists:
-                # with open("matrix_embedding_not_exists.txt", "a+") as wfp:
-                # print("seq_id: %s" % seq_id)
-                    # wfp.write("seq_id: %s\n" % seq_id)
-                    # wfp.flush()
+        
         if embedding_info is None:
             if self.llm_type == "esm":
                 seq_len = len(seq)

@@ -184,7 +184,7 @@ def predict_probs(
         batch_convecter,
         seq_batch
     )
-    batch_features,cur_sample_num=to_device(device,batch_features)
+    batch_features,cur_sample_num=to_device(args.device,batch_features)
     model.to(args.device)
     # if isinstance(batch_features, list):
         # probs = []

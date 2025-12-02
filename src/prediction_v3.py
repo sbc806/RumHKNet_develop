@@ -149,14 +149,14 @@ def transformer_batch_sample_2_feature(device, encoder, batch_converter, seq_bat
     encoder_output=encoder.encode_multiple(seq_batch)
     batch_features=batch_converter.batch_multiple(encoder_output)
     batch_features,cur_sample_num=to_device(device,batch_features)
-    
+    return batch_features
 
 def predict_probs(
         args,
         encoder,
         batch_convecter,
         model,
-        row
+        seq_batch
 ):
     """
     predict the prob
@@ -168,6 +168,7 @@ def predict_probs(
     :return:
     """
     model.to(torch.device("cpu"))
+    """
     batch_info, batch_features, seq_lens = transform_one_sample_2_feature(
         args.device,
         args.input_mode,
@@ -175,6 +176,9 @@ def predict_probs(
         batch_convecter,
         row
     )
+    """
+    batch_features = transformer_multiple_sample_2_feature(
+    """
     model.to(args.device)
     if isinstance(batch_features, list):
         probs = []
@@ -191,6 +195,7 @@ def predict_probs(
             probs = probs.detach().cpu().numpy()
         else:
             probs = probs.detach().numpy()
+    """
     return batch_info, probs, seq_lens
 
 

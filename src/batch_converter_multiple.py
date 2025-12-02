@@ -278,21 +278,21 @@ class BatchConverterMultiple(object):
         :return:
         """
         if self.seq_subword:
-            seq_encoded_list = []
-            for seq_str in seqs:
-                seq_to_list = self.seq_subword.process_line(seq_str.upper()).split(" ")
-                seq = " ".join(seq_to_list)
-                inputs = self.seq_tokenizer.encode_plus(
-                    seq,
-                    None,
-                    add_special_tokens=False,
-                    max_length=self.truncation_seq_length,
-                    truncation=True
-                )
-                seq_encoded_list.append(inputs["input_ids"])
+            # seq_encoded_list = []
+            # for seq_str in seqs:
+                # seq_to_list = self.seq_subword.process_line(seq_str.upper()).split(" ")
+                # seq = " ".join(seq_to_list)
+                # inputs = self.seq_tokenizer.encode_plus(
+                    # seq,
+                    # None,
+                    # add_special_tokens=False,
+                    # max_length=self.truncation_seq_length,
+                    # truncation=True
+                # )
+                # seq_encoded_list.append(inputs["input_ids"])
             new_seqs = [" ".join(self.seq_subword.process_line(seq_str.upper()).split(" ")) for seq_str in seqs]
-            outputs = self.seq_tokenizer(new_seqs, None, add_special_tokens=False, max_length=self.truncation_seq_length, truncaation=True)
-            seq_encoded_list = outputs["input_ids"]
+            inputs = self.seq_tokenizer(new_seqs, None, add_special_tokens=False, max_length=self.truncation_seq_length, truncation=True)
+            seq_encoded_list = inputs["input_ids"]
         else:
             seq_encoded_list = [self.seq_tokenizer.encode(seq_str.upper()) for seq_str in seqs]
             # 该长度已经减去了需要增加的特殊字符的个数

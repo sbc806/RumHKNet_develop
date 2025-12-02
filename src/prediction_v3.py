@@ -227,7 +227,8 @@ def predict_seq_level_binary_class(
     
     with pd.read_csv(args.input_file, chunksize=args.chunk_size) as csv_reader:
         for chunk in csv_reader:
-            batch_info, probs, seq_lens = predict_probs(lucapcycle_args, encoder, batch_convecter, model, chunk)
+            probs = predict_probs(lucapcycle_args, encoder, batch_convecter, model, chunk)
+            print(probs)
         torch.cuda.empty_cache()
     """
     # print("probs dim: ", probs.ndim)

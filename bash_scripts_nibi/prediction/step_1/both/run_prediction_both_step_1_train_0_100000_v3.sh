@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --account=rrg-guanuofa
 #SBATCH --gpus-per-node=h100:1
-#SBATCH --mem=200G
+#SBATCH --mem=100G
 #SBATCH --time=3-0
 #SBATCH --job-name=prediction-both-step-1-train-0-100000-v3
 #SBATCH --output=output/prediction_both_step_1_train_0_100000_v3_%j.out

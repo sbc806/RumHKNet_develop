@@ -229,7 +229,8 @@ def predict_seq_level_binary_class(
         for chunk in csv_reader:
             probs = predict_probs(lucapcycle_args, encoder, batch_convecter, model, chunk)
             print(probs)
-        torch.cuda.empty_cache()
+            
+        # torch.cuda.empty_cache()
     """
     # print("probs dim: ", probs.ndim)
         preds = (probs >= args.threshold).astype(int).flatten()

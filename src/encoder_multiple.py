@@ -430,7 +430,7 @@ class EncoderMultiple(object):
             
         # seq = seq.strip().upper()
         seq_id = seq_batch["seq_id"].tolist()
-        seq = seq_batch["seq"].str.strip().upper().tolist()
+        seq = seq_batch["seq"].str.strip().str.upper().tolist()
         seq_type = seq_batch["seq_type"].tolist()
         vector = []
         label = []

@@ -369,7 +369,7 @@ class BatchConverterMultiple(object):
         :param matrices:
         :return:
         """
-        max_len = max(matrix.shape[0] for matrix in matrices)
+        max_len = matrices.shape[1]
         # 表征有特殊字符，并且 在模型中需要使用，则实际长度-2
         if self.matrix_add_special_token and self.matrix_prepend_bos and self.matrix_append_eos:
             max_len -= 2
@@ -435,10 +435,11 @@ class BatchConverterMultiple(object):
         if matrices is not None and len(matrices) > 0:
 
             # 根据标记位填充，根据标记位填充，句子数量，根据标记位是否加上特殊字符长度
-            encoded_matrices, matrix_attention_masks, matrix_max_length = self.__matrix_encode__(
-                batch_size=batch_size,
-                matrices=matrices
-            )
+            # encoded_matrices, matrix_attention_masks, matrix_max_length = self.__matrix_encode__(
+                # batch_size=batch_size,
+                # matrices=matrices
+            # )
+            matrix_max_length = self.__matrix_encode__(batch_size=batch_size, matrices=matrices)
             max_length = min(max_length, matrix_max_length)
             matrix_part_of_input = True
 

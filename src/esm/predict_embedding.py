@@ -514,9 +514,9 @@ def predict_embedding_multiple(samples,
     # protein_seq = clean_seq(protein_id, protein_seq)
     # if len(protein_seq) > truncation_seq_length:
     if trunc_type == "left":
-        protein_seq = samples["seq"].str[-truncation_seq_length:]
+        samples.loc[:, "seq"] = samples["seq"].str[-truncation_seq_length:]
     else:
-        protein_seq = samples["seq"].str[:truncation_seq_length]
+        samples.loc[:, "seq"] = samples["seq"].str[:truncation_seq_length]
     if global_model is None or global_alphabet is None or global_version is None or global_version != version or global_layer_size is None:
         if version == "15B":
             llm_name = "esm2_t48_15B_UR50D"

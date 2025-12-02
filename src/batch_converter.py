@@ -503,6 +503,9 @@ class BatchConverter(object):
                     encoded_matrices[sample_idx, real_matrix_len + 1] = matrix[-1]
                     matrix_attention_masks[sample_idx, 0: real_matrix_len + 2] = 1
                     cur_sentence_length = real_matrix_len + 2
+                    print("This block",np.sum(matrix-encoded_matrices[sample_idx,:real_matrix_len+2]))
+                    print(matrix)
+                    print(encoded_matrices[sample_idx]
                 elif self.matrix_add_special_token:
                     # embedding矩阵中有特殊字符，但模型中不需要使用（已经进行了裁剪）
                     encoded_matrices[sample_idx, 0: real_matrix_len] = matrix[0: real_matrix_len]

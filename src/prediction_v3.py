@@ -328,97 +328,6 @@ def predict_seq_level_multi_class(
         return res
 
 
-def predict_seq_level_multi_label(
-        args,
-        encoder,
-        batch_convecter,
-        label_id_2_name,
-        model,
-        row
-):
-    """
-    predict the seq level multi-label classification task
-    :param args:
-    :param encoder:
-    :param batch_convecter:
-    :param label_id_2_name:
-    :param model:
-    :param row:
-    :return:
-    """
-    batch_info, probs, seq_lens = predict_probs(args, encoder, batch_convecter, model, row)
-    # print("probs dim: ", probs.ndim)
-    preds = relevant_indexes((probs >= args.threshold).astype(int))
-    res = []
-    for idx, info in enumerate(batch_info):
-        if args.input_mode == "pair":
-            cur_res = [
-                info[0],
-                info[1],
-                info[2],
-                info[3],
-                [float(probs[idx][label_index]) for label_index in preds[idx]],
-                [label_id_2_name[label_index] for label_index in preds[idx]]
-            ]
-            if len(info) > 4:
-                cur_res += info[4:]
-        else:
-            cur_res = [
-                info[0],
-                info[1],
-                [float(probs[idx][label_index]) for label_index in preds[idx]],
-                [label_id_2_name[label_index] for label_index in preds[idx]]
-            ]
-            if len(info) > 2:
-                cur_res += info[2:]
-        res.append(cur_res)
-    return res
-
-
-def predict_seq_level_regression(
-        args,
-        encoder,
-        batch_convecter,
-        label_id_2_name,
-        model,
-        row
-):
-    """
-    predict the seq level regression task
-    :param args:
-    :param encoder:
-    :param batch_convecter:
-    :param label_id_2_name:
-    :param model:
-    :param row:
-    :return:
-    """
-    batch_info, probs, seq_lens = predict_probs(args, encoder, batch_convecter, model, row)
-    # print("probs dim: ", probs.ndim)
-    res = []
-    for idx, info in enumerate(batch_info):
-        if args.input_mode == "pair":
-            cur_res = [
-                info[0],
-                info[1],
-                info[2],
-                info[3],
-                float(probs[idx][0]),
-                float(probs[idx][0])
-            ]
-            if len(info) > 4:
-                cur_res += info[4:]
-        else:
-            cur_res = [
-                info[0],
-                info[1],
-                float(probs[idx][0]),
-                float(probs[idx][0])
-            ]
-            if len(info) > 2:
-                cur_res += info[2:]
-        res.append(cur_res)
-    return res
 
 
 def load_tokenizer(
@@ -743,6 +652,13 @@ def run(
     label_id_2_name = {idx: name for idx, name in enumerate(label_list)}
 
     # Step 3: prediction
+    predict_seq_level_binary_class(args.file_path,
+                                   args.chunk_size,
+                                   lucapcycle_args,
+                                   encoder,
+                                   batch_convecter,
+                                   lucabase_model,
+                                  )
     """
     if lucapcycle_args.task_level_type in ["seq_level", "seq-level"] and task_type in ["binary_class", "binary-class"]:
         predict_func = predict_seq_level_binary_class

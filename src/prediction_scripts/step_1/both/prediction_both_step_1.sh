@@ -1,6 +1,6 @@
 # Binary Classification
 export CUDA_VISIBLE_DEVICES="0"
-dir_path="/home/schen123/scratch/kinases"
+dir_path="/home/schen123/projects/rrg-guanuofa/schen123/kinases"
 threshold=$1
 echo $threshold
 truncation_seq_length=$4

@@ -485,7 +485,7 @@ class BatchConverterMultiple(object):
                 print("selected_sequences",selected_sequences)
                 print(matrices.shape,filled_matrices.shape,encoded_matrices.shape)
                 print(matrices[selected_sequences,-1])
-                encoded_matrices[selected_sequences, -1] = matrices[selected_sequences, -1]
+                encoded_matrices[selected_sequences, -1] = matrices[selected_sequences, seq_len]
             
             matrix_attention_masks[encoded_tokens == 2] = 0
             matrix_attention_masks[encoded_tokens == 1] = 0

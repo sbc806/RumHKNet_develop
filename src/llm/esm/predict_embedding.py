@@ -360,8 +360,7 @@ def predict_embedding(sample,
                       truncation_seq_length=4094,
                       device=None,
                       version="3B",
-                      matrix_add_special_token=False,
-                     seq_len=None):
+                      matrix_add_special_token=False):
     '''
     use sequence to predict protein embedding matrix or vector(bos)
     :param sample: [protein_id, protein_sequence]
@@ -495,7 +494,8 @@ def predict_embedding_multiple(seq_batch,
                       truncation_seq_length=4094,
                       device=None,
                       version="3B",
-                      matrix_add_special_token=False):
+                      matrix_add_special_token=False,
+                      seq_len=None):
     '''
     use sequence to predict protein embedding matrix or vector(bos)
     :param sample: [protein_id, protein_sequence]

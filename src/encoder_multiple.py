@@ -397,7 +397,7 @@ class EncoderMultiple(object):
             else:
                 raise Exception("Not support the llm_type=%s" % self.llm_type)
         
-        return embedding_info, tokens
+        return embedding_info, tokens, seq_len
 
     def encode_multiple(self,
                       seq_batch,
@@ -424,7 +424,7 @@ class EncoderMultiple(object):
                 # matrix = matrix_filename
             # else:
                 # raise Exception("matrix is not filepath-str and np.ndarray")
-            matrix, tokens = self.__get_embedding_multiple__(seq_batch, "matrix")
+            matrix, tokens, seq_len = self.__get_embedding_multiple__(seq_batch, "matrix")
             
         # seq = seq.strip().upper()
         seq_id = seq_batch["seq_id"].tolist()
@@ -441,7 +441,8 @@ class EncoderMultiple(object):
             "matrix": matrix,
             "label": label,
             "batch": batch,
-            "esm2_tokens": tokens
+            "esm2_tokens": tokens,
+            "seq_len": seq_len
         }
 
     

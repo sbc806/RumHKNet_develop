@@ -4,7 +4,7 @@
 #SBATCH --mem=32G
 #SBATCH --time=0:5:0
 #SBATCH --job-name=prediction-both-step-1-five-sequences-v3
-#SBATCH --output=output/prediction_both_step_1_five_sequences_v3_j.out
+#SBATCH --output=output/prediction_both_step_1_five_sequences_v3_%j.out
 #SBATCH --err=output/prediction_both_step_1_five_sequences_v3_%j.err
 
 

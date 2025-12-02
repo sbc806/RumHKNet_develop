@@ -5,7 +5,9 @@ threshold=$1
 echo $threshold
 truncation_seq_length=$4
 echo $truncation_seq_length
-extra=$5
+chunk_size=$5
+echo $chunk_size
+extra=$6
 echo $extra
 
 python -u prediction_v3.py \
@@ -31,5 +33,6 @@ python -u prediction_v3.py \
     --seq_id_idx 0 \
     --seq_idx 2 \
     --matrix_embedding_exists \
-    --chunk_size 200
+    --chunk_size $chunk_size
+
 

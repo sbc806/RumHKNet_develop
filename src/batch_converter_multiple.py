@@ -763,6 +763,7 @@ class BatchConverterMultiple(object):
             matrices = raw_batch["matrix"]
             tokens = raw_batch["esm2_tokens"]
             seq_len = raw_batch["seq_len"]
+            self.seq_len = seq_len
             
             if len(batches) > 0:
                 batches = torch.tensor([int(batch) for batch in batches], dtype=torch.int64)

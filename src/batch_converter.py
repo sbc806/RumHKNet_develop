@@ -722,7 +722,13 @@ class BatchConverter(object):
                     matrices = new_matrices
             input_ids, position_ids, token_type_ids, seq_attention_masks, encoded_vectors, encoded_matrices, matrix_attention_masks, num_sentences, sentence_length, labels = self.__call_single__(
                 batch_size, seq_types, seqs, vectors, matrices, labels=labels)
-
+            print()
+            print(seq_ids,seq_types,seqs,len(seqs[0]))
+            print(input_ids.shape)
+            print(seq_attention_masks.shape)
+            print(encoded_matrices.shape)
+            print(matrix_attention_masks.shape)
+            print()
             if not hasattr(self, "max_sentences") or self.max_sentences is None:
                 res.update({
                     "input_ids": input_ids,

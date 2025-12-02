@@ -459,6 +459,7 @@ class BatchConverterMultiple(object):
         seq_encoded_tensor[seq_encoded_tensor == 0] = self.padding_idx
         seq_encoded_tensor[:, 0] = self.cls_idx
         seq_encoded_tensor[:, -1] = self.eos_idx
+        input_ids = seq_encoded_tensor
         if not self.no_position_embeddings:
             sys.exit("Is not self.no_position_embeddings")
         if not self.no_token_type_embeddings:

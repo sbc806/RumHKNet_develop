@@ -270,7 +270,7 @@ class BatchConverterMultiple(object):
 
         return new_label
 
-    def __seq_encode_multiple__(self, batch_size, seqs):
+    def __seq_encode__(self, batch_size, seqs):
         """
         该函数不加特殊字符[CLS]与[SEP]
         :param batch_size:
@@ -405,7 +405,7 @@ class BatchConverterMultiple(object):
                     # raise Exception("not support the seq_type=%s" % seq_type)
 
             # seq_encoded_list没有加特殊字符，input_ids标志位来占位， seq_max_length 根据标志位来加特殊字符长度
-            seq_encoded_list, input_ids, position_ids, token_type_ids, seq_attention_masks, seq_max_length = self.__seq_encode_multiple__(
+            seq_encoded_list, input_ids, position_ids, token_type_ids, seq_attention_masks, seq_max_length = self.__seq_encode__(
                 batch_size=batch_size,
                 seqs=pd.Series(seqs).str.upper().tolist()
             )

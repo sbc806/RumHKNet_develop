@@ -222,6 +222,8 @@ def predict_seq_level_binary_class(
     :param row:
     :return:
     """
+    file_path = args.file_path
+    chunk_size = args.chunk_size
     batch_info, probs, seq_lens = predict_probs(args, encoder, batch_convecter, model, row)
     # print("probs dim: ", probs.ndim)
     preds = (probs >= args.threshold).astype(int).flatten()

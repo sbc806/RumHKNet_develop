@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --account=def-guanuofa
-#SBATCH --gpus-per-node=nvidia_h100_80gb_hbm3_3g.40gb:1
-#SBATCH --mem=64G
-#SBATCH --time=0:10:0
+#SBATCH --gpus-per-node=nvidia_h100_80gb_hbm3_2g.20gb:1
+#SBATCH --mem=32G
+#SBATCH --time=0:5:0
 #SBATCH --job-name=prediction-both-step-1-five-sequences-v3
 #SBATCH --output=output/prediction_both_step_1_five_sequences_v3_j.out
 #SBATCH --err=output/prediction_both_step_1_five_sequences_v3_%j.err
@@ -22,5 +22,6 @@ cd ../sbc806/RumHKNet/src/
 
 
 deactivate
+
 
 

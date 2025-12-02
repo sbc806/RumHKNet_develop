@@ -388,6 +388,7 @@ class BatchConverterMultiple(object):
             dtype=torch.float32,
         )
         filled_matrices.fill_(0.0)
+        """
         attention_masks = torch.empty(
             (
                 batch_size,
@@ -395,10 +396,10 @@ class BatchConverterMultiple(object):
             ),
             dtype=torch.int64,
         )
-        attention_masks.fill_(0)
-        """
+        attention_masks.fill_(1)
+        
         # return filled_matrices, attention_masks, max_len
-        return max_len
+        return attention_masks, max_len
 
     def __call_single__(self, batch_size, seq_types, seqs, vectors, matrices, tokens, labels):
         max_length = sys.maxsize

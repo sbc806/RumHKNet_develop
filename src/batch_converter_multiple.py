@@ -407,10 +407,11 @@ class BatchConverterMultiple(object):
                 # else:
                     # raise Exception("not support the seq_type=%s" % seq_type)
 
+            print("batch_converter_multiple.py seqs:",seqs)
             # seq_encoded_list没有加特殊字符，input_ids标志位来占位， seq_max_length 根据标志位来加特殊字符长度
             seq_encoded_list, input_ids, position_ids, token_type_ids, seq_attention_masks, seq_max_length = self.__seq_encode__(
                 batch_size=batch_size,
-                seqs=pd.Series(seqs).str.upper().tolist()
+                seqs=seqs
             )
             max_length = min(max_length, seq_max_length)
             seq_part_of_input = True

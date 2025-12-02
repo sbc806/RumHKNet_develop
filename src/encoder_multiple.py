@@ -399,57 +399,31 @@ class EncoderMultiple(object):
         
         return embedding_info
 
-    def encode_single(self,
-                      seq_id,
-                      seq_type,
-                      seq,
-                      vector_filename=None,
-                      matrix_filename=None,
+    def encode_multiple(self,
+                      seq_batch,
                       label=None,
                       batch=None):
-        seq_type = seq_type.strip().lower()
-
-        # for embedding vector
-        vector = None
-        if self.input_type in ["vector", "seq_vector"]:
-            if vector_filename is None:
-                if seq is None:
-                    raise Exception("seq is none and vector_filename is none")
-                elif seq_type not in ["protein", "prot", "gene"]:
-                    raise Exception("now not support embedding of the seq_type=%s" % seq_type)
-                else:
-                    vector = self.__get_embedding__(seq_id, seq_type, seq, "vector")
-            elif isinstance(vector_filename, str):
-                for vector_dir in self.vector_dirpath:
-                    vector_filepath = os.path.join(vector_dir, vector_filename)
-                    if os.path.exists(vector_filepath):
-                        vector = torch.load(vector_filepath)
-                        break
-            elif isinstance(vector_filename, np.ndarray):
-                vector = vector_filename
-            else:
-                raise Exception("vector is not filepath-str and np.ndarray")
 
         # for embedding matrix
         matrix = None
         if self.input_type in ["matrix", "seq_matrix"]:
-            if matrix_filename is None:
-                if seq is None:
-                    raise Exception("seq is none and matrix_filename is none")
-                elif seq_type not in ["protein", "prot", "gene"]:
-                    raise Exception("now not support embedding of the seq_type=%s" % seq_type)
-                else:
-                    matrix = self.__get_embedding__(seq_id, seq_type, seq, "matrix")
-            elif isinstance(matrix_filename, str):
-                for matrix_dir in self.matrix_dirpath:
-                    matrix_filepath = os.path.join(matrix_dir, matrix_filename)
-                    if os.path.exists(matrix_filepath):
-                        matrix = torch.load(matrix_filepath)
-                        break
-            elif isinstance(matrix_filename, np.ndarray):
-                matrix = matrix_filename
-            else:
-                raise Exception("matrix is not filepath-str and np.ndarray")
+            # if matrix_filename is None:
+                # if seq is None:
+                    # raise Exception("seq is none and matrix_filename is none")
+                # elif seq_type not in ["protein", "prot", "gene"]:
+                    # raise Exception("now not support embedding of the seq_type=%s" % seq_type)
+                # else:
+                    # matrix = self.__get_embedding__(seq_id, seq_type, seq, "matrix")
+            # elif isinstance(matrix_filename, str):
+                # for matrix_dir in self.matrix_dirpath:
+                    # matrix_filepath = os.path.join(matrix_dir, matrix_filename)
+                    # if os.path.exists(matrix_filepath):
+                        # matrix = torch.load(matrix_filepath)
+                        # break
+            # elif isinstance(matrix_filename, np.ndarray):
+                # matrix = matrix_filename
+            # else:
+                # raise Exception("matrix is not filepath-str and np.ndarray")
 
         seq = seq.strip().upper()
         return {

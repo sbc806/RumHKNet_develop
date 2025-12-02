@@ -446,10 +446,13 @@ class BatchConverterMultiple(object):
         new_labels = []
         num_sentences = 1
         sentence_length = 1
+
+        # seq
+        
         for sample_idx in range(batch_size):
             # seq
+            """
             if seq_part_of_input:
-                """
                 if self.seq_prepend_bos:
                     input_ids[sample_idx, 0] = self.cls_idx
 

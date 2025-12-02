@@ -346,13 +346,13 @@ class EncoderMultiple(object):
                 # seq_len = len(seq)
                 seq_len = seq_batch["seq"].str.len().tolist()
                 if self.embedding_complete:
-                    truncation_seq_length = min(seq_len+[global_max_seq_len])
+                    truncation_seq_length = min(max(seq_len), global_max_seq_len)
                     # truncation_seq_length = np.minimum(seq_len, global_max_seq_len)
                 else:
                     truncation_seq_length = self.seq_max_length - int(self.prepend_bos) - int(self.append_eos)
-                    truncation_seq_length = min(seq_len+[truncation_seq_length])
+                    truncation_seq_length = min(max(seq_len), truncation_seq_length)
                     # truncation_seq_length = np.minimum(seq_len, truncation_seq_length)
-                embedding_info, processed_seq_len = predict_embedding_esm_multiple(
+                embedding_info, processed_seq_len, tokens = predict_embedding_esm_multiple(
                     sample=seq_batch,
                     trunc_type=self.trunc_type,
                     embedding_type=embedding_type,
@@ -397,7 +397,7 @@ class EncoderMultiple(object):
             else:
                 raise Exception("Not support the llm_type=%s" % self.llm_type)
         
-        return embedding_info
+        return embedding_info, tokens
 
     def encode_multiple(self,
                       seq_batch,
@@ -424,7 +424,7 @@ class EncoderMultiple(object):
                 # matrix = matrix_filename
             # else:
                 # raise Exception("matrix is not filepath-str and np.ndarray")
-            matrix = self.__get_embedding_multiple__(seq_batch)
+            matrix, tokens = self.__get_embedding_multiple__(seq_batch)
             
         # seq = seq.strip().upper()
         seq_id = seq_batch["seq_id"].tolist()
@@ -440,7 +440,8 @@ class EncoderMultiple(object):
             "vector": vector,
             "matrix": matrix,
             "label": label,
-            "batch": batch
+            "batch": batch,
+            "esm2_tokens": tokens
         }
 
     

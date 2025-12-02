@@ -424,7 +424,8 @@ class EncoderMultiple(object):
                 # matrix = matrix_filename
             # else:
                 # raise Exception("matrix is not filepath-str and np.ndarray")
-
+            matrix = self.__get_embedding_multiple__(seq_batch)
+            
         seq = seq.strip().upper()
         return {
             "seq_id": seq_id,

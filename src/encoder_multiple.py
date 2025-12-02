@@ -19,9 +19,11 @@ sys.path.append("..")
 sys.path.append("../src")
 try:
     from llm.esm.predict_embedding import predict_embedding as predict_embedding_esm
+    from llm.esm.predict_embedding import predict_embedding_multiple as predict_embedding_esm_multiple
     from utils import calc_emb_filename_by_seq_id
 except ImportError as e:
     from src.llm.esm.predict_embedding import predict_embedding as predict_embedding_esm
+    from src.llm.esm.predict_embedding import predict_embedding_multiple as predict_embedding_esm_multiple
     from src.utils import calc_emb_filename_by_seq_id
 
 
@@ -353,14 +355,15 @@ class EncoderMultiple(object):
                     truncation_seq_length = min(max(seq_len), truncation_seq_length)
                     # truncation_seq_length = np.minimum(seq_len, truncation_seq_length)
                 embedding_info, processed_seq_len, tokens = predict_embedding_esm_multiple(
-                    sample=seq_batch,
+                    seq_batch=seq_batch.copy(),
                     trunc_type=self.trunc_type,
                     embedding_type=embedding_type,
                     repr_layers=[-1],
                     truncation_seq_length=truncation_seq_length,
                     matrix_add_special_token=self.matrix_add_special_token,
                     version=self.llm_step,
-                    device=self.device
+                    device=self.device,
+                    seq_len=seq_len
                 )
                 while embedding_info is None:
                     print("%s embedding error, max_len from %d truncate to %d" % (seq_id,
@@ -397,7 +400,7 @@ class EncoderMultiple(object):
             else:
                 raise Exception("Not support the llm_type=%s" % self.llm_type)
         
-        return embedding_info, tokens
+        return embedding_info, tokens, seq_len
 
     def encode_multiple(self,
                       seq_batch,
@@ -424,12 +427,12 @@ class EncoderMultiple(object):
                 # matrix = matrix_filename
             # else:
                 # raise Exception("matrix is not filepath-str and np.ndarray")
-            matrix, tokens = self.__get_embedding_multiple__(seq_batch, "matrix")
+            matrix, tokens, seq_len = self.__get_embedding_multiple__(seq_batch, "matrix")
             
         # seq = seq.strip().upper()
         seq_id = seq_batch["seq_id"].tolist()
-        seq = seq_batch["seq"].str.strip().upper().tolist()
-        seq_type = seq_batch["seq_type"].tolist()
+        seq = seq_batch["seq"].str.strip().str.upper().tolist()
+        seq_type = ["prot"] * len(seq_batch)
         vector = []
         label = []
         batch = []
@@ -441,7 +444,8 @@ class EncoderMultiple(object):
             "matrix": matrix,
             "label": label,
             "batch": batch,
-            "esm2_tokens": tokens
+            "esm2_tokens": tokens,
+            "seq_len": seq_len
         }
 
     

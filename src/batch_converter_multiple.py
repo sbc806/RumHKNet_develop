@@ -291,16 +291,19 @@ class BatchConverterMultiple(object):
                 # )
                 # seq_encoded_list.append(inputs["input_ids"])
             new_seqs = [" ".join(self.seq_subword.process_line(seq_str.upper()).split(" ")) for seq_str in seqs]
-            inputs = self.seq_tokenizer(new_seqs, None, add_special_tokens=True, max_length=self.truncation_seq_length+2, truncation=True)
+            # print(new_seqs)
+            inputs = self.seq_tokenizer(new_seqs, None, add_special_tokens=True, max_length=self.truncation_seq_length+2, truncation=True, padding=True)
             seq_encoded_list = inputs["input_ids"]
             attention_masks = inputs["attention_mask"]
+            # print("__seq_encode__",seq_encoded_list,attention_masks)
         else:
             seq_encoded_list = [self.seq_tokenizer.encode(seq_str.upper()) for seq_str in seqs]
             # 该长度已经减去了需要增加的特殊字符的个数
             if self.truncation_seq_length:
                 seq_encoded_list = [encoded[:self.truncation_seq_length] for encoded in seq_encoded_list]
         # max_len = max(len(seq_encoded) for seq_encoded in seq_encoded_list)
-        # max_len = max_len + int(self.seq_prepend_bos) + int(self.seq_append_eos)
+        max_len = seq_encoded_list[0][-1] - 2 
+        max_len = max_len + int(self.seq_prepend_bos) + int(self.seq_append_eos)
         # for input
         # input_ids = torch.empty(
             # (
@@ -343,6 +346,7 @@ class BatchConverterMultiple(object):
         attention_masks = torch.tensor(attention_masks, dtype=torch.int64)
         input_ids = None
         return seq_encoded_list, input_ids, position_ids, token_type_ids, attention_masks, max_len
+        # return seq_encoded_list, input_ids, position_ids, token_type_ids, attention_masks, None
 
     def __vector_encode__(self, batch_size, vectors):
         """
@@ -376,7 +380,7 @@ class BatchConverterMultiple(object):
         if self.truncation_matrix_length:
             max_len = min(max_len, self.truncation_matrix_length)
         max_len = max_len + int(self.matrix_prepend_bos) + int(self.matrix_append_eos)
-        """
+        
         embedding_vector_dim = matrices[0].shape[1]
         # for input
         filled_matrices = torch.empty(
@@ -388,7 +392,7 @@ class BatchConverterMultiple(object):
             dtype=torch.float32,
         )
         filled_matrices.fill_(0.0)
-        """
+        
         attention_masks = torch.empty(
             (
                 batch_size,
@@ -398,10 +402,10 @@ class BatchConverterMultiple(object):
         )
         attention_masks.fill_(1)
         
-        # return filled_matrices, attention_masks, max_len
-        return attention_masks, max_len
+        return filled_matrices, attention_masks, max_len
+        # return attention_masks, max_len
 
-    def __call_single__(self, batch_size, seq_types, seqs, vectors, matrices, tokens, labels):
+    def __call_single__(self, batch_size, seq_types, seqs, vectors, matrices, tokens, seq_len, labels):
         max_length = sys.maxsize
         input_ids, position_ids, token_type_ids, seq_attention_masks = None, None, None, None
         seq_part_of_input = False
@@ -413,7 +417,7 @@ class BatchConverterMultiple(object):
                 # else:
                     # raise Exception("not support the seq_type=%s" % seq_type)
 
-            print("batch_converter_multiple.py seqs:",seqs)
+            # print("batch_converter_multiple.py seqs:",seqs)
             # seq_encoded_list没有加特殊字符，input_ids标志位来占位， seq_max_length 根据标志位来加特殊字符长度
             seq_encoded_list, input_ids, position_ids, token_type_ids, seq_attention_masks, seq_max_length = self.__seq_encode__(
                 batch_size=batch_size,
@@ -440,7 +444,7 @@ class BatchConverterMultiple(object):
                 # batch_size=batch_size,
                 # matrices=matrices
             # )
-            matrix_attention_masks, matrix_max_length = self.__matrix_encode__(batch_size=batch_size, matrices=matrices)
+            filled_matrices, matrix_attention_masks, matrix_max_length = self.__matrix_encode__(batch_size=batch_size, matrices=matrices)
             max_length = min(max_length, matrix_max_length)
             matrix_part_of_input = True
 
@@ -457,6 +461,7 @@ class BatchConverterMultiple(object):
         seq_encoded_tensor[seq_encoded_tensor == 0] = self.padding_idx
         seq_encoded_tensor[:, 0] = self.cls_idx
         seq_encoded_tensor[:, -1] = self.eos_idx
+        input_ids = seq_encoded_tensor
         if not self.no_position_embeddings:
             sys.exit("Is not self.no_position_embeddings")
         if not self.no_token_type_embeddings:
@@ -465,20 +470,25 @@ class BatchConverterMultiple(object):
         # vector
 
         # matrix
-        if self.matrix_add_special_token and self.matrix.prepend_bos and self.matrix.append_eos:
-            real_matrix_len = matrices.shape[1] - 2
-            real_matrix_len = min(real_matrix_length, self.truncation_matrix_length)
+        if self.matrix_add_special_token and self.matrix_prepend_bos and self.matrix_append_eos:
+            # real_matrix_len = matrices.shape[1] - 2
+            # real_matrix_len = min(real_matrix_length, self.truncation_matrix_length)
             matrices = torch.tensor(matrices, dtype=torch.float32)
-            matrices = matrices[:,:real_matrix_len]
-            tokens = tokens[:,:real_matrix_len]
+            encoded_matrices = matrices[:,:filled_matrices.shape[1]]
+            encoded_tokens = tokens[:,:filled_matrices.shape[1]]
             
-            matrices[tokens == 2] = 0
-            matrices[tokens == 1] = 0
+            encoded_matrices[encoded_tokens == 2] = 0
+            encoded_matrices[encoded_tokens == 1] = 0
 
-            encoded_matrices = matrices
+            if filled_matrices.shape[1] < matrices.shape[1]:
+                selected_sequences = np.where(np.minimum(filled_matrices.shape[1], seq_len) == filled_matrices.shape[1])[0]
+                # print("selected_sequences",selected_sequences)
+                # print(matrices.shape,filled_matrices.shape,encoded_matrices.shape)
+                # print(matrices[selected_sequences,-1])
+                encoded_matrices[selected_sequences, -1] = matrices[selected_sequences, np.array(seq_len)-1]
             
-            matrix_attention_masks[tokens == 2] = 0
-            matrix_attention_masks[tokens == 1] = 0
+            matrix_attention_masks[encoded_tokens == 2] = 0
+            matrix_attention_masks[encoded_tokens == 1] = 0
         else:
             sys.exit("Should be self.matrix_add_special_token and self.matrix.prepend_bos and self.matrix.append_eos")
             
@@ -596,7 +606,8 @@ class BatchConverterMultiple(object):
     def __call__(self, raw_batch: dict):
         batch_size = len(raw_batch["seq"])
         # pair
-        if "seq_id_a" in raw_batch[0] and "seq_id_b" in raw_batch[0]:
+        if False:
+        # if "seq_id_a" in raw_batch[0] and "seq_id_b" in raw_batch[0]:
             res = {}
             seq_ids_a = []
             seq_types_a = []
@@ -754,13 +765,15 @@ class BatchConverterMultiple(object):
             seqs = raw_batch["seq"]
             matrices = raw_batch["matrix"]
             tokens = raw_batch["esm2_tokens"]
+            seq_len = raw_batch["seq_len"]
+            self.seq_len = seq_len
             
             if len(batches) > 0:
                 batches = torch.tensor([int(batch) for batch in batches], dtype=torch.int64)
                 
             # embedding 矩阵有特殊字符，如果不使用则去掉首尾的特殊字符
             new_matrices = []
-            if matrices:
+            if matrices is not None:
                 for seq_idx, seq_type in enumerate(seq_types[0:2]):
                     if "molecule" in seq_type:
                         if self.atom_matrix_add_special_token \
@@ -775,8 +788,19 @@ class BatchConverterMultiple(object):
                 if new_matrices and len(new_matrices) > 0:
                     matrices = new_matrices
             input_ids, position_ids, token_type_ids, seq_attention_masks, encoded_vectors, encoded_matrices, matrix_attention_masks, num_sentences, sentence_length, labels = self.__call_single__(
-                batch_size, seq_types, seqs, vectors, matrices, tokens, labels=labels)
+                batch_size, seq_types, seqs, vectors, matrices, tokens, seq_len, labels=labels)
 
+            # print()
+            # print(input_ids.shape)
+            # print(seq_attention_masks.shape)
+            # print(encoded_matrices.shape)
+            # print(matrix_attention_masks.shape)
+            # print("input_ids",input_ids)
+            # print("seq_attention_masks",seq_attention_masks)
+            # print("encoded_matrices",encoded_matrices)
+            # print("matrix_attention_masks",matrix_attention_masks)
+            # print()
+                  
             if not hasattr(self, "max_sentences") or self.max_sentences is None:
                 res.update({
                     "input_ids": input_ids,

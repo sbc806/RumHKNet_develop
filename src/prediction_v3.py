@@ -18,6 +18,7 @@ import torch
 import codecs
 import time, shutil
 import numpy as np
+import pandas as pd
 import argparse
 from datetime import datetime
 from collections import OrderedDict
@@ -31,22 +32,24 @@ try:
     from utils import to_device
     from common.multi_label_metrics import relevant_indexes
     from common.alphabet import Alphabet
-    from encoder import Encoder
-    from batch_converter import BatchConverter
+    # from encoder import Encoder
+    from encoder_multiple import EncoderMultiple 
+    # from batch_converter import BatchConverter
+    from batch_converter_multiple import BatchConverterMultiple
     from lucaprot.models.lucaprot import LucaProt
     from utils import available_gpu_id, load_labels, download_trained_checkpoint_lucapcycle
     from file_operator import csv_reader, fasta_reader, csv_writer, tsv_reader
-    from multi_files_stream_dataloader import MultiFilesStreamDataloader
 except ImportError:
     from src.utils import to_device
     from src.common.multi_label_metrics import relevant_indexes
     from src.common.alphabet import Alphabet
-    from src.encoder import Encoder
-    from src.batch_converter import BatchConverter
+    # from src.encoder import Encoder
+    from encoder_multiple import EncoderMultiple
+    # from src.batch_converter import BatchConverter
+    from src.batch_converter_multiple import BatchConverterMultiple
     from src.lucaprot.models.lucaprot import LucaProt
     from src.utils import available_gpu_id, load_labels, download_trained_checkpoint_lucapcycle
     from src.file_operator import csv_reader, fasta_reader, csv_writer, tsv_reader
-    from src.multi_files_stream_dataloder import MultiFilesStreamDataloader
 
 
 def transform_one_sample_2_feature(
@@ -143,17 +146,18 @@ def transform_one_sample_2_feature(
         batch_features, cur_sample_num = to_device(device, batch_features)
     return batch_info, batch_features, [seq_lens]
 
-def transformer_batch_sample_2_feature(device, input_mode, encoder, batch_converter, batch):
-    batch_features=batch_converter.batch_multiple(batch_
+def transform_multiple_sample_2_feature(device, encoder, batch_converter, seq_batch):
+    encoder_output=encoder.encode_multiple(seq_batch)
+    batch_features=batch_converter(encoder_output)
     batch_features,cur_sample_num=to_device(device,batch_features)
-    
+    return batch_features
 
 def predict_probs(
         args,
         encoder,
         batch_convecter,
         model,
-        row
+        seq_batch
 ):
     """
     predict the prob
@@ -165,6 +169,7 @@ def predict_probs(
     :return:
     """
     model.to(torch.device("cpu"))
+    """
     batch_info, batch_features, seq_lens = transform_one_sample_2_feature(
         args.device,
         args.input_mode,
@@ -172,32 +177,42 @@ def predict_probs(
         batch_convecter,
         row
     )
+    """
+    batch_features = transform_multiple_sample_2_feature(
+        args.device,
+        encoder,
+        batch_convecter,
+        seq_batch
+    )
+    batch_features,cur_sample_num=to_device(args.device,batch_features)
     model.to(args.device)
-    if isinstance(batch_features, list):
-        probs = []
-        for cur_batch_features in batch_features:
-            cur_probs = model(**cur_batch_features)[1]
-            if cur_probs.is_cuda:
-                cur_probs = cur_probs.detach().cpu().numpy()
-            else:
-                cur_probs = cur_probs.detach().numpy()
-            probs.append(cur_probs)
+    # if isinstance(batch_features, list):
+        # probs = []
+        # for cur_batch_features in batch_features:
+            # cur_probs = model(**cur_batch_features)[1]
+            # if cur_probs.is_cuda:
+                # cur_probs = cur_probs.detach().cpu().numpy()
+            # else:
+                # cur_probs = cur_probs.detach().numpy()
+            # probs.append(cur_probs)
+    # else:
+    probs = model(**batch_features)[1]
+    if probs.is_cuda:
+        probs = probs.detach().cpu().numpy()
     else:
-        probs = model(**batch_features)[1]
-        if probs.is_cuda:
-            probs = probs.detach().cpu().numpy()
-        else:
-            probs = probs.detach().numpy()
-    return batch_info, probs, seq_lens
+        probs = probs.detach().numpy()
+    
+    # return batch_info, probs, seq_lens
+    # return 0, 1, 2
+    return probs
 
 
 def predict_seq_level_binary_class(
         args,
+    lucapcycle_args,
         encoder,
         batch_convecter,
-        label_id_2_name,
-        model,
-        row
+        model
 ):
     """
     predict the seq level binary-class classification task
@@ -209,22 +224,38 @@ def predict_seq_level_binary_class(
     :param row:
     :return:
     """
-    batch_info, probs, seq_lens = predict_probs(args, encoder, batch_convecter, model, row)
+    seq_ids = []
+    seqs = []
+    all_probs = []
+    all_preds = []
+    with pd.read_csv(args.input_file, chunksize=args.chunk_size) as csv_reader:
+        for chunk in csv_reader:
+            probs = predict_probs(lucapcycle_args, encoder, batch_convecter, model, chunk)
+            # print(probs,probs.ndim)
+            preds = (probs >= args.threshold).astype(int).flatten()
+            seq_ids = seq_ids + list(chunk["seq_id"])
+            seqs = seqs + list(chunk["seq"])
+            all_probs = all_probs + list(probs.flatten())
+            all_preds = all_preds + list(preds)
+            
+    pd.DataFrame({"seq_id":seq_ids,"seq":seqs,"prob":all_probs,"pred":all_preds}).to_csv(args.save_path)
+        # torch.cuda.empty_cache()
+    """
     # print("probs dim: ", probs.ndim)
-    preds = (probs >= args.threshold).astype(int).flatten()
-    res = []
-    for idx, info in enumerate(batch_info):
-        if args.input_mode == "pair":
-            cur_res = [info[0], info[1], info[4], info[5], float(probs[idx][0]), label_id_2_name[preds[idx]]]
-            if len(info) > 4:
-                cur_res += info[4:]
-        else:
-            cur_res = [info[0], info[1], float(probs[idx][0]), label_id_2_name[preds[idx]]]
-            if len(info) > 2:
-                cur_res += info[2:]
-        res.append(cur_res)
+        preds = (probs >= args.threshold).astype(int).flatten()
+        res = []
+        for idx, info in enumerate(batch_info):
+            if args.input_mode == "pair":
+                cur_res = [info[0], info[1], info[4], info[5], float(probs[idx][0]), label_id_2_name[preds[idx]]]
+                if len(info) > 4:
+                    cur_res += info[4:]
+            else:
+                cur_res = [info[0], info[1], float(probs[idx][0]), label_id_2_name[preds[idx]]]
+                if len(info) > 2:
+                    cur_res += info[2:]
+            res.append(cur_res)
     return res
-
+    """
 
 def predict_seq_level_multi_class(
         args,
@@ -309,97 +340,6 @@ def predict_seq_level_multi_class(
         return res
 
 
-def predict_seq_level_multi_label(
-        args,
-        encoder,
-        batch_convecter,
-        label_id_2_name,
-        model,
-        row
-):
-    """
-    predict the seq level multi-label classification task
-    :param args:
-    :param encoder:
-    :param batch_convecter:
-    :param label_id_2_name:
-    :param model:
-    :param row:
-    :return:
-    """
-    batch_info, probs, seq_lens = predict_probs(args, encoder, batch_convecter, model, row)
-    # print("probs dim: ", probs.ndim)
-    preds = relevant_indexes((probs >= args.threshold).astype(int))
-    res = []
-    for idx, info in enumerate(batch_info):
-        if args.input_mode == "pair":
-            cur_res = [
-                info[0],
-                info[1],
-                info[2],
-                info[3],
-                [float(probs[idx][label_index]) for label_index in preds[idx]],
-                [label_id_2_name[label_index] for label_index in preds[idx]]
-            ]
-            if len(info) > 4:
-                cur_res += info[4:]
-        else:
-            cur_res = [
-                info[0],
-                info[1],
-                [float(probs[idx][label_index]) for label_index in preds[idx]],
-                [label_id_2_name[label_index] for label_index in preds[idx]]
-            ]
-            if len(info) > 2:
-                cur_res += info[2:]
-        res.append(cur_res)
-    return res
-
-
-def predict_seq_level_regression(
-        args,
-        encoder,
-        batch_convecter,
-        label_id_2_name,
-        model,
-        row
-):
-    """
-    predict the seq level regression task
-    :param args:
-    :param encoder:
-    :param batch_convecter:
-    :param label_id_2_name:
-    :param model:
-    :param row:
-    :return:
-    """
-    batch_info, probs, seq_lens = predict_probs(args, encoder, batch_convecter, model, row)
-    # print("probs dim: ", probs.ndim)
-    res = []
-    for idx, info in enumerate(batch_info):
-        if args.input_mode == "pair":
-            cur_res = [
-                info[0],
-                info[1],
-                info[2],
-                info[3],
-                float(probs[idx][0]),
-                float(probs[idx][0])
-            ]
-            if len(info) > 4:
-                cur_res += info[4:]
-        else:
-            cur_res = [
-                info[0],
-                info[1],
-                float(probs[idx][0]),
-                float(probs[idx][0])
-            ]
-            if len(info) > 2:
-                cur_res += info[2:]
-        res.append(cur_res)
-    return res
 
 
 def load_tokenizer(
@@ -521,9 +461,9 @@ def create_encoder_batch_convecter(
     print("-" * 15 + "encoder_config:" + "-" * 15)
     print(encoder_config)
     print("-" * 50)
-    encoder = Encoder(**encoder_config)
+    encoder = EncoderMultiple(**encoder_config)
 
-    batch_converter = BatchConverter(
+    batch_converter = BatchConverterMultiple(
         input_type=lucapcycle_args.input_type if hasattr(lucapcycle_args, "input_type") else False,
         task_level_type=lucapcycle_args.task_level_type,
         label_size=lucapcycle_args.label_size,
@@ -557,7 +497,7 @@ global_struct_tokenizer, global_lucabase_model = None, None, None, None, None
 
 
 def run(
-        sequences,
+        args,
         truncation_seq_length,
         truncation_matrix_length,
         model_path,
@@ -697,33 +637,40 @@ def run(
         seq_subword,
         seq_tokenizer
     )
-
+    
     # embedding in advance
-    if not matrix_embedding_exists and gpu_id > -1:
+    # if not matrix_embedding_exists and gpu_id > -1:
         # 先to cpu
-        lucabase_model.to(torch.device("cpu"))
-        assert lucapcycle_args.emb_dir is not None
-        if not os.path.exists(lucapcycle_args.emb_dir):
-            os.makedirs(lucapcycle_args.emb_dir)
-        for item in sequences:
-            seq_id = item[0]
-            seq_type = item[1]
-            seq = item[2]
-            encoder.__get_embedding__(
-                seq_id=seq_id,
-                seq_type=seq_type,
-                seq=seq,
-                embedding_type="matrix" if "matrix" in input_type else "vector"
-            )
-            torch.cuda.empty_cache()
-        encoder.matrix_embedding_exists = True
+        # lucabase_model.to(torch.device("cpu"))
+        # assert lucapcycle_args.emb_dir is not None
+        # if not os.path.exists(lucapcycle_args.emb_dir):
+            # os.makedirs(lucapcycle_args.emb_dir)
+        # for item in sequences:
+            # seq_id = item[0]
+            # seq_type = item[1]
+            # seq = item[2]
+            # encoder.__get_embedding__(
+                # seq_id=seq_id,
+                # seq_type=seq_type,
+                # seq=seq,
+                # embedding_type="matrix" if "matrix" in input_type else "vector"
+            # )
+            # torch.cuda.empty_cache()
+        # encoder.matrix_embedding_exists = True
         # embedding 完之后to device
-        lucabase_model.to(lucapcycle_args.device)
+        # lucabase_model.to(lucapcycle_args.device)
 
-    label_list = load_labels(lucapcycle_args.label_filepath)
-    label_id_2_name = {idx: name for idx, name in enumerate(label_list)}
+    # label_list = load_labels(lucapcycle_args.label_filepath)
+    # label_id_2_name = {idx: name for idx, name in enumerate(label_list)}
 
     # Step 3: prediction
+    predicted_results=predict_seq_level_binary_class(args,
+                                   lucapcycle_args,
+                                   encoder,
+                                   batch_convecter,
+                                   lucabase_model
+                                  )
+    """
     if lucapcycle_args.task_level_type in ["seq_level", "seq-level"] and task_type in ["binary_class", "binary-class"]:
         predict_func = predict_seq_level_binary_class
     elif lucapcycle_args.task_level_type in ["seq_level", "seq-level"] and task_type in ["multi_class", "multi-class"]:
@@ -770,6 +717,7 @@ def run(
     # 删除embedding
     if os.path.exists(lucapcycle_args.emb_dir):
         shutil.rmtree(lucapcycle_args.emb_dir)
+    """
     return predicted_results
 
 
@@ -851,6 +799,7 @@ def run_args():
     parser.add_argument("--print_per_number", default=10000, type=int,
                         help="per num to print, default: 10000")
     parser.add_argument("--gpu_id", default=-1, type=int, help="the used gpu_id. default: -1(CPU)")
+    parser.add_argument("--chunk_size",default=100,type=int)
     input_args = parser.parse_args()
     return input_args
 
@@ -870,7 +819,27 @@ if __name__ == "__main__":
         if emb_base_name != input_base_name:
             args.emb_dir = os.path.join(args.emb_dir, input_base_name)
             print("updated emb_dir: %s" % args.emb_dir)
-
+    batch_results = run(args,
+                        args.truncation_seq_length,
+                        args.truncation_matrix_length,
+                        args.model_path,
+                        args.dataset_name,
+                        args.dataset_type,
+                        args.task_type,
+                        args.task_level_type,
+                        args.model_type,
+                        args.input_type,
+                        args.input_mode,
+                        args.time_str,
+                        args.step,
+                        args.gpu_id,
+                        args.threshold,
+                        topk=args.topk,
+                        emb_dir=args.emb_dir,
+                        matrix_embedding_exists=args.matrix_embedding_exists
+                       )
+                        
+    """
     assert args.seq is not None or (args.input_file is not None and os.path.exists(args.input_file))
     if args.input_file is not None and os.path.exists(args.input_file):
         file_suffix = os.path.basename(args.input_file).split(".")[-1]
@@ -1011,4 +980,4 @@ if __name__ == "__main__":
         print("*" * 50)
     else:
         raise Exception("input error, usage: --hep")
-
+"""

@@ -474,8 +474,8 @@ class BatchConverterMultiple(object):
             encoded_matrices = matrices[:,:filled_matrices.shape[1]]
             encoded_tokens = tokens[:,:filled_matrices.shape[1]]
             
-            encoded_matrices[tokens == 2] = 0
-            encoded_matrices[tokens == 1] = 0
+            encoded_matrices[encoded_tokens == 2] = 0
+            encoded_matrices[encoded_tokens == 1] = 0
 
             if filled_matrices.shape[1] < matrices.shape[1]:
                 selected_sequences = np.where(np.minimum(filled_matrices.shape[1], seq_len) == filled_matrices.shape[1])[0]

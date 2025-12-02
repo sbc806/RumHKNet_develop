@@ -376,6 +376,7 @@ class BatchConverterMultiple(object):
         if self.truncation_matrix_length:
             max_len = min(max_len, self.truncation_matrix_length)
         max_len = max_len + int(self.matrix_prepend_bos) + int(self.matrix_append_eos)
+        """
         embedding_vector_dim = matrices[0].shape[1]
         # for input
         filled_matrices = torch.empty(
@@ -395,7 +396,9 @@ class BatchConverterMultiple(object):
             dtype=torch.int64,
         )
         attention_masks.fill_(0)
-        return filled_matrices, attention_masks, max_len
+        """
+        # return filled_matrices, attention_masks, max_len
+        return max_len
 
     def __call_single__(self, batch_size, seq_types, seqs, vectors, matrices, tokens, labels):
         max_length = sys.maxsize
@@ -459,7 +462,10 @@ class BatchConverterMultiple(object):
 
         # vector
 
-        # matri
+        # matrix
+        matrices = torch.tensor(matrices, dtype=torch.float32)
+        matrices[tokens == 2] = 0
+        matrices[tokens ==1] = 0
         
         for sample_idx in range(batch_size):
             # seq

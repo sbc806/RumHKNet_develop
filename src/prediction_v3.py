@@ -524,9 +524,9 @@ def create_encoder_batch_convecter(
     print("-" * 15 + "encoder_config:" + "-" * 15)
     print(encoder_config)
     print("-" * 50)
-    encoder = Encoder(**encoder_config)
+    encoder = EncoderMultiple(**encoder_config)
 
-    batch_converter = BatchConverter(
+    batch_converter = BatchConverterMultiple(
         input_type=lucapcycle_args.input_type if hasattr(lucapcycle_args, "input_type") else False,
         task_level_type=lucapcycle_args.task_level_type,
         label_size=lucapcycle_args.label_size,

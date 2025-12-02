@@ -503,7 +503,7 @@ class BatchConverter(object):
                     encoded_matrices[sample_idx, real_matrix_len + 1] = matrix[-1]
                     matrix_attention_masks[sample_idx, 0: real_matrix_len + 2] = 1
                     cur_sentence_length = real_matrix_len + 2
-                    print("This block",torch.sum(matrix[:,encoded_matrices.shape[-1]]-encoded_matrices[sample_idx,:real_matrix_len+2]))
+                    print("This block",torch.sum(matrix[:,encoded_matrices.shape[1]]-encoded_matrices[sample_idx,:real_matrix_len+2]))
                     print(matrix)
                     print(encoded_matrices[sample_idx])
                 elif self.matrix_add_special_token:

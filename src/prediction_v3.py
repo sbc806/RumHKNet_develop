@@ -807,8 +807,25 @@ if __name__ == "__main__":
         if emb_base_name != input_base_name:
             args.emb_dir = os.path.join(args.emb_dir, input_base_name)
             print("updated emb_dir: %s" % args.emb_dir)
-    batch_results = run(batch_data,
+    batch_results = run(args,
                         args.truncation_seq_length,
+                        args.truncation_matrix_length,
+                        args.model_path,
+                        args.dataset_name,
+                        args.dataset_type,
+                        args.task_type,
+                        args.task_level_type,
+                        args.model_type,
+                        args.input_type,
+                        args.input_mode,
+                        args.time_str,
+                        args.step,
+                        args.gpu_id,
+                        args.threshold,
+                        topk=args.topk,
+                        emb_dir=args.emb_dir,
+                        matrix_embedding_exists=args.matrix_embedding_exists
+                       )
                         
     """
     assert args.seq is not None or (args.input_file is not None and os.path.exists(args.input_file))

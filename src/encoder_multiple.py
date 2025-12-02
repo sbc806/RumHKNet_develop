@@ -362,7 +362,8 @@ class EncoderMultiple(object):
                     truncation_seq_length=truncation_seq_length,
                     matrix_add_special_token=self.matrix_add_special_token,
                     version=self.llm_step,
-                    device=self.device
+                    device=self.device,
+                    seq_len=seq_len
                 )
                 while embedding_info is None:
                     print("%s embedding error, max_len from %d truncate to %d" % (seq_id,

@@ -481,8 +481,8 @@ class BatchConverterMultiple(object):
                 selected_sequences = np.where(np.minimum(filled_matrices.shape[1], seq_len) == filled_matrices.shape[1])[0]
                 encoded_matrices[:,selected_sequences,-1] = matrices[:, selected_sequences, -1]
             
-            matrix_attention_masks[tokens == 2] = 0
-            matrix_attention_masks[tokens == 1] = 0
+            matrix_attention_masks[encoded_tokens == 2] = 0
+            matrix_attention_masks[encoded_tokens == 1] = 0
         else:
             sys.exit("Should be self.matrix_add_special_token and self.matrix.prepend_bos and self.matrix.append_eos")
             

@@ -397,7 +397,7 @@ class BatchConverterMultiple(object):
         attention_masks.fill_(0)
         return filled_matrices, attention_masks, max_len
 
-    def __call_single__(self, batch_size, seq_types, seqs, vectors, matrices, labels):
+    def __call_single__(self, batch_size, seq_types, seqs, vectors, matrices, tokens, labels):
         max_length = sys.maxsize
         input_ids, position_ids, token_type_ids, seq_attention_masks = None, None, None, None
         seq_part_of_input = False
@@ -456,6 +456,11 @@ class BatchConverterMultiple(object):
             sys.exit("Is not self.no_position_embeddings")
         if not self.no_token_type_embeddings:
             sys.exit("Is not self.no_token_type_embeddings")
+
+        # vector
+
+        # matri
+        
         for sample_idx in range(batch_size):
             # seq
             """

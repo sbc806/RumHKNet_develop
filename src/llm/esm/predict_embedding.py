@@ -519,7 +519,7 @@ def predict_embedding_multiple(seq_batch,
     if trunc_type == "left":
         seq_batch.loc[:, "seq"] = seq_batch["seq"].str[-truncation_seq_length:]
     else:
-        seq_batch.loc[:, "seq"] = seq_batch["seq"][:truncation_seq_length]
+        seq_batch.loc[:, "seq"] = seq_batch["seq"].str[:truncation_seq_length]
     if global_model is None or global_alphabet is None or global_version is None or global_version != version or global_layer_size is None:
         if version == "15B":
             llm_name = "esm2_t48_15B_UR50D"
@@ -528,28 +528,28 @@ def predict_embedding_multiple(seq_batch,
         elif version == "3B":
             llm_name = "esm2_t36_3B_UR50D"
             global_layer_size = 36
-            # global_model, global_alphabet = pretrained.load_model_and_alphabet("esm2_t36_3B_UR50D")
+            global_model, global_alphabet = pretrained.load_model_and_alphabet("esm2_t36_3B_UR50D")
 
-            model_name = "esm2_t36_3B_UR50D"
-            url = f"https://dl/fbaipublicfiles.com/fair-esm/regression/{model_name}.pt"
-            fn = Path(url).name
-            model_data = torch.load(
-                f"{torch.hub.get_dir()}/checkpoints/{fn}",
-                map_location="cpu",
-                weights_only=False
-            )
+            # model_name = "esm2_t36_3B_UR50D"
+            # url = f"https://dl/fbaipublicfiles.com/fair-esm/regression/{model_name}.pt"
+            # fn = Path(url).name
+            # model_data = torch.load(
+                # f"{torch.hub.get_dir()}/checkpoints/{fn}",
+                # map_location="cpu",
+                # weights_only=False
+            # )
 
-            model_name = "esm2_t36_3B_UR50D"
-            url = f"https://dl.fbaipublicfiles.com/fair-esm/regression/{model_name}-contact-regression.pt"
-            fn = Path(url).name
-            regression_data = torch.load(
-            f"{torch.hub.get_dir()}/checkpoints/{fn}",
-            map_location="cpu",
-            weights_only=False
-        )
+            # model_name = "esm2_t36_3B_UR50D"
+            # url = f"https://dl.fbaipublicfiles.com/fair-esm/regression/{model_name}-contact-regression.pt"
+            # fn = Path(url).name
+            # regression_data = torch.load(
+            # f"{torch.hub.get_dir()}/checkpoints/{fn}",
+            # map_location="cpu",
+            # weights_only=False
+        # )
 
-            model_name = "esm2_t36_3B_UR50D"
-            global_model, global_alphabet = pretrained.load_model_and_alphabet_core(model_name, model_data, regression_data)
+            # model_name = "esm2_t36_3B_UR50D"
+            # global_model, global_alphabet = pretrained.load_model_and_alphabet_core(model_name, model_data, regression_data)
         elif version == "650M":
             llm_name = "esm2_t33_650M_UR50D"
             global_layer_size = 33

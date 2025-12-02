@@ -291,6 +291,7 @@ class BatchConverterMultiple(object):
                 # )
                 # seq_encoded_list.append(inputs["input_ids"])
             new_seqs = [" ".join(self.seq_subword.process_line(seq_str.upper()).split(" ")) for seq_str in seqs]
+            print(new_seqs)
             inputs = self.seq_tokenizer(new_seqs, None, add_special_tokens=True, max_length=self.truncation_seq_length+2, truncation=True)
             seq_encoded_list = inputs["input_ids"]
             attention_masks = inputs["attention_mask"]

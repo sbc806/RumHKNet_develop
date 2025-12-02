@@ -466,11 +466,11 @@ class BatchConverterMultiple(object):
 
         # matrix
         if self.matrix_add_special_token and self.matrix.prepend_bos and self.matrix.append_eos:
-            real_matrix_len = matrices.shape[1] - 2
-            real_matrix_len = min(real_matrix_length, self.truncation_matrix_length)
+            # real_matrix_len = matrices.shape[1] - 2
+            # real_matrix_len = min(real_matrix_length, self.truncation_matrix_length)
             matrices = torch.tensor(matrices, dtype=torch.float32)
-            matrices = matrices[:,:real_matrix_len]
-            tokens = tokens[:,:real_matrix_len]
+            matrices = matrices[:,:encoded_matrices.shape[1]]
+            tokens = tokens[:,:encoded_matrices.shape[1]]
             
             matrices[tokens == 2] = 0
             matrices[tokens == 1] = 0

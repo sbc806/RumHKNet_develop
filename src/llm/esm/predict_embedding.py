@@ -520,7 +520,6 @@ def predict_embedding_multiple(seq_batch,
         seq_batch.loc[:, "seq"] = seq_batch["seq"].str[-truncation_seq_length:]
     else:
         seq_batch.loc[:, "seq"] = seq_batch["seq"].str[:truncation_seq_length]
-    print(seq_batch)
                           
     if global_model is None or global_alphabet is None or global_version is None or global_version != version or global_layer_size is None:
         if version == "15B":

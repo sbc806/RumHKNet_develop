@@ -426,7 +426,13 @@ class EncoderMultiple(object):
                 # raise Exception("matrix is not filepath-str and np.ndarray")
             matrix = self.__get_embedding_multiple__(seq_batch)
             
-        seq = seq.strip().upper()
+        # seq = seq.strip().upper()
+        seq_id = seq_batch["seq"].tolist()
+        seq = seq_batch["seq"].str.strip().upper().tolist()
+        seq_type = seq_btch["seq_type"].tolist()
+        vector = []
+        label = []
+        batch = []
         return {
             "seq_id": seq_id,
             "seq": seq,

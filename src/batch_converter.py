@@ -732,6 +732,10 @@ class BatchConverter(object):
             print(seq_attention_masks.shape)
             print(encoded_matrices.shape)
             print(matrix_attention_masks.shape)
+            print(input_ids)
+            print(seq_attention_masks)
+            print(encoded_matrices)
+            print(matrix_attention_masks)
             print()
             if not hasattr(self, "max_sentences") or self.max_sentences is None:
                 res.update({

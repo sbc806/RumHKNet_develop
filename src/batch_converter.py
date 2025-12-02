@@ -289,6 +289,7 @@ class BatchConverter(object):
                     truncation=True
                 )
                 seq_encoded_list.append(inputs["input_ids"])
+                print(inputs["inputs_ids"].shape)
         else:
             seq_encoded_list = [self.seq_tokenizer.encode(seq_str.upper()) for seq_str in seqs]
             # 该长度已经减去了需要增加的特殊字符的个数

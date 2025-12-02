@@ -353,7 +353,7 @@ class EncoderMultiple(object):
                     truncation_seq_length = min(seq_len+[truncation_seq_length])
                     # truncation_seq_length = np.minimum(seq_len, truncation_seq_length)
                 embedding_info, processed_seq_len = predict_embedding_esm_multiple(
-                    sample=[seq_id, seq],
+                    sample=seq_batch,
                     trunc_type=self.trunc_type,
                     embedding_type=embedding_type,
                     repr_layers=[-1],

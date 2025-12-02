@@ -476,7 +476,8 @@ class BatchConverterMultiple(object):
             encoded_matrices[tokens == 1] = 0
 
             if filled_matrices.shape[1] < matrices.shape[1]:
-                encoded_matrices[:,np.minimum(filled_matrices.shape[1],[len(seq) for seq in seqs])] = matrices[:, -1]
+                selected_sequences = np.where(np.minimum(filled_matrices.shape[1], [len(seq) for seq in seq]) == filled_matrices.shape[1]])[0]
+                encoded_matrices[:,selected_sequences,-1] = matrices[:, selected_sequences, -1]
             
             matrix_attention_masks[tokens == 2] = 0
             matrix_attention_masks[tokens == 1] = 0

@@ -726,6 +726,7 @@ class BatchConverterMultiple(object):
             seq_types = raw_batch["seq_type"]
             seqs = raw_batch["seq"]
             matrices = raw_batch["matrix"]
+            tokens = raw_batch["esm2_tokens"]
             
             if len(batches) > 0:
                 batches = torch.tensor([int(batch) for batch in batches], dtype=torch.int64)
@@ -738,16 +739,16 @@ class BatchConverterMultiple(object):
                         if self.atom_matrix_add_special_token \
                                 and (not self.atom_matrix_prepend_bos or not self.atom_matrix_append_eos):
                             new_matrices.append(matrices[seq_idx][1:-1])
-                            sys.exit("Reached line molecule")
+                            sys.exit("Reached line molecule in batch_converter_multiple.py")
                     else:
                         if self.matrix_add_special_token \
                                 and (not self.matrix_prepend_bos or not self.matrix_append_eos):
                             new_matrices.append(matrices[seq_idx][1:-1])
-                            sys.exit("Reached line 726")
+                            sys.exit("Reached line 726 in batch_converter_multiple.py")
                 if new_matrices and len(new_matrices) > 0:
                     matrices = new_matrices
             input_ids, position_ids, token_type_ids, seq_attention_masks, encoded_vectors, encoded_matrices, matrix_attention_masks, num_sentences, sentence_length, labels = self.__call_single__(
-                batch_size, seq_types, seqs, vectors, matrices, labels=labels)
+                batch_size, seq_types, seqs, vectors, matrices, tokens, labels=labels)
 
             if not hasattr(self, "max_sentences") or self.max_sentences is None:
                 res.update({

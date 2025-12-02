@@ -206,12 +206,11 @@ def predict_probs(
 
 
 def predict_seq_level_binary_class(
-        args,
+        file_path,
+    chunk_size,
         encoder,
         batch_convecter,
-        label_id_2_name,
-        model,
-        row
+        model
 ):
     """
     predict the seq level binary-class classification task
@@ -223,8 +222,7 @@ def predict_seq_level_binary_class(
     :param row:
     :return:
     """
-    file_path = args.file_path
-    chunk_size = args.chunk_size
+    
     with pd.read_csv(file_path, chunksize=chunk_size) as csv_reader:
         for chunk in csv_reader:
             batch_info, probs, seq_lens = predict_probs(args, encoder, batch_convecter, model, chunk)

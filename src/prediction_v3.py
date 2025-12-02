@@ -224,7 +224,8 @@ def predict_seq_level_binary_class(
     :param row:
     :return:
     """
-    
+    all_probs = []
+    all_preds = []
     with pd.read_csv(args.input_file, chunksize=args.chunk_size) as csv_reader:
         for chunk in csv_reader:
             probs = predict_probs(lucapcycle_args, encoder, batch_convecter, model, chunk)

@@ -237,8 +237,9 @@ def predict_seq_level_binary_class(
             seqs = seqs + list(chunk["seq"])
             all_probs = all_probs + list(probs.flatten())
             all_preds = all_preds + list(preds)
-            
+    print("Saving predictions")
     pd.DataFrame({"seq_id":seq_ids,"seq":seqs,"prob":all_probs,"pred":all_preds}).to_csv(args.save_path)
+    print("Predictions saved")
         # torch.cuda.empty_cache()
     """
     # print("probs dim: ", probs.ndim)

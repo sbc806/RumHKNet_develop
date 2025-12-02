@@ -764,7 +764,7 @@ class BatchConverterMultiple(object):
                 
             # embedding 矩阵有特殊字符，如果不使用则去掉首尾的特殊字符
             new_matrices = []
-            if matrices:
+            if matrices is not None:
                 for seq_idx, seq_type in enumerate(seq_types[0:2]):
                     if "molecule" in seq_type:
                         if self.atom_matrix_add_special_token \

@@ -547,8 +547,8 @@ class BatchConverterMultiple(object):
                sentence_length, \
                labels
 
-    def __call__(self, raw_batch: Sequence[dict]):
-        batch_size = len(raw_batch)
+    def __call__(self, raw_batch: dict):
+        batch_size = len(raw_batch["seq"])
         # pair
         if "seq_id_a" in raw_batch[0] and "seq_id_b" in raw_batch[0]:
             res = {}

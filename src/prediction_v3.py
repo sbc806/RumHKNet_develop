@@ -22,6 +22,7 @@ import argparse
 from datetime import datetime
 from collections import OrderedDict
 from subword_nmt.apply_bpe import BPE
+from torch.utils.data import DataLoader
 from transformers import BertConfig, BertTokenizer
 sys.path.append(".")
 sys.path.append("..")
@@ -35,6 +36,7 @@ try:
     from lucaprot.models.lucaprot import LucaProt
     from utils import available_gpu_id, load_labels, download_trained_checkpoint_lucapcycle
     from file_operator import csv_reader, fasta_reader, csv_writer, tsv_reader
+    from multi_files_stream_dataloader import MultiFilesStreamDataloader
 except ImportError:
     from src.utils import to_device
     from src.common.multi_label_metrics import relevant_indexes
@@ -44,6 +46,7 @@ except ImportError:
     from src.lucaprot.models.lucaprot import LucaProt
     from src.utils import available_gpu_id, load_labels, download_trained_checkpoint_lucapcycle
     from src.file_operator import csv_reader, fasta_reader, csv_writer, tsv_reader
+    from src.multi_files_stream_dataloder import MultiFilesStreamDataloader
 
 
 def transform_one_sample_2_feature(
@@ -140,6 +143,10 @@ def transform_one_sample_2_feature(
         batch_features, cur_sample_num = to_device(device, batch_features)
     return batch_info, batch_features, [seq_lens]
 
+def transformer_batch_sample_2_feature(device, input_mode, encoder, batch_converter, batch):
+    batch_features=batch_converter.batch_multiple(batch_
+    batch_features,cur_sample_num=to_device(device,batch_features)
+    
 
 def predict_probs(
         args,

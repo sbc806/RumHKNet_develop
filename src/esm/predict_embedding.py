@@ -487,6 +487,140 @@ def predict_embedding(sample,
                 print("Please reduce the 'truncation_seq_length'")
             return None, None
 
+def predict_embedding_multiple(samples,
+                      trunc_type,
+                      embedding_type,
+                      repr_layers=[-1],
+                      truncation_seq_length=4094,
+                      device=None,
+                      version="3B",
+                      matrix_add_special_token=False):
+    '''
+    use sequence to predict protein embedding matrix or vector(bos)
+    :param sample: [protein_id, protein_sequence]
+    :param trunc_type:
+    :param embedding_type: bos or representations
+    :param repr_layers: [-1]
+    :param truncation_seq_length: [4094,2046,1982,1790,1534,1278,1150,1022]
+    :param device:
+    :param version:
+    :param matrix_add_special_token:
+    :return: embedding, processed_seq_len
+    '''
+    global global_model, global_alphabet, global_version, global_layer_size
+    assert "bos" in embedding_type or "representations" in embedding_type \
+           or "matrix" in embedding_type or "vector" in embedding_type or "contacts" in embedding_type
+    if len(sample) > 2:
+        protein_id, protein_seq = sample[:,0], sample[:,2]
+    else:
+        protein_id, protein_seq = sample[:,0], sample[:,1]
+    # protein_seq = clean_seq(protein_id, protein_seq)
+    # if len(protein_seq) > truncation_seq_length:
+    if trunc_type == "left":
+        protein_seq = protein_seq[:,-truncation_seq_length:]
+    else:
+        protein_seq = protein_seq[:,:truncation_seq_length]
+    if global_model is None or global_alphabet is None or global_version is None or global_version != version or global_layer_size is None:
+        if version == "15B":
+            llm_name = "esm2_t48_15B_UR50D"
+            global_layer_size = 48
+            global_model, global_alphabet = pretrained.load_model_and_alphabet("esm2_t48_15B_UR50D")
+        elif version == "3B":
+            llm_name = "esm2_t36_3B_UR50D"
+            global_layer_size = 36
+            # global_model, global_alphabet = pretrained.load_model_and_alphabet("esm2_t36_3B_UR50D")
+
+            model_name = "esm2_t36_3B_UR50D"
+            url = f"https://dl/fbaipublicfiles.com/fair-esm/regression/{model_name}.pt"
+            fn = Path(url).name
+            model_data = torch.load(
+                f"{torch.hub.get_dir()}/checkpoints/{fn}",
+                map_location="cpu",
+                weights_only=False
+            )
+
+            model_name = "esm2_t36_3B_UR50D"
+            url = f"https://dl.fbaipublicfiles.com/fair-esm/regression/{model_name}-contact-regression.pt"
+            fn = Path(url).name
+            regression_data = torch.load(
+            f"{torch.hub.get_dir()}/checkpoints/{fn}",
+            map_location="cpu",
+            weights_only=False
+        )
+
+            model_name = "esm2_t36_3B_UR50D"
+            global_model, global_alphabet = pretrained.load_model_and_alphabet_core(model_name, model_data, regression_data)
+        elif version == "650M":
+            llm_name = "esm2_t33_650M_UR50D"
+            global_layer_size = 33
+            global_model, global_alphabet = pretrained.load_model_and_alphabet("esm2_t33_650M_UR50D")
+        elif version == "150M":
+            llm_name = "esm2_t30_150M_UR50D"
+            global_layer_size = 30
+            global_model, global_alphabet = pretrained.load_model_and_alphabet("esm2_t30_150M_UR50D")
+        elif version == "8M":
+            llm_name = "esm2_t6_8M_UR50D"
+            global_layer_size = 6
+            global_model, global_alphabet = pretrained.load_model_and_alphabet("esm2_t6_8M_UR50D")
+        else:
+            raise Exception("not support this version=%s" % version)
+        print("LLM: %s, version: %s, layer_idx: %d, device: %s" % (llm_name, version, global_layer_size, str(device)))
+        global_version = version
+    '''
+    if torch.cuda.is_available() and device is not None:
+        global_model = global_model.to(device)
+    elif torch.cuda.is_available():
+        global_model = global_model.cuda()
+        device = torch.device("cuda")
+    else:
+        device = torch.device("cpu")
+        print("llm use cpu")
+    '''
+    if device is None:
+        device = next(global_model.parameters()).device
+    else:
+        model_device = next(global_model.parameters()).device
+        if device != model_device:
+            global_model = global_model.to(device)
+    # print("llm device:", device)
+    assert all(-(global_model.num_layers + 1) <= i <= global_model.num_layers for i in repr_layers)
+    repr_layers = [(i + global_model.num_layers + 1) % (global_model.num_layers + 1) for i in repr_layers]
+    global_model.eval()
+
+    converter = BatchConverter(global_alphabet, truncation_seq_length)
+    # protein_ids, raw_seqs, tokens = converter([[protein_id, protein_seq]])
+    protein_ids, raw_seqs, tokens = converter(samples)
+    embeddings = {}
+    with torch.no_grad():
+        # if torch.cuda.is_available():
+        tokens = tokens.to(device=device, non_blocking=True)
+        try:
+            out = global_model(tokens, repr_layers=repr_layers, return_contacts=False)
+            truncate_len = min(truncation_seq_length, len(raw_seqs[0]))
+            processed_seq_len = truncate_len + 2
+            if "representations" in embedding_type or "matrix" in embedding_type:
+                if matrix_add_special_token:
+                    embedding = out["representations"][global_layer_size].to(device="cpu")[0, 1: truncate_len + 1].clone().numpy()
+                else:
+                    embedding = out["representations"][global_layer_size].to(device="cpu")[0, 1: truncate_len + 1].clone().numpy()
+                embeddings["representations"] = embedding
+            if "bos" in embedding_type or "vector" in embedding_type:
+                embedding = out["representations"][global_layer_size].to(device="cpu")[0, 0].clone().numpy()
+                embeddings["bos_representations"] = embedding
+            if "contacts" in embedding_type:
+                embedding = out["contacts"][global_layer_size].to(device="cpu")[0, :, :].clone().numpy()
+                embeddings["contacts"] = embedding
+            if len(embeddings) > 1:
+                return embeddings, processed_seq_len
+            elif len(embeddings) == 1:
+                return list(embeddings.items())[0][1], processed_seq_len
+            else:
+                return None, None
+        except RuntimeError as e:
+            if e.args[0].startswith("CUDA out of memory"):
+                print(f"Failed (CUDA out of memory) on sequence {sample[0]} of length {len(sample[1] if len(sample) == 2 else sample[2] )}.")
+                print("Please reduce the 'truncation_seq_length'")
+            return None, None
 
 def get_args():
     parser = argparse.ArgumentParser(description='ESM/ESM2 Embedding')

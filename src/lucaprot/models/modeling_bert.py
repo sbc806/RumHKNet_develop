@@ -220,7 +220,7 @@ class BertEmbeddings(nn.Module):
                     torch.zeros(self.position_ids.size(), dtype=torch.long),
                     persistent=False,
                 )
-
+    
     def forward(
             self,
             input_ids: Optional[torch.LongTensor] = None,
@@ -235,7 +235,7 @@ class BertEmbeddings(nn.Module):
             input_shape = inputs_embeds.size()[:-1]
 
         seq_length = input_shape[1]
-
+        
         if position_ids is None:
             position_ids = self.position_ids[:, past_key_values_length : seq_length + past_key_values_length]
 

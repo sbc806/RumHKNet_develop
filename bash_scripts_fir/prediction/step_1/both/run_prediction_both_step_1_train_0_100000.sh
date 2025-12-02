@@ -1,11 +1,11 @@
 #!/bin/bash
 #SBATCH --account=def-guanuofa
-#SBATCH --gpus-per-node=nvidia_h100_80gb_hbm3_2g.20gb:1
-#SBATCH --mem=22G
-#SBATCH --time=0:5:0
-#SBATCH --job-name=prediction-both-step-1-five-sequences
-#SBATCH --output=output/prediction_both_step_1_five_sequences_%j.out
-#SBATCH --er=output/prediction_both_step_1_five_sequences_%j.err
+#SBATCH --gpus-per-node=nvidia_h100_80gb_hbm3_3g.40gb:1
+#SBATCH --mem=64G
+#SBATCH --time=3-0
+#SBATCH --job-name=prediction-both-step-1-train-0-100000
+#SBATCH --output=output/prediction_both_step_1_train_0_100000_%j.out
+#SBATCH --er=output/prediction_both_step_1_train_0_100000_%j.err
 
 
 module load python/3.11
@@ -18,8 +18,9 @@ source TEST/bin/activate
 
 cd ../sbc806/RumHKNet/src/
 # cat transformer_step_2_4_1.sh > /home/schen123/projects/rrg-guanuofa/schen123/kinases/sbc806/RumHKNet/bash_scripts_nibi/step_2/transformer/output/transformer_step_2_4_1_$SLURM_JOB_ID.txt
-./prediction_scripts/step_1/both/prediction_both_step_1.sh 0.5 05 train_five_sequences 3432 _test_2
+./prediction_scripts/step_1/both/prediction_both_step_1.sh 0.3 03 train_0_100000 34551
 
 
 deactivate
+
 

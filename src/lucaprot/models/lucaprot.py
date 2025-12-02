@@ -508,6 +508,7 @@ class LucaProt(BertPreTrainedModel):
         if self.has_embedding_encoder:
             if return_embedding:
                 matrices_copy = matrices.clone()
+                print("Using embedding_encoder")
                 if matrix_attention_masks is not None:
                     # (B, Seq_len) -> (B, Seq_len, 1)
                     max_mask = 1.0 - matrix_attention_masks

@@ -293,7 +293,7 @@ class BatchConverterMultiple(object):
             new_seqs = [" ".join(self.seq_subword.process_line(seq_str.upper()).split(" ")) for seq_str in seqs]
             inputs = self.seq_tokenizer(new_seqs, None, add_special_tokens=True, max_length=self.truncation_seq_length+2, truncation=True)
             seq_encoded_list = inputs["input_ids"]
-            attention_masks = inputs["attention_masks"]
+            attention_masks = inputs["attention_mask"]
         else:
             seq_encoded_list = [self.seq_tokenizer.encode(seq_str.upper()) for seq_str in seqs]
             # 该长度已经减去了需要增加的特殊字符的个数
@@ -449,6 +449,7 @@ class BatchConverterMultiple(object):
         for sample_idx in range(batch_size):
             # seq
             if seq_part_of_input:
+                """
                 if self.seq_prepend_bos:
                     input_ids[sample_idx, 0] = self.cls_idx
 
@@ -484,7 +485,9 @@ class BatchConverterMultiple(object):
                         token_type_ids[sample_idx, pos_idx] = type_value
 
                 seq_attention_masks[sample_idx, 0: cur_len] = 1
-
+                """
+                seq_encoded_list = torch.tensor(seq_encoded_list, dtype=torch.int64)
+                
             # vector
             if vector_part_of_input:
                 encoded_vectors[sample_idx, :] = torch.tensor(vectors[sample_idx], dtype=torch.float32)

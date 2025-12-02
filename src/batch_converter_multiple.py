@@ -409,8 +409,7 @@ class BatchConverterMultiple(object):
                 batch_size=batch_size,
                 seqs=pd.Series(seqs).str.upper().tolist()
             )
-            # max_length = min(max_length, seq_max_length)
-            max_length = min([max_length]+pd.Series(seqs).str.len().tolist())
+            max_length = min(max_length, seq_max_length)
             seq_part_of_input = True
 
         encoded_vectors = None

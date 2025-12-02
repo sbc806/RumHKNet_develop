@@ -31,7 +31,8 @@ try:
     from utils import to_device
     from common.multi_label_metrics import relevant_indexes
     from common.alphabet import Alphabet
-    from encoder import Encoder
+    # from encoder import Encoder
+    from encoder_multiple import EncoderMultiple 
     # from batch_converter import BatchConverter
     from batch_converter_multiple import BatchConverterMultiple
     from lucaprot.models.lucaprot import LucaProt
@@ -41,7 +42,8 @@ except ImportError:
     from src.utils import to_device
     from src.common.multi_label_metrics import relevant_indexes
     from src.common.alphabet import Alphabet
-    from src.encoder import Encoder
+    # from src.encoder import Encoder
+    from encoder_multiple import EncoderMultiple
     # from src.batch_converter import BatchConverter
     from src.batch_converter_multiple import BatchConverterMultiple
     from src.lucaprot.models.lucaprot import LucaProt

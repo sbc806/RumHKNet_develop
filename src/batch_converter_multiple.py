@@ -291,11 +291,11 @@ class BatchConverterMultiple(object):
                 # )
                 # seq_encoded_list.append(inputs["input_ids"])
             new_seqs = [" ".join(self.seq_subword.process_line(seq_str.upper()).split(" ")) for seq_str in seqs]
-            print(new_seqs)
+            # print(new_seqs)
             inputs = self.seq_tokenizer(new_seqs, None, add_special_tokens=True, max_length=self.truncation_seq_length+2, truncation=True, padding=True)
             seq_encoded_list = inputs["input_ids"]
             attention_masks = inputs["attention_mask"]
-            print("__seq_encode__",seq_encoded_list,attention_masks)
+            # print("__seq_encode__",seq_encoded_list,attention_masks)
         else:
             seq_encoded_list = [self.seq_tokenizer.encode(seq_str.upper()) for seq_str in seqs]
             # 该长度已经减去了需要增加的特殊字符的个数
@@ -417,7 +417,7 @@ class BatchConverterMultiple(object):
                 # else:
                     # raise Exception("not support the seq_type=%s" % seq_type)
 
-            print("batch_converter_multiple.py seqs:",seqs)
+            # print("batch_converter_multiple.py seqs:",seqs)
             # seq_encoded_list没有加特殊字符，input_ids标志位来占位， seq_max_length 根据标志位来加特殊字符长度
             seq_encoded_list, input_ids, position_ids, token_type_ids, seq_attention_masks, seq_max_length = self.__seq_encode__(
                 batch_size=batch_size,
@@ -482,9 +482,9 @@ class BatchConverterMultiple(object):
 
             if filled_matrices.shape[1] < matrices.shape[1]:
                 selected_sequences = np.where(np.minimum(filled_matrices.shape[1], seq_len) == filled_matrices.shape[1])[0]
-                print("selected_sequences",selected_sequences)
-                print(matrices.shape,filled_matrices.shape,encoded_matrices.shape)
-                print(matrices[selected_sequences,-1])
+                # print("selected_sequences",selected_sequences)
+                # print(matrices.shape,filled_matrices.shape,encoded_matrices.shape)
+                # print(matrices[selected_sequences,-1])
                 encoded_matrices[selected_sequences, -1] = matrices[selected_sequences, np.array(seq_len)-1]
             
             matrix_attention_masks[encoded_tokens == 2] = 0

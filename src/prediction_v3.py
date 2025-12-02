@@ -224,7 +224,7 @@ def predict_seq_level_binary_class(
     :return:
     """
     
-    with pd.read_csv(args.file_path, chunksize=args.chunk_size) as csv_reader:
+    with pd.read_csv(args.input_path, chunksize=args.chunk_size) as csv_reader:
         for chunk in csv_reader:
             batch_info, probs, seq_lens = predict_probs(lucapcycle_args, encoder, batch_convecter, model, chunk)
         torch.cuda.empty_cache()
@@ -787,7 +787,6 @@ def run_args():
     parser.add_argument("--print_per_number", default=10000, type=int,
                         help="per num to print, default: 10000")
     parser.add_argument("--gpu_id", default=-1, type=int, help="the used gpu_id. default: -1(CPU)")
-    parser.add_argument("--file_path")
     parser.add_argument("--chunk_size",default=100,type=int)
     input_args = parser.parse_args()
     return input_args

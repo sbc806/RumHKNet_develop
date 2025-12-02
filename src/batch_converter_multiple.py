@@ -291,24 +291,25 @@ class BatchConverterMultiple(object):
                 # )
                 # seq_encoded_list.append(inputs["input_ids"])
             new_seqs = [" ".join(self.seq_subword.process_line(seq_str.upper()).split(" ")) for seq_str in seqs]
-            inputs = self.seq_tokenizer(new_seqs, None, add_special_tokens=False, max_length=self.truncation_seq_length, truncation=True)
+            inputs = self.seq_tokenizer(new_seqs, None, add_special_tokens=True, max_length=self.truncation_seq_length+2, truncation=True)
             seq_encoded_list = inputs["input_ids"]
+            attention_masks = inputs["attention_masks"]
         else:
             seq_encoded_list = [self.seq_tokenizer.encode(seq_str.upper()) for seq_str in seqs]
             # 该长度已经减去了需要增加的特殊字符的个数
             if self.truncation_seq_length:
                 seq_encoded_list = [encoded[:self.truncation_seq_length] for encoded in seq_encoded_list]
-        max_len = max(len(seq_encoded) for seq_encoded in seq_encoded_list)
-        max_len = max_len + int(self.seq_prepend_bos) + int(self.seq_append_eos)
+        # max_len = max(len(seq_encoded) for seq_encoded in seq_encoded_list)
+        # max_len = max_len + int(self.seq_prepend_bos) + int(self.seq_append_eos)
         # for input
-        input_ids = torch.empty(
-            (
-                batch_size,
-                max_len,
-            ),
-            dtype=torch.int64,
-        )
-        input_ids.fill_(self.padding_idx)
+        # input_ids = torch.empty(
+            # (
+                # batch_size,
+                # max_len,
+            # ),
+            # dtype=torch.int64,
+        # )
+        # input_ids.fill_(self.padding_idx)
 
         position_ids = None
         if not self.no_position_embeddings:
@@ -331,15 +332,16 @@ class BatchConverterMultiple(object):
                 dtype=torch.int64,
             )
             token_type_ids.fill_(self.padding_idx)
-        attention_masks = torch.empty(
-            (
-                batch_size,
-                max_len,
-            ),
-            dtype=torch.int64,
-        )
-        attention_masks.fill_(0)
-
+        # attention_masks = torch.empty(
+            # (
+                # batch_size,
+                # max_len,
+            # ),
+            # dtype=torch.int64,
+        # )
+        # attention_masks.fill_(0)
+        attention_masks = torch.tensor(attention_masks, dtype=torch.int64)
+        input_ids = None
         return seq_encoded_list, input_ids, position_ids, token_type_ids, attention_masks, max_len
 
     def __vector_encode__(self, batch_size, vectors):

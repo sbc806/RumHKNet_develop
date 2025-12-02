@@ -870,6 +870,8 @@ def run_args():
     parser.add_argument("--print_per_number", default=10000, type=int,
                         help="per num to print, default: 10000")
     parser.add_argument("--gpu_id", default=-1, type=int, help="the used gpu_id. default: -1(CPU)")
+    parser.add_argument("--file_path")
+    parser.add_argument("--chunk_size",default=100,type=int)
     input_args = parser.parse_args()
     return input_args
 
@@ -889,7 +891,10 @@ if __name__ == "__main__":
         if emb_base_name != input_base_name:
             args.emb_dir = os.path.join(args.emb_dir, input_base_name)
             print("updated emb_dir: %s" % args.emb_dir)
-
+    batch_results = run(batch_data,
+                        args.truncation_seq_length,
+                        
+    """
     assert args.seq is not None or (args.input_file is not None and os.path.exists(args.input_file))
     if args.input_file is not None and os.path.exists(args.input_file):
         file_suffix = os.path.basename(args.input_file).split(".")[-1]
@@ -1030,4 +1035,4 @@ if __name__ == "__main__":
         print("*" * 50)
     else:
         raise Exception("input error, usage: --hep")
-
+"""

@@ -467,7 +467,7 @@ class BatchConverterMultiple(object):
         # vector
 
         # matrix
-        if self.matrix_add_special_token and self.matrix.prepend_bos and self.matrix.append_eos:
+        if self.matrix_add_special_token and self.matrix_prepend_bos and self.matrix_append_eos:
             # real_matrix_len = matrices.shape[1] - 2
             # real_matrix_len = min(real_matrix_length, self.truncation_matrix_length)
             matrices = torch.tensor(matrices, dtype=torch.float32)

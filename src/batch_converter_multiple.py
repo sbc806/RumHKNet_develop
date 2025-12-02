@@ -294,6 +294,7 @@ class BatchConverterMultiple(object):
             inputs = self.seq_tokenizer(new_seqs, None, add_special_tokens=True, max_length=self.truncation_seq_length+2, truncation=True)
             seq_encoded_list = inputs["input_ids"]
             attention_masks = inputs["attention_mask"]
+            print("__seq_encode__",seq_encoded_list.shape,attention_masks.shape)
         else:
             seq_encoded_list = [self.seq_tokenizer.encode(seq_str.upper()) for seq_str in seqs]
             # 该长度已经减去了需要增加的特殊字符的个数

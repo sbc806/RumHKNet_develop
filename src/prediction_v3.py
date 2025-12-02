@@ -229,7 +229,9 @@ def predict_seq_level_binary_class(
         for chunk in csv_reader:
             probs = predict_probs(lucapcycle_args, encoder, batch_convecter, model, chunk)
             print(probs)
-            
+            preds = (pros >= args.threshold).astype(int).flatten()
+            probs = probs + ptobes
+            preds = np.concatenate([all_preds,preds])
         # torch.cuda.empty_cache()
     """
     # print("probs dim: ", probs.ndim)
@@ -655,7 +657,7 @@ def run(
     label_id_2_name = {idx: name for idx, name in enumerate(label_list)}
 """
     # Step 3: prediction
-    predict_seq_level_binary_class(args,
+    predicted_results=predict_seq_level_binary_class(args,
                                    lucapcycle_args,
                                    encoder,
                                    batch_convecter,

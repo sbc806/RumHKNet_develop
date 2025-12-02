@@ -376,7 +376,7 @@ class BatchConverterMultiple(object):
         if self.truncation_matrix_length:
             max_len = min(max_len, self.truncation_matrix_length)
         max_len = max_len + int(self.matrix_prepend_bos) + int(self.matrix_append_eos)
-        """
+        
         embedding_vector_dim = matrices[0].shape[1]
         # for input
         filled_matrices = torch.empty(
@@ -388,7 +388,7 @@ class BatchConverterMultiple(object):
             dtype=torch.float32,
         )
         filled_matrices.fill_(0.0)
-        """
+        
         attention_masks = torch.empty(
             (
                 batch_size,
@@ -398,8 +398,8 @@ class BatchConverterMultiple(object):
         )
         attention_masks.fill_(1)
         
-        # return filled_matrices, attention_masks, max_len
-        return attention_masks, max_len
+        return filled_matrices, attention_masks, max_len
+        # return attention_masks, max_len
 
     def __call_single__(self, batch_size, seq_types, seqs, vectors, matrices, tokens, labels):
         max_length = sys.maxsize
@@ -436,11 +436,11 @@ class BatchConverterMultiple(object):
         if matrices is not None and len(matrices) > 0:
 
             # 根据标记位填充，根据标记位填充，句子数量，根据标记位是否加上特殊字符长度
-            # encoded_matrices, matrix_attention_masks, matrix_max_length = self.__matrix_encode__(
-                # batch_size=batch_size,
-                # matrices=matrices
-            # )
-            matrix_attention_masks, matrix_max_length = self.__matrix_encode__(batch_size=batch_size, matrices=matrices)
+            encoded_matrices, matrix_attention_masks, matrix_max_length = self.__matrix_encode__(
+                batch_size=batch_size,
+                matrices=matrices
+            )
+            # matrix_attention_masks, matrix_max_length = self.__matrix_encode__(batch_size=batch_size, matrices=matrices)
             max_length = min(max_length, matrix_max_length)
             matrix_part_of_input = True
 

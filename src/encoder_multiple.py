@@ -344,14 +344,14 @@ class EncoderMultiple(object):
         if embedding_info is None:
             if self.llm_type == "esm":
                 # seq_len = len(seq)
-                seq_len = seq_batch["seq"].str.len()
+                seq_len = seq_batch["seq"].str.len().tolist()
                 if self.embedding_complete:
-                    # truncation_seq_length = min(seq_len, global_max_seq_len)
-                    truncation_seq_length = np.minimum(seq_len, global_max_seq_len)
+                    truncation_seq_length = min(seq_len+[global_max_seq_len])
+                    # truncation_seq_length = np.minimum(seq_len, global_max_seq_len)
                 else:
                     truncation_seq_length = self.seq_max_length - int(self.prepend_bos) - int(self.append_eos)
-                    # truncation_seq_length = min(seq_len, truncation_seq_length)
-                    truncation_seq_length = np.minimum(seq_len, truncation_seq_length)
+                    truncation_seq_length = min(seq_len+[truncation_seq_length])
+                    # truncation_seq_length = np.minimum(seq_len, truncation_seq_length)
                 embedding_info, processed_seq_len = predict_embedding_esm_multiple(
                     sample=[seq_id, seq],
                     trunc_type=self.trunc_type,

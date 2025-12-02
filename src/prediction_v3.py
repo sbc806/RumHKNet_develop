@@ -202,6 +202,7 @@ def predict_probs(
             probs = probs.detach().numpy()
     """
     # return batch_info, probs, seq_lens
+    return 0, 1, 2
 
 
 def predict_seq_level_binary_class(
@@ -224,22 +225,25 @@ def predict_seq_level_binary_class(
     """
     file_path = args.file_path
     chunk_size = args.chunk_size
-    batch_info, probs, seq_lens = predict_probs(args, encoder, batch_convecter, model, row)
+    with pd.read_csv(file_path, chunksize=chunk_size) as csv_reader:
+        for chunk in csv_reader:
+            batch_info, probs, seq_lens = predict_probs(args, encoder, batch_convecter, model, chunk)
+    """
     # print("probs dim: ", probs.ndim)
-    preds = (probs >= args.threshold).astype(int).flatten()
-    res = []
-    for idx, info in enumerate(batch_info):
-        if args.input_mode == "pair":
-            cur_res = [info[0], info[1], info[4], info[5], float(probs[idx][0]), label_id_2_name[preds[idx]]]
-            if len(info) > 4:
-                cur_res += info[4:]
-        else:
-            cur_res = [info[0], info[1], float(probs[idx][0]), label_id_2_name[preds[idx]]]
-            if len(info) > 2:
-                cur_res += info[2:]
-        res.append(cur_res)
+        preds = (probs >= args.threshold).astype(int).flatten()
+        res = []
+        for idx, info in enumerate(batch_info):
+            if args.input_mode == "pair":
+                cur_res = [info[0], info[1], info[4], info[5], float(probs[idx][0]), label_id_2_name[preds[idx]]]
+                if len(info) > 4:
+                    cur_res += info[4:]
+            else:
+                cur_res = [info[0], info[1], float(probs[idx][0]), label_id_2_name[preds[idx]]]
+                if len(info) > 2:
+                    cur_res += info[2:]
+            res.append(cur_res)
     return res
-
+    """
 
 def predict_seq_level_multi_class(
         args,

@@ -436,11 +436,11 @@ class BatchConverterMultiple(object):
         if matrices is not None and len(matrices) > 0:
 
             # 根据标记位填充，根据标记位填充，句子数量，根据标记位是否加上特殊字符长度
-            encoded_matrices, matrix_attention_masks, matrix_max_length = self.__matrix_encode__(
-                batch_size=batch_size,
-                matrices=matrices
-            )
-            # matrix_attention_masks, matrix_max_length = self.__matrix_encode__(batch_size=batch_size, matrices=matrices)
+            # encoded_matrices, matrix_attention_masks, matrix_max_length = self.__matrix_encode__(
+                # batch_size=batch_size,
+                # matrices=matrices
+            # )
+            filled_matrices, matrix_attention_masks, matrix_max_length = self.__matrix_encode__(batch_size=batch_size, matrices=matrices)
             max_length = min(max_length, matrix_max_length)
             matrix_part_of_input = True
 
@@ -469,13 +469,14 @@ class BatchConverterMultiple(object):
             # real_matrix_len = matrices.shape[1] - 2
             # real_matrix_len = min(real_matrix_length, self.truncation_matrix_length)
             matrices = torch.tensor(matrices, dtype=torch.float32)
-            matrices = matrices[:,:encoded_matrices.shape[1]]
-            tokens = tokens[:,:encoded_matrices.shape[1]]
+            encoded_matrices = matrices[:,:filled_matrices.shape[1]]
+            encoded_tokens = tokens[:,:filled_matrices.shape[1]]
             
-            matrices[tokens == 2] = 0
-            matrices[tokens == 1] = 0
+            encoded_matrices[tokens == 2] = 0
+            encoded_matrices[tokens == 1] = 0
 
-            encoded_matrices = matrices
+            if filled_matrices.shape[1] < matrices.shape[1]:
+                encoded_matrices[:,np.minimum(filled_matrices.shape[1],[len(seq) for seq in seqs])] = matrices[:, -1]
             
             matrix_attention_masks[tokens == 2] = 0
             matrix_attention_masks[tokens == 1] = 0

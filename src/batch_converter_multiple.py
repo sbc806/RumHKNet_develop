@@ -448,7 +448,14 @@ class BatchConverterMultiple(object):
         sentence_length = 1
 
         # seq
-        
+        seq_encoded_tensor = torch.tensor(seq_encoded_list, dtype=torch.int64)
+        seq_encoded_tensor[seq_encoded_tensor == 0] = self.padding_idx
+        seq_encoded_tensor[:, 0] = self.cls_idx
+        seq_encoded_tensor[:, -1] = self.eos_idx
+        if not self.no_position_embeddings:
+            sys.exit("Is not self.no_position_embeddings")
+        if not self.no_token_type_embeddings:
+            sys.exit("Is not self.no_token_type_embeddings")
         for sample_idx in range(batch_size):
             # seq
             """
@@ -489,7 +496,6 @@ class BatchConverterMultiple(object):
 
                 seq_attention_masks[sample_idx, 0: cur_len] = 1
                 """
-                seq_encoded_list = torch.tensor(seq_encoded_list, dtype=torch.int64)
                 
             # vector
             if vector_part_of_input:

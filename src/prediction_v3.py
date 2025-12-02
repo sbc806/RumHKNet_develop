@@ -576,7 +576,7 @@ global_struct_tokenizer, global_lucabase_model = None, None, None, None, None
 
 
 def run(
-        sequences,
+        args,
         truncation_seq_length,
         truncation_matrix_length,
         model_path,
@@ -743,6 +743,7 @@ def run(
     label_id_2_name = {idx: name for idx, name in enumerate(label_list)}
 
     # Step 3: prediction
+    """
     if lucapcycle_args.task_level_type in ["seq_level", "seq-level"] and task_type in ["binary_class", "binary-class"]:
         predict_func = predict_seq_level_binary_class
     elif lucapcycle_args.task_level_type in ["seq_level", "seq-level"] and task_type in ["multi_class", "multi-class"]:
@@ -789,6 +790,7 @@ def run(
     # 删除embedding
     if os.path.exists(lucapcycle_args.emb_dir):
         shutil.rmtree(lucapcycle_args.emb_dir)
+    """
     return predicted_results
 
 

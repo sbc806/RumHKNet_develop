@@ -475,10 +475,13 @@ class BatchConverterMultiple(object):
             matrices[tokens == 2] = 0
             matrices[tokens == 1] = 0
 
+            encoded_matrices = matrices
+            
             matrix_attention_masks[tokens == 2] = 0
             matrix_attention_masks[tokens == 1] = 0
         else:
             sys.exit("Should be self.matrix_add_special_token and self.matrix.prepend_bos and self.matrix.append_eos")
+            
         """
         for sample_idx in range(batch_size):
             # seq

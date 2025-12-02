@@ -300,7 +300,8 @@ class BatchConverterMultiple(object):
             if self.truncation_seq_length:
                 seq_encoded_list = [encoded[:self.truncation_seq_length] for encoded in seq_encoded_list]
         # max_len = max(len(seq_encoded) for seq_encoded in seq_encoded_list)
-        # max_len = max_len + int(self.seq_prepend_bos) + int(self.seq_append_eos)
+        max_len = seq_encoded_list[0][-1]
+        max_len = max_len + int(self.seq_prepend_bos) + int(self.seq_append_eos)
         # for input
         # input_ids = torch.empty(
             # (
@@ -342,8 +343,8 @@ class BatchConverterMultiple(object):
         # attention_masks.fill_(0)
         attention_masks = torch.tensor(attention_masks, dtype=torch.int64)
         input_ids = None
-        # return seq_encoded_list, input_ids, position_ids, token_type_ids, attention_masks, max_len
-        return seq_encoded_list, input_ids, position_ids, token_type_ids, attention_masks, None
+        return seq_encoded_list, input_ids, position_ids, token_type_ids, attention_masks, max_len
+        # return seq_encoded_list, input_ids, position_ids, token_type_ids, attention_masks, None
 
     def __vector_encode__(self, batch_size, vectors):
         """

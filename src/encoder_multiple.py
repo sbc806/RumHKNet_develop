@@ -427,7 +427,7 @@ class EncoderMultiple(object):
             matrix = self.__get_embedding_multiple__(seq_batch)
             
         # seq = seq.strip().upper()
-        seq_id = seq_batch["seq"].tolist()
+        seq_id = seq_batch["seq_id"].tolist()
         seq = seq_batch["seq"].str.strip().upper().tolist()
         seq_type = seq_batch["seq_type"].tolist()
         vector = []

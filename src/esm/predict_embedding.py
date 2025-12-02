@@ -586,20 +586,20 @@ def predict_embedding_multiple(samples,
 
     converter = BatchConverter(global_alphabet, truncation_seq_length)
     # protein_ids, raw_seqs, tokens = converter([[protein_id, protein_seq]])
-    protein_ids, raw_seqs, tokens = converter(samples)
+    protein_ids, raw_seqs, tokens = converter(samples.values.tolist())
     embeddings = {}
     with torch.no_grad():
         # if torch.cuda.is_available():
         tokens = tokens.to(device=device, non_blocking=True)
         try:
             out = global_model(tokens, repr_layers=repr_layers, return_contacts=False)
-            truncate_len = min(truncation_seq_length, len(raw_seqs[0]))
+            truncate_len = min(truncation_seq_length, tokens.shape[-1])
             processed_seq_len = truncate_len + 2
             if "representations" in embedding_type or "matrix" in embedding_type:
                 if matrix_add_special_token:
-                    embedding = out["representations"][global_layer_size].to(device="cpu")[0, 1: truncate_len + 1].clone().numpy()
+                    embedding = out["representations"][global_layer_size].to(device="cpu")[:, 1: truncate_len + 1].clone().numpy()
                 else:
-                    embedding = out["representations"][global_layer_size].to(device="cpu")[0, 1: truncate_len + 1].clone().numpy()
+                    embedding = out["representations"][global_layer_size].to(device="cpu")[:, 1: truncate_len + 1].clone().numpy()
                 embeddings["representations"] = embedding
             if "bos" in embedding_type or "vector" in embedding_type:
                 embedding = out["representations"][global_layer_size].to(device="cpu")[0, 0].clone().numpy()
@@ -610,7 +610,7 @@ def predict_embedding_multiple(samples,
             if len(embeddings) > 1:
                 return embeddings, processed_seq_len
             elif len(embeddings) == 1:
-                return list(embeddings.items())[0][1], processed_seq_len
+                return list(embeddings.items())[0][1], processed_seq_len, tokens
             else:
                 return None, None
         except RuntimeError as e:

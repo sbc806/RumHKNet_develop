@@ -241,7 +241,7 @@ def predict_seq_level_binary_class(
     end=time.time()
     print("Prediction time:",(end-start)/60,"minutes")
     print("Saving predictions")
-    pd.DataFrame({"seq_id":seq_ids,"seq":seqs,"prob":all_probs,"pred":all_preds}).to_csv(args.save_path)
+    pd.DataFrame({"seq_id":seq_ids,"seq":seqs,"prob":all_probs,"pred":all_preds}).to_csv(args.save_path,index=False)
     print("Predictions saved")
         # torch.cuda.empty_cache()
     """

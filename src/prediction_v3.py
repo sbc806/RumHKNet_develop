@@ -239,7 +239,7 @@ def predict_seq_level_binary_class(
             all_probs = all_probs + list(probs.flatten())
             all_preds = all_preds + list(preds)
     end=time.time()
-    print("Prediction time:",(end-start)/60/60,"minutes")
+    print("Prediction time:",(end-start)/60,"minutes")
     print("Saving predictions")
     pd.DataFrame({"seq_id":seq_ids,"seq":seqs,"prob":all_probs,"pred":all_preds}).to_csv(args.save_path)
     print("Predictions saved")

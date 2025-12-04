@@ -508,7 +508,7 @@ def predict_embedding_multiple(seq_batch,
     :param matrix_add_special_token:
     :return: embedding, processed_seq_len
     '''
-    global global_model, global_alphabet, global_version, global_layer_size
+    # global global_model, global_alphabet, global_version, global_layer_size
     assert "bos" in embedding_type or "representations" in embedding_type \
            or "matrix" in embedding_type or "vector" in embedding_type or "contacts" in embedding_type
     # if len(sample) > 2:

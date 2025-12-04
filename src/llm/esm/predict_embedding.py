@@ -581,12 +581,12 @@ def predict_embedding_multiple(seq_batch,
         device = torch.device("cpu")
         print("llm use cpu")
     '''
-    if device is None:
-        device = next(global_model.parameters()).device
-    else:
-        model_device = next(global_model.parameters()).device
-        if device != model_device:
-            global_model = global_model.to(device)
+    # if device is None:
+        # device = next(global_model.parameters()).device
+    # else:
+        # model_device = next(global_model.parameters()).device
+        # if device != model_device:
+            # global_model = global_model.to(device)
     # print("llm device:", device)
     assert all(-(global_model.num_layers + 1) <= i <= global_model.num_layers for i in repr_layers)
     repr_layers = [(i + global_model.num_layers + 1) % (global_model.num_layers + 1) for i in repr_layers]

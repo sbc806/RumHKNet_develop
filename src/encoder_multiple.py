@@ -336,7 +336,12 @@ class EncoderMultiple(object):
         print("-" * 50)
 
         global_model, global_alphabet = pretrained.load_model_and_alphabet("esm2_t36_3B_UR50D")
-
+        if device is None:
+            device = next(global_model.parameters()).device
+        else:
+            model_device = next(global_model.parameters()).device
+            if device != model_device:
+                global_model = global_model.to(device)
         self.global_model = global_model
         self.global_alphabet = global_alphabet
                      
@@ -369,7 +374,9 @@ class EncoderMultiple(object):
                     matrix_add_special_token=self.matrix_add_special_token,
                     version=self.llm_step,
                     device=self.device,
-                    seq_len=seq_len
+                    seq_len=seq_len,
+                    global_model=self.global_model,
+                    global_alphabet=self.global_alphabet
                 )
                 while embedding_info is None:
                     print("%s embedding error, max_len from %d truncate to %d" % (seq_id,

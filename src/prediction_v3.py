@@ -147,8 +147,14 @@ def transform_one_sample_2_feature(
     return batch_info, batch_features, [seq_lens]
 
 def transform_multiple_sample_2_feature(device, encoder, batch_converter, seq_batch):
+    start=time.time()
     encoder_output=encoder.encode_multiple(seq_batch)
+    end=time.time()
+    print("EncoderMultiple:",(end-start)/60)
+    start=time.time()
     batch_features=batch_converter(encoder_output)
+    end=time.time()
+    print("BatchConverterMultiple:",(end-start)/60)
     batch_features,cur_sample_num=to_device(device,batch_features)
     return batch_features
 
@@ -168,7 +174,7 @@ def predict_probs(
     :param row:
     :return:
     """
-    model.to(torch.device("cpu"))
+    # model.to(torch.device("cpu"))
     """
     batch_info, batch_features, seq_lens = transform_one_sample_2_feature(
         args.device,
@@ -196,7 +202,10 @@ def predict_probs(
                 # cur_probs = cur_probs.detach().numpy()
             # probs.append(cur_probs)
     # else:
+    start=time.time()
     probs = model(**batch_features)[1]
+    end=time.time()
+    print("Model:",(end-start)/60)
     if probs.is_cuda:
         probs = probs.detach().cpu().numpy()
     else:

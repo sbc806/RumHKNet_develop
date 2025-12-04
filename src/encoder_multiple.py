@@ -14,6 +14,7 @@ import os
 import torch
 import sys
 import numpy as np
+from esm import pretrained
 sys.path.append(".")
 sys.path.append("..")
 sys.path.append("../src")
@@ -334,6 +335,11 @@ class EncoderMultiple(object):
               )
         print("-" * 50)
 
+        global_model, global_alphabet = pretrained.load_model_and_alphabet("esm2_t36_3B_UR50D")
+
+        self.global_model = global_model
+        self.global_alphabet = global_alphabet
+                     
     def __get_embedding_multiple__(self, seq_batch, embedding_type):
         # Expects seq_batch which
         # First column should be seq_id

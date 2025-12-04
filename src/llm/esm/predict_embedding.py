@@ -593,7 +593,7 @@ def predict_embedding_multiple(seq_batch,
     global_model.eval()
 
     converter = BatchConverter(global_alphabet, truncation_seq_length)
-    protein_ids, raw_seqs, tokens = converter(seq_batch.values.tolist())
+    protein_ids, raw_seqs, tokens = converter(seq_batch.values)
     embeddings = {}
     with torch.no_grad():
         # if torch.cuda.is_available():

@@ -495,7 +495,7 @@ def predict_embedding_multiple(seq_batch,
                       device=None,
                       version="3B",
                       matrix_add_special_token=False,
-                      seq_len=None):
+                      seq_len=None,global_model=None,global_alphabet=None,global_version="3B",global_layer_size=36):
     '''
     use sequence to predict protein embedding matrix or vector(bos)
     :param sample: [protein_id, protein_sequence]
@@ -521,7 +521,7 @@ def predict_embedding_multiple(seq_batch,
         seq_batch.loc[:, "seq"] = seq_batch["seq"].str[-truncation_seq_length:]
     else:
         seq_batch.loc[:, "seq"] = seq_batch["seq"].str[:truncation_seq_length]
-                          
+    '''
     if global_model is None or global_alphabet is None or global_version is None or global_version != version or global_layer_size is None:
         if version == "15B":
             llm_name = "esm2_t48_15B_UR50D"
@@ -568,6 +568,9 @@ def predict_embedding_multiple(seq_batch,
             raise Exception("not support this version=%s" % version)
         print("LLM: %s, version: %s, layer_idx: %d, device: %s" % (llm_name, version, global_layer_size, str(device)))
         global_version = version
+    '''
+    llm_name="esm2_t36_3B_UR50D"
+    print("LLM: $s, version: %s, layer_idx: %d, device: %s" % (llm_name, version, global_layer_size, str(device)))
     '''
     if torch.cuda.is_available() and device is not None:
         global_model = global_model.to(device)

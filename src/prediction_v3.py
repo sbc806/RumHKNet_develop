@@ -813,6 +813,7 @@ def run_args():
                         help="per num to print, default: 10000")
     parser.add_argument("--gpu_id", default=-1, type=int, help="the used gpu_id. default: -1(CPU)")
     parser.add_argument("--chunk_size",default=100,type=int)
+    parser.add_argument("--save_predictions_size",default=100000,type=int)
     input_args = parser.parse_args()
     return input_args
 

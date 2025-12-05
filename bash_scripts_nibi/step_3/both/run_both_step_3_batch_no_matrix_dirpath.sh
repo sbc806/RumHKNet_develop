@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --account=rrg-guanuofa
-#SBATCH --gpus=h100:1
+#SBATCH --account=def-guanuofa
+#SBATCH --gpus=nvidia_h100:1
 #SBATCH --mem=100G
 #SBATCH --time=7-0
 #SBATCH --job-name=both-step-3-batch-no-matrix-dirpath

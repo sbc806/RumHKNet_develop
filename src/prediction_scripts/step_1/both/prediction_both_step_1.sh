@@ -31,7 +31,7 @@ python -u prediction_v2.py \
     --seq_id_idx 0 \
     --seq_idx 2 \
     --matrix_embedding_exists \
-    --save_name $3_predicted_$2_truncation_seq_length$extra
+    --save_name $3_predicted_$2_$truncation_seq_length$extra
 
 
 

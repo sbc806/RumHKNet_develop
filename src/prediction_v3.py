@@ -257,6 +257,7 @@ def predict_seq_level_binary_class(
                 all_probs=[]
                 all_preds=[]
                 count=count+1
+                start=time.time()
     end=time.time()
     print("Prediction time:",(end-start)/60,"minutes")
     print("Saving predictions")

@@ -251,10 +251,16 @@ def predict_seq_level_binary_class(
             if len(seq_ids)==args.save_predictions_size:
                 end=time.time()
                 print("Prediction time:",(end-start)/60,"minutes")
+                pd.DataFrame({"seq_id":seq_ids,"seq":seqs,"prob":all_probs,"pred":all_preds}).to_csv(os.path.join(args.save_path,f"{args.save_name}_{count}.csv"),index=False)
+                seq_ids=[]
+                seqs=[]
+                all_probs=[]
+                all_preds=[]
+                count=count+1
     end=time.time()
     print("Prediction time:",(end-start)/60,"minutes")
     print("Saving predictions")
-    pd.DataFrame({"seq_id":seq_ids,"seq":seqs,"prob":all_probs,"pred":all_preds}).to_csv(args.save_path,index=False)
+    pd.DataFrame({"seq_id":seq_ids,"seq":seqs,"prob":all_probs,"pred":all_preds}).to_csv(os.path.join(args.save_path,f"{args.save_name}_{count}.csv"),index=False)
     print("Predictions saved")
         # torch.cuda.empty_cache()
     """
@@ -818,6 +824,7 @@ def run_args():
     parser.add_argument("--gpu_id", default=-1, type=int, help="the used gpu_id. default: -1(CPU)")
     parser.add_argument("--chunk_size",default=100,type=int)
     parser.add_argument("--save_predictions_size",default=100000,type=int)
+    parser.add_argument("--save_name)
     input_args = parser.parse_args()
     return input_args
 

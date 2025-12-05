@@ -12,7 +12,7 @@ python -u prediction_v2.py \
     --seq_type prot \
     --input_file $dir_path/predictions/predictions_dataset/step_1/$3.csv \
     --model_path $dir_path/sbc806/RumHKNet/models_step_1_both \
-    --save_path $dir_path"/predictions/predicted_results/step_1/both/$3_predicted_$2"_$truncation_seq_length$extra.csv \
+    --save_path $dir_path"/predictions/predicted_results/step_1/both \
     --dataset_name step_1_non_kinases_preprocessed \
     --dataset_type protein \
     --task_type binary_class \
@@ -30,7 +30,8 @@ python -u prediction_v2.py \
     --gpu_id 0 \
     --seq_id_idx 0 \
     --seq_idx 2 \
-    --matrix_embedding_exists
+    --matrix_embedding_exists \
+    --save_name $3_predicted_$2_truncation_seq_length$extra
 
 
 

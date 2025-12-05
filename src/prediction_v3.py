@@ -237,6 +237,7 @@ def predict_seq_level_binary_class(
     seqs = []
     all_probs = []
     all_preds = []
+    count = 0
     start=time.time()
     with pd.read_csv(args.input_file, chunksize=args.chunk_size) as csv_reader:
         for chunk in csv_reader:
@@ -247,6 +248,9 @@ def predict_seq_level_binary_class(
             seqs = seqs + list(chunk["seq"])
             all_probs = all_probs + list(probs.flatten())
             all_preds = all_preds + list(preds)
+            if len(seq_ids)==args.save_predictions_size:
+                end=time.time()
+                print("Prediction time:",(end-start)/60,"minutes")
     end=time.time()
     print("Prediction time:",(end-start)/60,"minutes")
     print("Saving predictions")

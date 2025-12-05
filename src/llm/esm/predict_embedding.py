@@ -430,7 +430,7 @@ def predict_embedding(sample,
             global_model, global_alphabet = pretrained.load_model_and_alphabet("esm2_t6_8M_UR50D")
         else:
             raise Exception("not support this version=%s" % version)
-        print("LLM: %s, version: %s, layer_idx: %d, device: %s" % (llm_name, version, global_layer_size, str(device)))
+        # print("LLM: %s, version: %s, layer_idx: %d, device: %s" % (llm_name, version, global_layer_size, str(device)))
         global_version = version
     '''
     if torch.cuda.is_available() and device is not None:

@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --account=rrg-guanuofa
-#SBATCH --gpus-per-h100:1
+#SBATCH --gpus-per-node=h100:1
 #SBATCH --mem=32G
 #SBATCH --time=7-0
 #SBATCH --job-name=prediction-both-step-1-small-0-v3

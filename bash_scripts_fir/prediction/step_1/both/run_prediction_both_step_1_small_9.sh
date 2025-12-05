@@ -5,7 +5,7 @@
 #SBATCH --time=7-0
 #SBATCH --job-name=prediction-both-step-1-sequences-small-9
 #SBATCH --output=output/prediction_both_step_1_sequences_small_9_%j.out
-#SBATCH --err=output/prediction_both_step_1_sequences_small_v9_%j.err
+#SBATCH --err=output/prediction_both_step_1_sequences_small_9_%j.err
 
 
 module load python/3.11
@@ -22,5 +22,6 @@ cd ../sbc806/RumHKNet/src/
 
 
 deactivate
+
 
 

@@ -2,7 +2,7 @@
 #SBATCH --account=rrg-guanuofa
 #SBATCH --gpus=h100:1
 #SBATCH --mem=100G
-#SBATCH --time=3-0
+#SBATCH --time=7-0
 #SBATCH --job-name=both-step-3-batch-no-matrix-dirpath
 #SBATCH --output=output/both_step_3_batch_no_matrix_dirpath_%j.out
 #SBATCH --err=output/both_step_3_batch_no_matrix_dirpath_%j.err

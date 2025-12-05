@@ -1,8 +1,8 @@
 #!/bin/bash
-#SBATCH --account=rrg-guanuofa
+#SBATCH --account=def-guanuofa
 #SBATCH --gpus=nvidia_h100_80gb_hbm3_3g.40gb:1
 #SBATCH --mem=100G
-#SBATCH --time=5-0
+#SBATCH --time=3-0
 #SBATCH --job-name=both-step-3-11-512-family-no-matrix-dirpath
 #SBATCH --output=output/both_step_3_11_512_family_no_matrix_dirpath_%j.out
 #SBATCH --err=output/both_step_3_11_512_family_no_matrix_dirpath_%j.err
@@ -23,5 +23,6 @@ cat both_step_3_11_family_no_matrix_dirpath.sh > /home/schen123/projects/rrg-gua
 
 
 deactivate
+
 
 

@@ -379,6 +379,7 @@ class EncoderMultiple(object):
                     global_alphabet=self.global_alphabet
                 )
                 while embedding_info is None:
+                    sys.exit()
                     print("%s embedding error, max_len from %d truncate to %d" % (seq_id,
                                                                                   truncation_seq_length,
                                                                                   int(truncation_seq_length * 0.95)))

@@ -570,7 +570,7 @@ def predict_embedding_multiple(seq_batch,
         global_version = version
     '''
     llm_name="esm2_t36_3B_UR50D"
-    print("LLM: %s, version: %s, layer_idx: %d, device: %s" % (llm_name, version, global_layer_size, str(device)))
+    # print("LLM: %s, version: %s, layer_idx: %d, device: %s" % (llm_name, version, global_layer_size, str(device)))
     '''
     if torch.cuda.is_available() and device is not None:
         global_model = global_model.to(device)

@@ -5,14 +5,16 @@ threshold=$1
 echo $threshold
 truncation_seq_length=$4
 echo $truncation_seq_length
-extra=$5
+chunk_size=$5
+echo $chunk_size
+extra=$6
 echo $extra
 
-python -u prediction_v2.py \
+python -u prediction_v3.py \
     --seq_type prot \
-    --input_file $dir_path/predictions/predictions_dataset/step_1/$3.csv \
+    --input_file $dir_path/predictions/predictions_dataset/step_1/clustered/$3.csv \
     --model_path $dir_path/sbc806/RumHKNet/models_step_1_both \
-    --save_path $dir_path/predictions/predicted_results/step_1/both \
+    --save_path $dir_path/predictions/predicted_results/step_1/both/clustered \
     --dataset_name step_1_non_kinases_preprocessed \
     --dataset_type protein \
     --task_type binary_class \
@@ -31,7 +33,9 @@ python -u prediction_v2.py \
     --seq_id_idx 0 \
     --seq_idx 2 \
     --matrix_embedding_exists \
+    --chunk_size $chunk_size \
     --save_name $3_predicted_$2_$4$extra
+
 
 
 

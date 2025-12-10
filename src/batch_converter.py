@@ -289,7 +289,7 @@ class BatchConverter(object):
                     truncation=True
                 )
                 seq_encoded_list.append(inputs["input_ids"])
-                print("Length:",len(inputs["input_ids"]))
+                # print("Length:",len(inputs["input_ids"]))
         else:
             seq_encoded_list = [self.seq_tokenizer.encode(seq_str.upper()) for seq_str in seqs]
             # 该长度已经减去了需要增加的特殊字符的个数
@@ -503,9 +503,9 @@ class BatchConverter(object):
                     encoded_matrices[sample_idx, real_matrix_len + 1] = matrix[-1]
                     matrix_attention_masks[sample_idx, 0: real_matrix_len + 2] = 1
                     cur_sentence_length = real_matrix_len + 2
-                    print("This block",torch.sum(matrix[:encoded_matrices.shape[1]]-encoded_matrices[sample_idx,:real_matrix_len+2]))
-                    print("matrix:",matrix)
-                    print("encoded matrices:",encoded_matrices[sample_idx])
+                    # print("This block",torch.sum(matrix[:encoded_matrices.shape[1]]-encoded_matrices[sample_idx,:real_matrix_len+2]))
+                    # print("matrix:",matrix)
+                    # print("encoded matrices:",encoded_matrices[sample_idx])
                 elif self.matrix_add_special_token:
                     # embedding矩阵中有特殊字符，但模型中不需要使用（已经进行了裁剪）
                     encoded_matrices[sample_idx, 0: real_matrix_len] = matrix[0: real_matrix_len]

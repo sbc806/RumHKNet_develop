@@ -391,6 +391,7 @@ class Encoder(object):
                     device=self.device
                 )
                 while embedding_info is None:
+                    sys.exit("Error in predict_embedding_esm() with predicting embeddings.")
                     print("%s embedding error, max_len from %d truncate to %d" % (seq_id,
                                                                                   truncation_seq_length,
                                                                                   int(truncation_seq_length * 0.95)))
@@ -487,7 +488,7 @@ class Encoder(object):
                 raise Exception("matrix is not filepath-str and np.ndarray")
 
         seq = seq.strip().upper()
-        print("matrix:",matrix.shape)
+        # print("matrix:",matrix.shape)
         return {
             "seq_id": seq_id,
             "seq": seq,

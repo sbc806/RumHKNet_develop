@@ -10,7 +10,7 @@
 
 module load python/3.11
 module load scipy-stack
-module load gcc arrow/21.0.0
+module load gcc arrow/19.0.1
 
 
 cd /home/schen123/scratch/virtual_environments
@@ -23,4 +23,5 @@ cat both_step_3_batch_no_matrix_dirpath.sh > /home/schen123/projects/rrg-guanuof
 
 
 deactivate
+
 

@@ -394,8 +394,9 @@ def predict_embedding(sample,
         elif version == "3B":
             llm_name = "esm2_t36_3B_UR50D"
             global_layer_size = 36
-            # global_model, global_alphabet = pretrained.load_model_and_alphabet("esm2_t36_3B_UR50D")
+            global_model, global_alphabet = pretrained.load_model_and_alphabet("esm2_t36_3B_UR50D")
 
+            """
             model_name = "esm2_t36_3B_UR50D"
             url = f"https://dl/fbaipublicfiles.com/fair-esm/regression/{model_name}.pt"
             fn = Path(url).name
@@ -416,6 +417,7 @@ def predict_embedding(sample,
 
             model_name = "esm2_t36_3B_UR50D"
             global_model, global_alphabet = pretrained.load_model_and_alphabet_core(model_name, model_data, regression_data)
+            """
         elif version == "650M":
             llm_name = "esm2_t33_650M_UR50D"
             global_layer_size = 33

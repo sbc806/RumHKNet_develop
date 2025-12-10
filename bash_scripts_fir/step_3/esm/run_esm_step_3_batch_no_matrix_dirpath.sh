@@ -18,11 +18,12 @@ source TEST/bin/activate
 
 
 cd ../sbc806/RumHKNet/src/training/V3
-cat esm_step_3_batch_no_matrix_dirpath.sh > /home/schen123/scratch/RumHKNet/bash_scripts_fir/step_3/esm/output/both_step_3_batch_no_matrix_dirpath_$SLURM_JOB_ID.txt
+cat esm_step_3_batch_no_matrix_dirpath.sh > /home/schen123/scratch/kinases/sbc806/RumHKNet/bash_scripts_fir/step_3/esm/output/both_step_3_batch_no_matrix_dirpath_$SLURM_JOB_ID.txt
 ./esm_step_3_batch_no_matrix_dirpath.sh
 
 
 deactivate
+
 
 
 

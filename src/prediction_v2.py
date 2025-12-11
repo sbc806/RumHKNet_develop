@@ -216,6 +216,7 @@ def predict_seq_level_binary_class(
             if len(info) > 2:
                 cur_res += info[2:]
         res.append(cur_res)
+        print(cur_res[0])
         with open("/home/schen123/projects/rrg-guanuofa/schen123/kinases/predictions/predicted_results/step_1/both/clustered_rep_seq95_large_sorted_last_1250_predicted_03.csv","a") as f:
             f.write(",".join([str(item) for item in cur_res]+"\n")
     return res
@@ -501,7 +502,7 @@ def create_encoder_batch_convecter(
         "llm_dirpath": lucapcycle_args.llm_dirpath,
         "input_type": lucapcycle_args.input_type,
         "trunc_type": lucapcycle_args.trunc_type,
-        "seq_max_length": lucapcycle_args.seq_max_length,
+        "seq_max_length": lucapcycle_args.truncation_matrix_length,
         "prepend_bos": True,
         "append_eos": True,
         "vector_dirpath": lucapcycle_args.vector_dirpath,

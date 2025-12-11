@@ -216,6 +216,8 @@ def predict_seq_level_binary_class(
             if len(info) > 2:
                 cur_res += info[2:]
         res.append(cur_res)
+        with open("/home/schen123/projects/rrg-guanuofa/schen123/kinases/predictions/predicted_results/step_1/both/clustered_rep_seq95_large_sorted_last_1500.csv","a") as f:
+            f.write(",".join([str(item) for item in cur_res]+"\n")
     return res
 
 

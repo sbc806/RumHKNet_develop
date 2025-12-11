@@ -29,7 +29,7 @@ python -u prediction_v2.py \
     --emb_dir $dir_path/embeddings/step_1/esm \
     --gpu_id 0 \
     --seq_id_idx 0 \
-    --seq_idx 2 \
+    --seq_idx 1 \
     --matrix_embedding_exists \
     --save_name $3_predicted_$2_$4$extra
 

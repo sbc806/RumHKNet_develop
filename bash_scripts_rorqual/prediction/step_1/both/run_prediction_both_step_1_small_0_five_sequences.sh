@@ -18,7 +18,7 @@ source TEST/bin/activate
 
 cd ../sbc806_4/RumHKNet/src/
 # cat transformer_step_2_4_1.sh > /home/schen123/projects/rrg-guanuofa/schen123/kinases/sbc806/RumHKNet/bash_scripts_nibi/step_2/transformer/output/transformer_step_2_4_1_$SLURM_JOB_ID.txt
-./prediction_scripts/step_1/both/prediction_both_step_1_v3_rorqual.sh 0.3 03 clustered_rep_seq95_small_0_five_sequences 1500 50 _v3_2025_12_15
+./prediction_scripts/step_1/both/prediction_both_step_1_v3_rorqual.sh 0.3 03 clustered_rep_seq95_small_0_five_sequences 1500 1 _v3_2025_12_15
 
 
 deactivate

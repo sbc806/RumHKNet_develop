@@ -371,6 +371,7 @@ class BatchConverter(object):
         if self.truncation_matrix_length:
             max_len = min(max_len, self.truncation_matrix_length)
         max_len = max_len + int(self.matrix_prepend_bos) + int(self.matrix_append_eos)
+        print("max_len:",max_len)
         embedding_vector_dim = matrices[0].shape[1]
         # for input
         filled_matrices = torch.empty(

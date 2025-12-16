@@ -503,7 +503,7 @@ def create_encoder_batch_convecter(
         "input_type": lucapcycle_args.input_type,
         "trunc_type": lucapcycle_args.trunc_type,
         # "seq_max_length": lucapcycle_args.truncation_matrix_length,
-        "seq_max_length": 14002,
+        "seq_max_length": 13952,
         "prepend_bos": True,
         "append_eos": True,
         "vector_dirpath": lucapcycle_args.vector_dirpath,

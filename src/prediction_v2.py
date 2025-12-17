@@ -697,6 +697,7 @@ def run(
     # embedding in advance
     if not matrix_embedding_exists and gpu_id > -1:
         # 先to cpu
+        print("Hello in prediction_v2.py")
         lucabase_model.to(torch.device("cpu"))
         assert lucapcycle_args.emb_dir is not None
         if not os.path.exists(lucapcycle_args.emb_dir):

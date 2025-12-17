@@ -23,7 +23,7 @@ python -u prediction_v2.py \
     --time_str 20251114152942 \
     --step 374392 \
     --threshold $threshold \
-    --print_per_num 100000 \
+    --print_per_num 1 \
     --truncation_seq_length $truncation_seq_length \
     --truncation_matrix_length $truncation_seq_length \
     --emb_dir $dir_path/embeddings/step_1/esm \

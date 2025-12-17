@@ -380,7 +380,7 @@ class Encoder(object):
                 else:
                     truncation_seq_length = self.seq_max_length - int(self.prepend_bos) - int(self.append_eos)
                     truncation_seq_length = min(seq_len, truncation_seq_length)
-                truncation_seq_length=13942
+                truncation_seq_length=13900
                 print("truncation_seq_length:",truncation_seq_length)
                 embedding_info, processed_seq_len = predict_embedding_esm(
                     sample=[seq_id, seq],

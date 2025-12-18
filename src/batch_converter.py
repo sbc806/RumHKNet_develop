@@ -289,7 +289,7 @@ class BatchConverter(object):
                     truncation=True
                 )
                 seq_encoded_list.append(inputs["input_ids"])
-                print("Length:",len(inputs["input_ids"]))
+                # print("Length:",len(inputs["input_ids"]))
         else:
             seq_encoded_list = [self.seq_tokenizer.encode(seq_str.upper()) for seq_str in seqs]
             # 该长度已经减去了需要增加的特殊字符的个数
@@ -371,7 +371,7 @@ class BatchConverter(object):
         if self.truncation_matrix_length:
             max_len = min(max_len, self.truncation_matrix_length)
         max_len = max_len + int(self.matrix_prepend_bos) + int(self.matrix_append_eos)
-        print("max_len:",max_len)
+        # print("max_len:",max_len)
         embedding_vector_dim = matrices[0].shape[1]
         # for input
         filled_matrices = torch.empty(

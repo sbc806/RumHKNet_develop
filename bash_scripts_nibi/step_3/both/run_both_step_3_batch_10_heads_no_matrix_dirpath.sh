@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --account=def-guanuofa
+#SBATCH --account=rrg-guanuofa
 #SBATCH --gpus=nvidia_h100_80gb_hbm3_3g.40gb:1
 #SBATCH --mem=100G
 #SBATCH --time=7-0
@@ -23,3 +23,4 @@ cat both_step_3_batch_10_heads_no_matrix_dirpath.sh > /home/schen123/projects/rr
 
 
 deactivate
+

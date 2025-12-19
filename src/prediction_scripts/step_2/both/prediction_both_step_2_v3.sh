@@ -12,10 +12,10 @@ echo $extra
 
 python -u prediction_v3.py \
     --seq_type prot \
-    --input_file $dir_path/predictions/predictions_dataset/step_1/clustered/$3.csv \
-    --model_path $dir_path/sbc806/RumHKNet/models_step_1_both \
-    --save_path $dir_path/predictions/predicted_results/step_1/both/clustered \
-    --dataset_name step_1_non_kinases_preprocessed \
+    --input_file $dir_path/predictions/predictions_dataset/step_2/clustered/$3.csv \
+    --model_path $dir_path/sbc806/RumHKNet/models/step_2/both \
+    --save_path $dir_path/predictions/predicted_results/step_2/both/clustered \
+    --dataset_name extra_p_2_class_v3_binary_kinases_only \
     --dataset_type protein \
     --task_type binary_class \
     --task_level_type seq_level \
@@ -35,3 +35,4 @@ python -u prediction_v3.py \
     --matrix_embedding_exists \
     --chunk_size $chunk_size \
     --save_name $3_predicted_$2_$4$extra
+

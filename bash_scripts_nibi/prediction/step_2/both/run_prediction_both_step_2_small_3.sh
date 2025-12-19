@@ -2,7 +2,7 @@
 #SBATCH --account=rrg-guanuofa
 #SBATCH --gpus-per-node=h100:1
 #SBATCH --mem=32G
-#SBATCH --time=7-0
+#SBATCH --time=3-0
 #SBATCH --job-name=prediction-both-step-2-small-3-v3
 #SBATCH --output=output/prediction_both_step_2_small_3_v3_%j.out
 #SBATCH --err=output/prediction_both_step_2_small_3_v3_%j.err
@@ -22,5 +22,6 @@ cd ../sbc806/RumHKNet/src/
 
 
 deactivate
+
 
 

@@ -1,6 +1,6 @@
 # Binary Classification
 export CUDA_VISIBLE_DEVICES="0"
-dir_path="../../../.."
+dir_path="../../../../../.."
 threshold=$1
 echo $threshold
 truncation_seq_length=$4

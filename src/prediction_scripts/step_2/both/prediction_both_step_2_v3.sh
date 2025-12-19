@@ -23,7 +23,7 @@ python -u prediction_v3.py \
     --input_type seq_matrix \
     --input_mode single \
     --time_str 20251114152941 \
-    --step 374392 \
+    --step 428736 \
     --threshold $threshold \
     --print_per_num 100000 \
     --truncation_seq_length $truncation_seq_length \
@@ -35,5 +35,6 @@ python -u prediction_v3.py \
     --matrix_embedding_exists \
     --chunk_size $chunk_size \
     --save_name $3_predicted_$2_$4$extra
+
 
 

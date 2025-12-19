@@ -28,13 +28,14 @@ python -u prediction_v3.py \
     --print_per_num 100000 \
     --truncation_seq_length $truncation_seq_length \
     --truncation_matrix_length $truncation_seq_length \
-    --emb_dir $dir_path/embeddings/step_1/esm \
+    --emb_dir $dir_path/embeddings/step_2/esm \
     --gpu_id 0 \
     --seq_id_idx 0 \
     --seq_idx 2 \
     --matrix_embedding_exists \
     --chunk_size $chunk_size \
     --save_name $3_predicted_$2_$4$extra
+
 
 
 

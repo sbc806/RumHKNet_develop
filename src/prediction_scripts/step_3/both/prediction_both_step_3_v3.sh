@@ -12,9 +12,9 @@ echo $extra
 
 python -u prediction_v3.py \
     --seq_type prot \
-    --input_file $dir_path/predictions/predictions_dataset/step_2/clustered/$3.csv \
-    --model_path $dir_path/sbc806/RumHKNet/models/step_2/both \
-    --save_path $dir_path/predictions/predicted_results/step_2/both/clustered \
+    --input_file $dir_path/predictions/predictions_dataset/step_3/clustered/$3.csv \
+    --model_path $dir_path/sbc806/RumHKNet/models_step_3_both_11_family \
+    --save_path $dir_path/predictions/predicted_results/step_3/both/clustered \
     --dataset_name step_3_11_family \
     --dataset_type protein \
     --task_type multi_class \
@@ -35,6 +35,7 @@ python -u prediction_v3.py \
     --matrix_embedding_exists \
     --chunk_size $chunk_size \
     --save_name $3_predicted_$2_$4$extra
+
 
 
 

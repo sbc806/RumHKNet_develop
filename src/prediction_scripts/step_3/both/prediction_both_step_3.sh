@@ -16,8 +16,8 @@ python -u prediction_v2.py \
     --model_type lucaprot \
     --input_type seq_matrix \
     --input_mode single \
-    --time_str 20251114152941 \
-    --step 428736 \
+    --time_str 20251120222923 \
+    --step 133628 \
     --threshold $threshold \
     --print_per_num 100000 \
     --truncation_seq_length 12211 \
@@ -27,6 +27,7 @@ python -u prediction_v2.py \
     --seq_id_idx 0 \
     --seq_idx 1 \
     --matrix_embedding_exists
+
 
 
 

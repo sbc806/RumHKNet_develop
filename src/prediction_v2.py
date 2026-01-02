@@ -216,7 +216,7 @@ def predict_seq_level_binary_class(
             if len(info) > 2:
                 cur_res += info[2:]
         res.append(cur_res)
-        print(cur_res[0],len(cur_res[1]))
+        # print(cur_res[0],len(cur_res[1]))
         # with open("../../../predictions/predicted_results/step_1/both/clustered/newrun_seqs_large_kinase_predicted_03.csv","a") as f:
             # f.write(",".join([str(item) for item in cur_res])+"\n")
     return res

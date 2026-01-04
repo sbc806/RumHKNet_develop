@@ -387,7 +387,7 @@ class Encoder(object):
                     trunc_type=self.trunc_type,
                     embedding_type=embedding_type,
                     repr_layers=[-1],
-                    truncation_seq_length=12211,
+                    truncation_seq_length=truncation_seq_length,
                     matrix_add_special_token=self.matrix_add_special_token,
                     version=self.llm_step,
                     device=self.device

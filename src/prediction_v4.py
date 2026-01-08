@@ -344,7 +344,7 @@ def predict_seq_level_multi_class(
             seq_ids=[]
             seqs=[]
             all_probs=[]
-            all_probs=[]
+            all_preds=[]
             all_topk_probs=[]
             all_topk_preds=[]
             count=count+1
@@ -1061,6 +1061,7 @@ if __name__ == "__main__":
     else:
         raise Exception("input error, usage: --hep")
 """
+
 
 
 

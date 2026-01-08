@@ -288,7 +288,7 @@ def predict_seq_level_multi_class(
         batch_convecter,
         label_id_2_name,
         model,
-        row,
+        # row,
         topk=5
 ):
     """
@@ -1050,6 +1050,7 @@ if __name__ == "__main__":
     else:
         raise Exception("input error, usage: --hep")
 """
+
 
 
 

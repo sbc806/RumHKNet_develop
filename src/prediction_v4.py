@@ -313,42 +313,42 @@ def predict_seq_level_multi_class(
     # batch_info, probs, seq_lens = predict_probs(args, encoder, batch_convecter, model,chunk)
     # print("probs dim: ", probs.ndim)
 
-    if topk is not None and topk > 1:
-        # print("topk: %d" % topk)
-        preds = np.argmax(probs, axis=-1)
-        preds_topk = np.argsort(probs, axis=-1)[:, ::-1][:, :topk]
-        res = []
-        for idx, info in enumerate(batch_info):
-            cur_topk_probs = []
-            cur_topk_labels = []
-            for label_idx in preds_topk[idx]:
-                cur_topk_probs.append(float(probs[idx][label_idx]))
-                cur_topk_labels.append(label_id_2_name[label_idx])
-            if args.input_mode == "pair":
-                cur_res = [
-                    info[0],
-                    info[1],
-                    info[2],
-                    info[3],
-                    float(probs[idx][preds[idx]]),
-                    label_id_2_name[preds[idx]],
-                    cur_topk_probs,
-                    cur_topk_labels
-                ]
-                if len(info) > 4:
-                    cur_res += info[4:]
-            else:
-                cur_res = [
-                    info[0],
-                    info[1],
-                    float(probs[idx][preds[idx]]),
-                    label_id_2_name[preds[idx]],
-                    cur_topk_probs,
-                    cur_topk_labels
-                ]
-                if len(info) > 2:
-                    cur_res += info[2:]
-            res.append(cur_res)
+        if topk is not None and topk > 1:
+            # print("topk: %d" % topk)
+            preds = np.argmax(probs, axis=-1)
+            preds_topk = np.argsort(probs, axis=-1)[:, ::-1][:, :topk]
+            res = []
+            for idx, info in enumerate(batch_info):
+                cur_topk_probs = []
+                cur_topk_labels = []
+                for label_idx in preds_topk[idx]:
+                    cur_topk_probs.append(float(probs[idx][label_idx]))
+                    cur_topk_labels.append(label_id_2_name[label_idx])
+                if args.input_mode == "pair":
+                    cur_res = [
+                        info[0],
+                        info[1],
+                        info[2],
+                        info[3],
+                        float(probs[idx][preds[idx]]),
+                        label_id_2_name[preds[idx]],
+                        cur_topk_probs,
+                        cur_topk_labels
+                    ]
+                    if len(info) > 4:
+                        cur_res += info[4:]
+                else:
+                    cur_res = [
+                        info[0],
+                        info[1],
+                        float(probs[idx][preds[idx]]),
+                        label_id_2_name[preds[idx]],
+                        cur_topk_probs,
+                        cur_topk_labels
+                    ]
+                    if len(info) > 2:
+                        cur_res += info[2:]
+                res.append(cur_res)
         return res
     else:
         preds = np.argmax(probs, axis=-1)
@@ -1016,3 +1016,4 @@ if __name__ == "__main__":
     else:
         raise Exception("input error, usage: --hep")
 """
+

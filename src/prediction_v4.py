@@ -283,6 +283,7 @@ def predict_seq_level_binary_class(
 
 def predict_seq_level_multi_class(
         args,
+    lucapcycle_args,
         encoder,
         batch_convecter,
         label_id_2_name,
@@ -1045,6 +1046,7 @@ if __name__ == "__main__":
     else:
         raise Exception("input error, usage: --hep")
 """
+
 
 
 

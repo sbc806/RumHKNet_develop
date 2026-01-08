@@ -346,7 +346,7 @@ def predict_seq_level_multi_class(
     chunk_info={"seq_id":seq_ids,"seq":seqs,"prob":all_probs,"pred":all_preds}
     pd.DataFrame(chunk_info).to_csv(os.path.join(args.save_path,f"{args.save_name}_{count}.csv"),index=False)
     print("Predictions saved")
-            """
+    """
             res = []
             for idx, info in enumerate(batch_info):
                 cur_topk_probs = []
@@ -401,7 +401,7 @@ def predict_seq_level_multi_class(
                     cur_res += info[2:]
             res.append(cur_res)
         return res
-        """
+    """
             
 
 
@@ -1050,6 +1050,7 @@ if __name__ == "__main__":
     else:
         raise Exception("input error, usage: --hep")
 """
+
 
 
 

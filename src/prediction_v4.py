@@ -317,6 +317,7 @@ def predict_seq_level_multi_class(
             # print("topk: %d" % topk)
             preds = np.argmax(probs, axis=-1)
             preds_topk = np.argsort(probs, axis=-1)[:, ::-1][:, :topk]
+            """
             res = []
             for idx, info in enumerate(batch_info):
                 cur_topk_probs = []
@@ -371,7 +372,8 @@ def predict_seq_level_multi_class(
                     cur_res += info[2:]
             res.append(cur_res)
         return res
-
+        """
+            
 
 
 
@@ -1016,4 +1018,5 @@ if __name__ == "__main__":
     else:
         raise Exception("input error, usage: --hep")
 """
+
 

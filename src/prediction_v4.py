@@ -319,7 +319,7 @@ def predict_seq_level_multi_class(
         if topk is not None and topk > 1:
             # print("topk: %d" % topk)
             preds = np.argmax(probs, axis=-1)
-            probs_topk = np.sort(probs, axis=-1)[:,::-1][:, :topk]
+            probs_topk = np.sort(probs, axis=-1)[:, ::-1][:, :topk]
             preds_topk = np.argsort(probs, axis=-1)[:, ::-1][:, :topk]
         else:
             preds = np.argmax(probs, axis=-1)
@@ -1061,6 +1061,7 @@ if __name__ == "__main__":
     else:
         raise Exception("input error, usage: --hep")
 """
+
 
 
 

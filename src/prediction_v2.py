@@ -717,7 +717,7 @@ def run(
         # embedding 完之后to device
         lucabase_model.to(lucapcycle_args.device)
 
-    label_list = load_labels(lucapcycle_args.label_filepath)
+    label_list = load_labels(lucapcycle_args.label_filepath, header=False)
     label_id_2_name = {idx: name for idx, name in enumerate(label_list)}
     print(lucapcycle_args.label_filepath)
     print(label_id_2_name)

@@ -10,7 +10,7 @@ echo $chunk_size
 extra=$6
 echo $extra
 
-python -u prediction_v3.py \
+python -u prediction_v4.py \
     --seq_type prot \
     --input_file $dir_path/predictions/predictions_dataset/step_3/clustered/$3.csv \
     --model_path $dir_path/sbc806/RumHKNet/models_step_3_both_11_family \

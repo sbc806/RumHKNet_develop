@@ -306,10 +306,11 @@ def predict_seq_level_multi_class(
     seqs=[]
     all_probs=[]
     all_preds=[]
+    all_topk_probs=[]
     all_topk_preds=[]
     count=0
     start=time.time()
-    with pd.csv(args.input_file,chunksize=args.chunk_size) as csv_reader:
+    with pd.read_csv(args.input_file,chunksize=args.chunk_size) as csv_reader:
       for chunk in csvreader:
         probs=predict_probs(lucapcycle_args,encoder,batch_convecter,model,chunk)
     # batch_info, probs, seq_lens = predict_probs(args, encoder, batch_convecter, model,chunk)
@@ -318,14 +319,17 @@ def predict_seq_level_multi_class(
         if topk is not None and topk > 1:
             # print("topk: %d" % topk)
             preds = np.argmax(probs, axis=-1)
+            probs_topk = np.sort(probs, axis=-1)[:,::-1][:, :topk]
             preds_topk = np.argsort(probs, axis=-1)[:, ::-1][:, :topk]
         else:
             preds = np.argmax(probs, axis=-1)
+            probs_topk = []
             preds_topk = []
         seq_ids=seq_ids+list(chunk["seq_id"])
         seqs=seqs+list(chunk["seq"])
         all_preds=all_preds+list(preds)
         all_probs=all_probs+list(np.max(probs,axis=-1))
+        all_topk_probs=all_topk_probs+list(probs_topk)
         all_topk_preds=all_topk_preds+list(preds_topk)
         if len(seq_ids)==args.save_prediction_size:
             end=time.time()
@@ -1050,6 +1054,7 @@ if __name__ == "__main__":
     else:
         raise Exception("input error, usage: --hep")
 """
+
 
 
 

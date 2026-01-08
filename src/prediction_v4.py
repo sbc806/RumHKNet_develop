@@ -321,15 +321,29 @@ def predict_seq_level_multi_class(
             preds = np.argmax(probs, axis=-1)
             preds_topk = []
         seq_ids=seq_ids+list(chunk["seq_id"])
-        seqs=seqs+lsit(chunk["seq"])
+        seqs=seqs+list(chunk["seq"])
+        all_preds=all_preds+list(preds)
         all_probs=all_probs+list(np.max(probs,axis=-1))
         all_topk_preds=all_topk_preds+list(preds_topk)
         if len(seq_ids)==args.save_prediction_size:
             end=time.time()
             print("Prediction time:",(end-start)/60,"minutes")
-            print("Savin preg predictions")
+            # print("Saving predictions")
             chunk_info={"seq_id":seq_ids,"seq":seqs,"prob":all_probs,"pred":all_preds}
-            pd.DataFrame(chunk_info).to_csv(os.path.join(args.save_path,f"{args.save_name}_
+            pd.DataFrame(chunk_info).to_csv(os.path.join(args.save_path,f"{args.save_name}_{count}.csv"),index=False)
+            # print("Predictions saved")
+            seq_ids=[]
+            seqs=[]
+            all_probs=[]
+            all_probs=[]
+            all_topk_preds=[]
+            count=count+1
+    end=time.time()
+    print("Prediction time:",(end-start)/60,"minutes")
+    print("Saving predictions")
+    chunk_info={"seq_id":seq_ids,"seq":seqs,"prob":all_probs,"pred":all_preds}
+    pd.DataFrame(chunk_info).to_csv(os.path.join(args.save_path,f"{args.save_name}_{count.csv"),index=False)
+    print("Predictions saved")
             """
             res = []
             for idx, info in enumerate(batch_info):
@@ -1031,6 +1045,7 @@ if __name__ == "__main__":
     else:
         raise Exception("input error, usage: --hep")
 """
+
 
 
 

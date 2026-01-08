@@ -719,7 +719,9 @@ def run(
 
     label_list = load_labels(lucapcycle_args.label_filepath)
     label_id_2_name = {idx: name for idx, name in enumerate(label_list)}
-
+    print(lucapcycle_args.label_filepath)
+    print(label_id_2_name)
+    
     # Step 3: prediction
     if lucapcycle_args.task_level_type in ["seq_level", "seq-level"] and task_type in ["binary_class", "binary-class"]:
         predict_func = predict_seq_level_binary_class

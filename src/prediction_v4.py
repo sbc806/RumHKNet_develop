@@ -306,6 +306,7 @@ def predict_seq_level_multi_class(
     seqs=[]
     all_probs=[]
     all_preds=[]
+    all_topk_preds=[]
     count=0
     start=time.time()
     with pd.csv(args.input_file,chunksize=args.chunk_size) as csv_reader:
@@ -1046,6 +1047,7 @@ if __name__ == "__main__":
     else:
         raise Exception("input error, usage: --hep")
 """
+
 
 
 

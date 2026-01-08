@@ -724,15 +724,18 @@ def run(
         # embedding 完之后to device
         # lucabase_model.to(lucapcycle_args.device)
 
-    # label_list = load_labels(lucapcycle_args.label_filepath)
-    # label_id_2_name = {idx: name for idx, name in enumerate(label_list)}
-
+    label_list = load_labels(lucapcycle_args.label_filepath, header=False)
+    label_id_2_name = {idx: name for idx, name in enumerate(label_list)}
+    print(lucapcycle_args.label_filepath)
+    print(label_id_2_name)
+    
     # Step 3: prediction
-    predicted_results=predict_seq_level_binary_class(args,
+    predicted_results=predict_seq_level_multi_class(args,
                                    lucapcycle_args,
                                    encoder,
                                    batch_convecter,
-                                   lucabase_model
+                                   label_id_2_name,
+                                    lucabase_model
                                   )
     """
     if lucapcycle_args.task_level_type in ["seq_level", "seq-level"] and task_type in ["binary_class", "binary-class"]:
@@ -1047,6 +1050,7 @@ if __name__ == "__main__":
     else:
         raise Exception("input error, usage: --hep")
 """
+
 
 
 

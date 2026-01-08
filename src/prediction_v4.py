@@ -336,18 +336,25 @@ def predict_seq_level_multi_class(
             print("Prediction time:",(end-start)/60,"minutes")
             # print("Saving predictions")
             chunk_info={"seq_id":seq_ids,"seq":seqs,"prob":all_probs,"pred":all_preds}
+            if topk is not None and topk > 1:
+                chunk_info["topk_prob"]=all_topk_probs
+                chunk_info["topk_pred"]=all_topk_preds
             pd.DataFrame(chunk_info).to_csv(os.path.join(args.save_path,f"{args.save_name}_{count}.csv"),index=False)
             # print("Predictions saved")
             seq_ids=[]
             seqs=[]
             all_probs=[]
             all_probs=[]
+            all_topk_probs=[]
             all_topk_preds=[]
             count=count+1
     end=time.time()
     print("Prediction time:",(end-start)/60,"minutes")
     print("Saving predictions")
     chunk_info={"seq_id":seq_ids,"seq":seqs,"prob":all_probs,"pred":all_preds}
+    if topk is not None and topk > 1:
+        chunk_info["topk_prob"]=all_topk_probs
+        chunk_info["topk_pred"]=all_topk_preds
     pd.DataFrame(chunk_info).to_csv(os.path.join(args.save_path,f"{args.save_name}_{count}.csv"),index=False)
     print("Predictions saved")
     """
@@ -1054,6 +1061,7 @@ if __name__ == "__main__":
     else:
         raise Exception("input error, usage: --hep")
 """
+
 
 
 

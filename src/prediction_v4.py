@@ -344,7 +344,7 @@ def predict_seq_level_multi_class(
     print("Prediction time:",(end-start)/60,"minutes")
     print("Saving predictions")
     chunk_info={"seq_id":seq_ids,"seq":seqs,"prob":all_probs,"pred":all_preds}
-    pd.DataFrame(chunk_info).to_csv(os.path.join(args.save_path,f"{args.save_name}_{count.csv"),index=False)
+    pd.DataFrame(chunk_info).to_csv(os.path.join(args.save_path,f"{args.save_name}_{count}.csv"),index=False)
     print("Predictions saved")
             """
             res = []
@@ -1050,6 +1050,7 @@ if __name__ == "__main__":
     else:
         raise Exception("input error, usage: --hep")
 """
+
 
 
 

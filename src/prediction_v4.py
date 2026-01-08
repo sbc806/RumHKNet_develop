@@ -317,6 +317,19 @@ def predict_seq_level_multi_class(
             # print("topk: %d" % topk)
             preds = np.argmax(probs, axis=-1)
             preds_topk = np.argsort(probs, axis=-1)[:, ::-1][:, :topk]
+        else:
+            preds = np.argmax(probs, axis=-1)
+            preds_topk = []
+        seq_ids=seq_ids+list(chunk["seq_id"])
+        seqs=seqs+lsit(chunk["seq"])
+        all_probs=all_probs+list(np.max(probs,axis=-1))
+        all_topk_preds=all_topk_preds+list(preds_topk)
+        if len(seq_ids)==args.save_prediction_size:
+            end=time.time()
+            print("Prediction time:",(end-start)/60,"minutes")
+            print("Savin preg predictions")
+            chunk_info={"seq_id":seq_ids,"seq":seqs,"prob":all_probs,"pred":all_preds}
+            pd.DataFrame(chunk_info).to_csv(os.path.join(args.save_path,f"{args.save_name}_
             """
             res = []
             for idx, info in enumerate(batch_info):
@@ -1018,5 +1031,6 @@ if __name__ == "__main__":
     else:
         raise Exception("input error, usage: --hep")
 """
+
 
 

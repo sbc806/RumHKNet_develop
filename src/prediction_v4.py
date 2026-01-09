@@ -331,7 +331,7 @@ def predict_seq_level_multi_class(
         all_probs=all_probs+list(np.max(probs,axis=-1))
         all_topk_probs=all_topk_probs+list(probs_topk)
         all_topk_preds=all_topk_preds+list(preds_topk)
-        if len(seq_ids)==args.save_prediction_size:
+        if len(seq_ids)==args.save_predictions_size:
             end=time.time()
             print("Prediction time:",(end-start)/60,"minutes")
             # print("Saving predictions")
@@ -1061,6 +1061,7 @@ if __name__ == "__main__":
     else:
         raise Exception("input error, usage: --hep")
 """
+
 
 
 

@@ -746,7 +746,8 @@ def run(
                                    encoder,
                                    batch_convecter,
                                    label_id_2_name,
-                                    lucabase_model
+                                   lucabase_model,
+                                   args.topk
                                   )
     """
     if lucapcycle_args.task_level_type in ["seq_level", "seq-level"] and task_type in ["binary_class", "binary-class"]:
@@ -1061,6 +1062,7 @@ if __name__ == "__main__":
     else:
         raise Exception("input error, usage: --hep")
 """
+
 
 
 

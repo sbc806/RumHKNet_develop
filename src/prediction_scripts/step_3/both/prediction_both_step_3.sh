@@ -26,7 +26,8 @@ python -u prediction_v2.py \
     --gpu_id 0 \
     --seq_id_idx 0 \
     --seq_idx 1 \
-    --matrix_embedding_exists
+    --matrix_embedding_exists \
+    --topk 10
 
 
 

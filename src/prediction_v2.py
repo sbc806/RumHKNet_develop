@@ -860,7 +860,7 @@ def run_args():
                         help="per num to print, default: 10000")
     parser.add_argument("--gpu_id", default=-1, type=int, help="the used gpu_id. default: -1(CPU)")
 
-    parser.add_argument("--use_batch", action="store_true")
+    parser.add_argument("--use_batch", action="store_true", help="whether to use batch for classification")
     
     input_args = parser.parse_args()
     return input_args

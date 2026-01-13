@@ -22,7 +22,7 @@ python -u prediction_v4.py \
     --model_type lucaprot \
     --input_type seq_matrix \
     --input_mode single \
-    --time_str 20251120222923 \
+    --time_str 20251209201835 \
     --step 100221 \
     --threshold $threshold \
     --print_per_num 100000 \
@@ -36,6 +36,7 @@ python -u prediction_v4.py \
     --chunk_size $chunk_size \
     --save_name $3_predicted_$2_$4$extra \
     --topk 10
+
 
 
 

@@ -860,7 +860,8 @@ def run_args():
                         help="per num to print, default: 10000")
     parser.add_argument("--gpu_id", default=-1, type=int, help="the used gpu_id. default: -1(CPU)")
 
-    parser.add_argument("--
+    parser.add_argument("--use_batch", action="store_true")
+    
     input_args = parser.parse_args()
     return input_args
 
@@ -933,7 +934,10 @@ if __name__ == "__main__":
             for row in file_reader(args.input_file):
                 if row[args.seq_id_idx] in exists_ids:
                     continue
-                batch_data.append([row[args.seq_id_idx], args.seq_type, row[args.seq_idx]])
+                batch_part = []
+                if args.use_batch:
+                    batch_part = [row[-1]]
+                batch_data.append([row[args.seq_id_idx], args.seq_type, row[args.seq_idx]]+batch_part)
                 if len(batch_data) % args.print_per_number == 0:
                     batch_results = run(
                         batch_data,

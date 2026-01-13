@@ -165,7 +165,8 @@ def predict_probs(
         encoder,
         batch_convecter,
         model,
-        seq_batch
+        seq_batch,
+        batch=None
 ):
     """
     predict the prob
@@ -190,7 +191,8 @@ def predict_probs(
         args.device,
         encoder,
         batch_convecter,
-        seq_batch
+        seq_batch,
+        batch=batch
     )
     # batch_features,cur_sample_num=to_device(args.device,batch_features)
     model.to(args.device)
@@ -314,7 +316,10 @@ def predict_seq_level_multi_class(
     start=time.time()
     with pd.read_csv(args.input_file,chunksize=args.chunk_size) as csv_reader:
       for chunk in csv_reader:
-        probs=predict_probs(lucapcycle_args,encoder,batch_convecter,model,chunk)
+          batch = None
+          if "batch" in chunk.columns:
+              batch = chunk["batch"].values
+          probs=predict_probs(lucapcycle_args,encoder,batch_convecter,model,chunk.iloc[0:2],batch=batch)
     # batch_info, probs, seq_lens = predict_probs(args, encoder, batch_convecter, model,chunk)
     # print("probs dim: ", probs.ndim)
 
@@ -1064,6 +1069,7 @@ if __name__ == "__main__":
     else:
         raise Exception("input error, usage: --hep")
 """
+
 
 
 

@@ -4,7 +4,7 @@
 #SBATCH --mem=32G
 #SBATCH --time=12:0:0
 #SBATCH --job-name=prediction-both-step-3-new-small-v4
-#SBATCH --output=output/prediction_both_step_3_new-small_v4_%j.out
+#SBATCH --output=output/prediction_both_step_3_new_small_v4_%j.out
 #SBATCH --err=output/prediction_both_step_3_new-small_v4_%j.err
 
 
@@ -22,5 +22,6 @@ cd ../sbc806/RumHKNet/src/
 
 
 deactivate
+
 
 

@@ -23,7 +23,7 @@ python -u prediction_v4.py \
     --input_type seq_matrix \
     --input_mode single \
     --time_str 20251120222923 \
-    --step 133628 \
+    --step 100221 \
     --threshold $threshold \
     --print_per_num 100000 \
     --truncation_seq_length $truncation_seq_length \
@@ -36,6 +36,7 @@ python -u prediction_v4.py \
     --chunk_size $chunk_size \
     --save_name $3_predicted_$2_$4$extra \
     --topk 10
+
 
 
 

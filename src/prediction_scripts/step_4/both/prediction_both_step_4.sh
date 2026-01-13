@@ -27,7 +27,9 @@ python -u prediction_v2.py \
     --seq_id_idx 0 \
     --seq_idx 1 \
     --matrix_embedding_exists \
-    --topk 10
+    --topk 10 \
+    --use_batch
+
 
 
 

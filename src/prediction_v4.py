@@ -146,7 +146,7 @@ def transform_one_sample_2_feature(
         batch_features, cur_sample_num = to_device(device, batch_features)
     return batch_info, batch_features, [seq_lens]
 
-def transform_multiple_sample_2_feature(device, encoder, batch_converter, seq_batch):
+def transform_multiple_sample_2_feature(device, encoder, batch_converter, seq_batch, batch=None):
     # start=time.time()
     encoder_output=encoder.encode_multiple(seq_batch)
     # end=time.time()
@@ -155,6 +155,8 @@ def transform_multiple_sample_2_feature(device, encoder, batch_converter, seq_ba
     batch_features=batch_converter(encoder_output)
     # end=time.time()
     # print("BatchConverterMultiple:",(end-start)/60)
+    if batch is not None:
+        batch_features["batches"] = batch
     batch_features,cur_sample_num=to_device(device,batch_features)
     return batch_features
 
@@ -1062,6 +1064,7 @@ if __name__ == "__main__":
     else:
         raise Exception("input error, usage: --hep")
 """
+
 
 
 

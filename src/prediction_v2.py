@@ -146,7 +146,8 @@ def predict_probs(
         encoder,
         batch_convecter,
         model,
-        row
+        row,
+        batch=None
 ):
     """
     predict the prob
@@ -165,6 +166,9 @@ def predict_probs(
         batch_convecter,
         row
     )
+    # Added below
+    if batch is not None:
+        batch_features["batches"] = [batch]
     model.to(args.device)
     if isinstance(batch_features, list):
         probs = []
@@ -229,7 +233,8 @@ def predict_seq_level_multi_class(
         label_id_2_name,
         model,
         row,
-        topk=5
+        topk=5,
+        batch=None
 ):
     """
     predict the seq level multi-class classification task
@@ -242,7 +247,7 @@ def predict_seq_level_multi_class(
     :param topk:
     :return:
     """
-    batch_info, probs, seq_lens = predict_probs(args, encoder, batch_convecter, model, row)
+    batch_info, probs, seq_lens = predict_probs(args, encoder, batch_convecter, model, row, batch)
     # print("probs dim: ", probs.ndim)
 
     if topk is not None and topk > 1:

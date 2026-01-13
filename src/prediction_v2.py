@@ -747,6 +747,9 @@ def run(
         row = [seq_id, seq_type, seq]
         if task_level_type in ["seq_level", "seq-level"] and task_type in ["multi_class", "multi-class"]:
             # print("task_level_type: %s, task_type: %s" % (task_level_type, task_type))
+            batch = None
+            if len(item) == 4:
+                batch = item[3]
             cur_res = predict_func(
                 lucapcycle_args,
                 encoder,
@@ -754,7 +757,8 @@ def run(
                 label_id_2_name,
                 lucabase_model,
                 row,
-                topk=topk
+                topk=topk,
+                batch=batch
             )
             if topk is not None and topk > 1:
                 predicted_results.append([seq_id, seq, cur_res[0][2], cur_res[0][3], cur_res[0][4], cur_res[0][5]])
@@ -855,6 +859,8 @@ def run_args():
     parser.add_argument("--print_per_number", default=10000, type=int,
                         help="per num to print, default: 10000")
     parser.add_argument("--gpu_id", default=-1, type=int, help="the used gpu_id. default: -1(CPU)")
+
+    parser.add_argument("--
     input_args = parser.parse_args()
     return input_args
 

@@ -892,6 +892,7 @@ def run_args():
     parser.add_argument("--chunk_size",default=100,type=int)
     parser.add_argument("--save_predictions_size",default=100000,type=int)
     parser.add_argument("--save_name")
+    parser.add_argument("--num_batches", default=-1, type=int)
     input_args = parser.parse_args()
     return input_args
 
@@ -928,7 +929,8 @@ if __name__ == "__main__":
                         args.threshold,
                         topk=args.topk,
                         emb_dir=args.emb_dir,
-                        matrix_embedding_exists=args.matrix_embedding_exists
+                        matrix_embedding_exists=args.matrix_embedding_exists,
+                        num_batches=args.num_batches
                        )
                         
     """
@@ -1073,6 +1075,7 @@ if __name__ == "__main__":
     else:
         raise Exception("input error, usage: --hep")
 """
+
 
 
 

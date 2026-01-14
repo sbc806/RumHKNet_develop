@@ -168,7 +168,7 @@ def predict_probs(
     )
     # Added below
     if batch is not None:
-        batch_features["batches"] = [batch]
+        batch_features["batches"] = torch.tensor([int(batch)], dtype=torch.int64)
     model.to(args.device)
     if isinstance(batch_features, list):
         probs = []

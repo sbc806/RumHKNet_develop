@@ -35,7 +35,8 @@ python -u prediction_v4.py \
     --matrix_embedding_exists \
     --chunk_size $chunk_size \
     --save_name $3_predicted_$2_$4$extra \
-    --topk 10
+    --topk 10 \
+    --num_batches 10
 
 
 

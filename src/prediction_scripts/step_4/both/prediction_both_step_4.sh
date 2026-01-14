@@ -28,7 +28,8 @@ python -u prediction_v2.py \
     --seq_idx 1 \
     --matrix_embedding_exists \
     --topk 10 \
-    --use_batch
+    --use_batch \
+    --num_batches 10
 
 
 

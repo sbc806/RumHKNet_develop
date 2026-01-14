@@ -575,7 +575,8 @@ def run(
         threshold,
         topk,
         emb_dir,
-        matrix_embedding_exists
+        matrix_embedding_exists,
+        num_batches=-1
 ):
     # step1: loading args
     global global_model_config, global_seq_subword, global_seq_tokenizer, global_struct_tokenizer, global_lucabase_model
@@ -668,6 +669,9 @@ def run(
     print("*" * 50)
     lucapcycle_args.device = torch.device("cuda:%d" % gpu_id if gpu_id > -1 else "cpu")
 
+    if num_batches > 1:
+        lucapcycle_args.num_batches = num_batches
+        
     print("LucaPCycle Args:")
     print(lucapcycle_args.__dict__)
     print("*" * 50)
@@ -861,6 +865,7 @@ def run_args():
     parser.add_argument("--gpu_id", default=-1, type=int, help="the used gpu_id. default: -1(CPU)")
 
     parser.add_argument("--use_batch", action="store_true", help="whether to use batch for classification")
+    parser.add_argument("--num_batches", default=-1, type=int)
     
     input_args = parser.parse_args()
     return input_args
@@ -957,7 +962,8 @@ if __name__ == "__main__":
                         args.threshold,
                         topk=args.topk,
                         emb_dir=args.emb_dir,
-                        matrix_embedding_exists=args.matrix_embedding_exists
+                        matrix_embedding_exists=args.matrix_embedding_exists,
+                        num_batches=args.num_batches
                     )
                     for item in batch_results:
                         writer.writerow(item)

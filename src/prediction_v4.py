@@ -596,7 +596,8 @@ def run(
         threshold,
         topk,
         emb_dir,
-        matrix_embedding_exists
+        matrix_embedding_exists,
+        num_batches=-1
 ):
     # step1: loading args
     global global_model_config, global_seq_subword, global_seq_tokenizer, global_struct_tokenizer, global_lucabase_model
@@ -681,6 +682,9 @@ def run(
     if not os.path.exists(lucapcycle_args.label_filepath):
         lucapcycle_args.label_filepath = os.path.join(config_dir, "label.txt")
 
+    if num_batches > 1:
+        lucapcycle_args.num_batches = num_batches
+        
     if gpu_id is None or gpu_id < 0:
         # gpu_id = available_gpu_id()
         gpu_id = -1
@@ -1069,6 +1073,7 @@ if __name__ == "__main__":
     else:
         raise Exception("input error, usage: --hep")
 """
+
 
 
 

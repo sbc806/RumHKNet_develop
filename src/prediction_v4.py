@@ -156,7 +156,7 @@ def transform_multiple_sample_2_feature(device, encoder, batch_converter, seq_ba
     # end=time.time()
     # print("BatchConverterMultiple:",(end-start)/60)
     if batch is not None:
-        batch_features["batches"] = batch
+        batch_features["batches"] = torch.tensor([int(each_batch) for each_batch in batch]), dtype=torch.int64)
     batch_features,cur_sample_num=to_device(device,batch_features)
     return batch_features
 
@@ -1075,6 +1075,7 @@ if __name__ == "__main__":
     else:
         raise Exception("input error, usage: --hep")
 """
+
 
 
 

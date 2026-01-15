@@ -319,7 +319,7 @@ def predict_seq_level_multi_class(
         batch = None
         if "batch" in chunk.columns:
             batch = chunk["batch"].values
-        probs=predict_probs(lucapcycle_args,encoder,batch_convecter,model,chunk.iloc[0:2],batch=batch)
+        probs=predict_probs(lucapcycle_args,encoder,batch_convecter,model,chunk.iloc[:,0:2],batch=batch)
     # batch_info, probs, seq_lens = predict_probs(args, encoder, batch_convecter, model,chunk)
     # print("probs dim: ", probs.ndim)
 
@@ -1075,6 +1075,7 @@ if __name__ == "__main__":
     else:
         raise Exception("input error, usage: --hep")
 """
+
 
 
 

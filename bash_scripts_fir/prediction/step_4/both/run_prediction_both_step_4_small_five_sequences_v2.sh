@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --account=rrg-guanuofa
+#SBATCH --account=def-guanuofa
 #SBATCH --gpus-per-node=h100:1
 #SBATCH --mem=32G
 #SBATCH --time=0:5:0
@@ -22,6 +22,7 @@ cd ../sbc806/RumHKNet/src/
 
 
 deactivate
+
 
 
 

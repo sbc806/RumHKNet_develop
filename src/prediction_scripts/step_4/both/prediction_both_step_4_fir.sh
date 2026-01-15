@@ -1,6 +1,6 @@
 # Binary Classification
 export CUDA_VISIBLE_DEVICES="0"
-dir_path="/home/schen1123/scratch/kinases"
+dir_path="/home/schen123/scratch/kinases"
 threshold=$1
 echo $threshold
 
@@ -30,6 +30,7 @@ python -u prediction_v2.py \
     --topk 10 \
     --use_batch \
     --num_batches 10
+
 
 
 

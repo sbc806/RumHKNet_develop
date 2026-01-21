@@ -989,7 +989,8 @@ if __name__ == "__main__":
                     args.threshold,
                     topk=args.topk,
                     emb_dir=args.emb_dir,
-                    matrix_embedding_exists=args.matrix_embedding_exists
+                    matrix_embedding_exists=args.matrix_embedding_exists,
+                    num_batches=args.num_batches
                 )
                 for item in batch_results:
                     writer.writerow(item)

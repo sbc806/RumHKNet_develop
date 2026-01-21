@@ -285,8 +285,6 @@ class LucaProt(BertPreTrainedModel):
                 self.classifier = nn.Linear(output_size, config.num_labels)
             self.output = nn.Sigmoid()
         else:
-            args.num_batches=10
-            self.num_batches=args.num_batches
             if args.num_batches > 1:
                 print("Using args.num_batchs:", args.num_batches)
                 self.classifier = nn.Linear(output_size+args.num_batches, config.num_labels)

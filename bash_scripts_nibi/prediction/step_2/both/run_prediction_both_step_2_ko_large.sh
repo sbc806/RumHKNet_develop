@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --account=rrg-guanuofa
-#SBATCH --gpus-per-node=nvidia_h100_80gb_hbm3_3g.40gb:1
+#SBATCH --gpus-per-node=h100:1
 #SBATCH --mem=32G
 #SBATCH --time=12:0:0
 #SBATCH --job-name=prediction-both-step-2-sequences-large
@@ -22,6 +22,7 @@ cd ../sbc806/RumHKNet/src/
 
 
 deactivate
+
 
 
 

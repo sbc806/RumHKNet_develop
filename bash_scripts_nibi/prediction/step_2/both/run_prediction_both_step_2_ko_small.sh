@@ -18,10 +18,11 @@ source TEST/bin/activate
 
 cd ../sbc806/RumHKNet/src/
 # cat transformer_step_2_4_1.sh > /home/schen123/projects/rrg-guanuofa/schen123/kinases/sbc806/RumHKNet/bash_scripts_nibi/step_2/transformer/output/transformer_step_2_4_1_$SLURM_JOB_ID.txt
-./prediction_scripts/step_2/both/prediction_both_step_2_v3.sh 0.3 03 2025_01_20_new_ko_small_shared 1500 50 _v3
+./prediction_scripts/step_2/both/prediction_both_step_2_v3.sh 0.3 03 2025_01_20_new_ko_shared_small 1500 50 _v3
 
 
 deactivate
+
 
 
 

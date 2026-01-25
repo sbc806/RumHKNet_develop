@@ -380,14 +380,14 @@ def predict_embedding(sample,
         protein_id, protein_seq = sample[0], sample[2]
     else:
         protein_id, protein_seq = sample[0], sample[1]
-    print(len(protein_seq))
+    # print(len(protein_seq))
     protein_seq = clean_seq(protein_id, protein_seq)
     if len(protein_seq) > truncation_seq_length:
         if trunc_type == "left":
             protein_seq = protein_seq[-truncation_seq_length:]
         else:
             protein_seq = protein_seq[:truncation_seq_length]
-    print(truncation_seq_length,len(protein_seq))
+    # print(truncation_seq_length,len(protein_seq))
     if global_model is None or global_alphabet is None or global_version is None or global_version != version or global_layer_size is None:
         if version == "15B":
             llm_name = "esm2_t48_15B_UR50D"

@@ -18,10 +18,11 @@ source TEST/bin/activate
 
 cd ../sbc806/RumHKNet/src/
 # cat transformer_step_2_4_1.sh > /home/schen123/projects/rrg-guanuofa/schen123/kinases/sbc806/RumHKNet/bash_scripts_nibi/step_2/transformer/output/transformer_step_2_4_1_$SLURM_JOB_ID.txt
-./prediction_scripts/step_2/both/prediction_both_step_2.sh 0.3 03 clustered_rep_seq95_large_sorted_kinase
+./prediction_scripts/step_2/both/prediction_both_step_2.sh 0.3 03 step_1_clustered_newrun_rbags_02_not_contained_large 34551 _v2
 
 
 deactivate
+
 
 
 

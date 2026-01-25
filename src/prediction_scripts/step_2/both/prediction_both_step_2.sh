@@ -3,6 +3,8 @@ export CUDA_VISIBLE_DEVICES="0"
 dir_path="/home/schen123/projects/rrg-guanuofa/schen123/kinases"
 threshold=$1
 echo $threshold
+truncation_seq_length=$$
+echo $4
 
 python -u prediction_v2.py \
     --seq_type prot \
@@ -20,8 +22,8 @@ python -u prediction_v2.py \
     --step 428736 \
     --threshold $threshold \
     --print_per_num 100000 \
-    --truncation_seq_length 12211 \
-    --truncation_matrix_length 12211 \
+    --truncation_seq_length $truncation_seq_length \
+    --truncation_matrix_length $truncation_seq_length \
     --emb_dir $dir_path/embeddings/step_2/esm \
     --gpu_id 0 \
     --seq_id_idx 0 \

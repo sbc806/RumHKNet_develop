@@ -3,14 +3,16 @@ export CUDA_VISIBLE_DEVICES="0"
 dir_path="/home/schen123/projects/rrg-guanuofa/schen123/kinases"
 threshold=$1
 echo $threshold
-truncation_seq_length=$$
-echo $4
+truncation_seq_length=$4
+echo $truncation_seq_length
+extra=$5
+echo $extra
 
 python -u prediction_v2.py \
     --seq_type prot \
     --input_file $dir_path/predictions/predictions_dataset/step_2/clustered/$3.csv \
     --model_path $dir_path/sbc806/RumHKNet/models/step_2/both \
-    --save_path $dir_path/predictions/predicted_results/step_2/both/clustered/$3_predicted_$2.csv \
+    --save_path $dir_path/predictions/predicted_results/step_2/both/clustered/$3_predicted_$2$5.csv \
     --dataset_name extra_p_2_class_v3_kinases_only \
     --dataset_type protein \
     --task_type binary_class \

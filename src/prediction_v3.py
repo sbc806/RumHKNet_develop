@@ -556,17 +556,17 @@ def run(
     print(lucapcycle_args.__dict__)
     print("*" * 50)
     # 选较大值
-    lucapcycle_args.truncation_seq_length = lucapcycle_args.seq_max_length
+    # lucapcycle_args.truncation_seq_length = lucapcycle_args.seq_max_length
     # if lucapcycle_args.truncation_seq_length is None or lucapcycle_args.truncation_seq_length < truncation_seq_length:
         # lucapcycle_args.truncation_seq_length = truncation_seq_length
-    if truncation_seq_length is not None:
-        lucapcycle_args.truncation_seq_length = truncation_seq_length
+    # if truncation_seq_length is not None:
+    lucapcycle_args.truncation_seq_length = truncation_seq_length
     # 选较大值
-    lucapcycle_args.truncation_matrix_length = lucapcycle_args.matrix_max_length
+    # lucapcycle_args.truncation_matrix_length = lucapcycle_args.matrix_max_length
     # if lucapcycle_args.truncation_matrix_length is None or lucapcycle_args.truncation_matrix_length < truncation_seq_length:
         # lucapcycle_args.truncation_matrix_length = truncation_seq_length
-    if truncation_matrix_length is not None:
-        lucapcycle_args.truncation_matrix_length = truncation_matrix_length
+    # if truncation_matrix_length is not None:
+    lucapcycle_args.truncation_matrix_length = truncation_matrix_length
         
     lucapcycle_args.matrix_embedding_exists = matrix_embedding_exists
     # embedding saved dir during prediction

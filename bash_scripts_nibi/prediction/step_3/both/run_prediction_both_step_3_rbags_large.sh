@@ -3,9 +3,9 @@
 #SBATCH --gpus-per-node=h100:1
 #SBATCH --mem=32G
 #SBATCH --time=1-0
-#SBATCH --job-name=prediction-both-step-3-large-v3
-#SBATCH --output=output/prediction_both_step_3_large_v3_%j.out
-#SBATCH --err=output/prediction_both_step_3_large_v3_%j.err
+#SBATCH --job-name=prediction-both-step-3-large-02-v3
+#SBATCH --output=output/prediction_both_step_3_large_02_v3_%j.out
+#SBATCH --err=output/prediction_both_step_3_large_02_v3_%j.err
 
 
 module load python/3.11
@@ -18,10 +18,11 @@ source TEST/bin/activate
 
 cd ../sbc806/RumHKNet/src/
 # cat transformer_step_2_4_1.sh > /home/schen123/projects/rrg-guanuofa/schen123/kinases/sbc806/RumHKNet/bash_scripts_nibi/step_2/transformer/output/transformer_step_2_4_1_$SLURM_JOB_ID.txt
-./prediction_scripts/step_3/both/prediction_both_step_3.sh 0.3 03 step_3_clustered_newrun_rbags_02_predicted_large_remaining 34551
+./prediction_scripts/step_3/both/prediction_both_step_3.sh 0.3 03 step_3_clustered_newrun_rbags_predicted_02_large_remaining 34551
 
 
 deactivate
+
 
 
 

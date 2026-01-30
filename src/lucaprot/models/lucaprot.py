@@ -585,8 +585,8 @@ class LucaProt(BertPreTrainedModel):
             selected_one_hot = nn.functional.one_hot(batches.to("cuda")[batches.to("cuda")>=0], self.num_batches)
             batches_one_hot[batches.to("cuda")>=0] = selected_one_hot
 
-            # print(batches)
-            # print(batches_one_hot)
+            print(batches)
+            print(batches_one_hot)
             
             pooled_output = torch.concat((pooled_output, batches_one_hot), axis=-1)
             

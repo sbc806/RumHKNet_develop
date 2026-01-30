@@ -3,9 +3,9 @@
 #SBATCH --gpus-per-node=h100:1
 #SBATCH --mem=32G
 #SBATCH --time=12:0:0
-#SBATCH --job-name=prediction-both-step-4-large-remaining-v4
-#SBATCH --output=output/prediction_both_step_4_large_remaining_v4_%j.out
-#SBATCH --err=output/prediction_both_step_4_large_remaining_v4_%j.err
+#SBATCH --job-name=prediction-both-step-4-large-02-v4
+#SBATCH --output=output/prediction_both_step_4_large_02_v4_%j.out
+#SBATCH --err=output/prediction_both_step_4_large_02_v4_%j.err
 
 
 module load python/3.11
@@ -22,4 +22,5 @@ cd ../sbc806/RumHKNet/src/
 
 
 deactivate
+
 

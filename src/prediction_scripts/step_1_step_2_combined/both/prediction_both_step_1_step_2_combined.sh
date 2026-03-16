@@ -11,10 +11,10 @@ echo $extra
 
 python -u prediction_v2.py \
     --seq_type prot \
-    --input_file $dir_path/predictions/predictions_dataset/step_1/clustered/$3.csv \
+    --input_file $dir_path/predictions/predictions_dataset/step_1_step_2_combined/clustered/$3.csv \
     --model_path $dir_path_1/sbc806/RumHKNet_develop/models_step_1_step_2_combined_both \
     --save_path $dir_path/predictions/predicted_results/step_1/both/clustered/$3_predicted_$2$5.csv \
-    --dataset_name step_1_non_kinases_preprocessed \
+    --dataset_name step_1_step_2_combined \
     --dataset_type protein \
     --task_type binary_class \
     --task_level_type seq_level \

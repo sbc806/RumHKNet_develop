@@ -18,7 +18,7 @@ source TEST/bin/activate
 
 cd /home/schen123/scratch/kinases/sbc806/RumHKNet_develop/src/
 # cat transformer_step_2_4_1.sh > /home/schen123/projects/rrg-guanuofa/schen123/kinases/sbc806/RumHKNet/bash_scripts_nibi/step_2/transformer/output/transformer_step_2_4_1_$SLURM_JOB_ID.txt
-./prediction_scripts/step_1_step_2_combined/both/prediction_both_step_1_step_2_combined.sh 0.3 03 histidine_rumhknet_predicted_02_02_large 13000 _v2
+./prediction_scripts/step_1_step_2_combined/both/prediction_both_step_1_step_2_combined.sh 0.2 02 histidine_rumhknet_predicted_02_02_large 13000 _v2
 
 
 deactivate

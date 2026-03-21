@@ -3,9 +3,9 @@
 #SBATCH --gpus-per-node=h100:1
 #SBATCH --mem=32G
 #SBATCH --time=7-0
-#SBATCH --job-name=prediction-both-step-1-step-2-combined-remaining_small-0-v3
-#SBATCH --output=../step_1_step_2_combined/output/prediction_both_step_1_step_2_combined_remaining_small_0_v3_%j.out
-#SBATCH --err=../step_1_step_2_combined/output/prediction_both_step_1_step_2_combined_remaining_small_0_v3_%j.err
+#SBATCH --job-name=prediction-both-step-1-step-2-combined-remaining_small-3-v3
+#SBATCH --output=../step_1_step_2_combined/output/prediction_both_step_1_step_2_combined_remaining_small_3_v3_%j.out
+#SBATCH --err=../step_1_step_2_combined/output/prediction_both_step_1_step_2_combined_remaining_small_3_v3_%j.err
 
 
 module load python/3.11

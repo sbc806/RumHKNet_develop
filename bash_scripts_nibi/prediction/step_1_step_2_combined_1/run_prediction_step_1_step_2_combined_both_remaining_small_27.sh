@@ -5,7 +5,7 @@
 #SBATCH --time=1-0
 #SBATCH --job-name=prediction-both-step-1-step-2-combined-remaining_small-27-v3
 #SBATCH --output=../step_1_step_2_combined/output/prediction_both_step_1_step_2_combined_remaining_small_27_v3_%j.out
-#SBATCH --err=output/prediction_both_step_1_step_2_combined_remaining_small_27_v3_%j.err
+#SBATCH --err=../step_1_step_2_combined/output/prediction_both_step_1_step_2_combined_remaining_small_27_v3_%j.err
 
 
 module load python/3.11

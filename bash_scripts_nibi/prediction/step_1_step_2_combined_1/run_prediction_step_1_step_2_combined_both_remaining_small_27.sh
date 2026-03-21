@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --account=rrg-guanuofa
-#SBATCH --gpus-per-node=nvidia_h100_80gb_hbm3_3g.40gb:1
+#SBATCH --gpus-per-node=h100:1
 #SBATCH --mem=32G
 #SBATCH --time=1-0
 #SBATCH --job-name=prediction-both-step-1-step-2-combined-remaining_small-27-v3

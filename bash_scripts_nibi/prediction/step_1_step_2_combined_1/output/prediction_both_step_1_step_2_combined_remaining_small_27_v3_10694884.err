@@ -1,0 +1,61 @@
+Traceback (most recent call last):
+  File "/scratch/schen123/kinases/sbc806/RumHKNet_develop/src/llm/esm/predict_embedding.py", line 604, in predict_embedding_multiple
+    out = global_model(tokens, repr_layers=repr_layers, return_contacts=False)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/6102148/schen123/kinases/virtual_environments/TEST/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/6102148/schen123/kinases/virtual_environments/TEST/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/6102148/schen123/kinases/virtual_environments/TEST/lib/python3.11/site-packages/esm/model/esm2.py", line 112, in forward
+    x, attn = layer(
+              ^^^^^^
+  File "/project/6102148/schen123/kinases/virtual_environments/TEST/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/6102148/schen123/kinases/virtual_environments/TEST/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/6102148/schen123/kinases/virtual_environments/TEST/lib/python3.11/site-packages/esm/modules.py", line 125, in forward
+    x, attn = self.self_attn(
+              ^^^^^^^^^^^^^^^
+  File "/project/6102148/schen123/kinases/virtual_environments/TEST/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/6102148/schen123/kinases/virtual_environments/TEST/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/6102148/schen123/kinases/virtual_environments/TEST/lib/python3.11/site-packages/esm/multihead_attention.py", line 371, in forward
+    attn_weights = attn_weights.masked_fill(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 11.55 GiB. GPU 0 has a total capacity of 39.50 GiB of which 11.34 GiB is free. Process 663049 has 8.46 GiB memory in use. Including non-PyTorch memory, this process has 28.11 GiB memory in use. Of the allocated memory 25.44 GiB is allocated by PyTorch, and 2.32 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/scratch/schen123/kinases/sbc806/RumHKNet_develop/src/prediction_v3.py", line 848, in <module>
+    batch_results = run(args,
+                    ^^^^^^^^^
+  File "/scratch/schen123/kinases/sbc806/RumHKNet_develop/src/prediction_v3.py", line 691, in run
+    predicted_results=predict_seq_level_binary_class(args,
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/schen123/kinases/sbc806/RumHKNet_develop/src/prediction_v3.py", line 244, in predict_seq_level_binary_class
+    probs = predict_probs(lucapcycle_args, encoder, batch_convecter, model, chunk)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/schen123/kinases/sbc806/RumHKNet_develop/src/prediction_v3.py", line 187, in predict_probs
+    batch_features = transform_multiple_sample_2_feature(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/schen123/kinases/sbc806/RumHKNet_develop/src/prediction_v3.py", line 151, in transform_multiple_sample_2_feature
+    encoder_output=encoder.encode_multiple(seq_batch)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/schen123/kinases/sbc806/RumHKNet_develop/src/encoder_multiple.py", line 444, in encode_multiple
+    matrix, tokens, seq_len = self.__get_embedding_multiple__(seq_batch, "matrix")
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/schen123/kinases/sbc806/RumHKNet_develop/src/encoder_multiple.py", line 368, in __get_embedding_multiple__
+    embedding_info, processed_seq_len, tokens = predict_embedding_esm_multiple(
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/schen123/kinases/sbc806/RumHKNet_develop/src/llm/esm/predict_embedding.py", line 629, in predict_embedding_multiple
+    print(f"Failed (CUDA out of memory) on sequence {sample[0]} of length {len(sample[1] if len(sample) == 2 else sample[2] )}.")
+                                                     ^^^^^^
+NameError: name 'sample' is not defined

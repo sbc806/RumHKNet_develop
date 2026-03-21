@@ -3,8 +3,8 @@
 #SBATCH --gpus-per-node=h100:1
 #SBATCH --mem=32G
 #SBATCH --time=1-0
-#SBATCH --job-name=prediction-both-step-1-step-2-combined-small-v3
-#SBATCH --output=output/prediction_both_step_1_step_2_combined_small_v3_%j.out
+#SBATCH --job-name=prediction-both-step-1-step-2-combined-small-remaining-0-v3
+#SBATCH --output=../step_1_step_2_combined/output/prediction_both_step_1_step_2_combined_remaining_small_0_v3_%j.out
 #SBATCH --err=output/prediction_both_step_1_step_2_combined_small_v3_%j.err
 
 

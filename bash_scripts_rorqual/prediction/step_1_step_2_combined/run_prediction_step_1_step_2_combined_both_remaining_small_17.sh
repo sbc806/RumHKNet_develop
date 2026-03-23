@@ -4,8 +4,8 @@
 #SBATCH --mem=32G
 #SBATCH --time=7-0
 #SBATCH --job-name=prediction-both-step-1-step-2-combined-remaining_small-17-v3
-#SBATCH --output=../step_1_step_2_combined/output/prediction_both_step_1_step_2_combined_remaining_small_17_v3_%j.out
-#SBATCH --err=../step_1_step_2_combined/output/prediction_both_step_1_step_2_combined_remaining_small_17_v3_%j.err
+#SBATCH --output=output/prediction_both_step_1_step_2_combined_remaining_small_17_v3_%j.out
+#SBATCH --err=output/prediction_both_step_1_step_2_combined_remaining_small_17_v3_%j.err
 
 
 module load python/3.11

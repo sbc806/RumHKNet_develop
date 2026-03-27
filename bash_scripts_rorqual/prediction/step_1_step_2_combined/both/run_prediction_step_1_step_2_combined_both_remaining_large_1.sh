@@ -4,8 +4,8 @@
 #SBATCH --mem=32G
 #SBATCH --time=3-0
 #SBATCH --job-name=prediction-both-step-1-step-2-combined-large-remaining-1
-#SBATCH --output=output/step_1_step_2_combined/output/prediction_both_step_1_step_2_combined_large_remaining_1_%j.out
-#SBATCH --err=output/step_1_step_2_combined/output/prediction_both_step_1_step_2_combined_large_remaining_1_%j.err
+#SBATCH --output=output/prediction_both_step_1_step_2_combined_large_remaining_1_%j.out
+#SBATCH --err=output/prediction_both_step_1_step_2_combined_large_remaining_1_%j.err
 
 
 module load python/3.11

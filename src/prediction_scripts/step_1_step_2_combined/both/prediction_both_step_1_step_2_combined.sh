@@ -1,6 +1,6 @@
 # Binary Classification
 export CUDA_VISIBLE_DEVICES="0"
-dir_path="/home/schen123/projects/rrg-guanuofa/schen123/kinases"
+dir_path="/home/schen123/links/projects/def-guanuofa/schen123/kinases"
 dir_path_1="/home/schen123/scratch/kinases"
 threshold=$1
 echo $threshold
@@ -12,7 +12,7 @@ echo $extra
 python -u prediction_v2.py \
     --seq_type prot \
     --input_file $dir_path/predictions/predictions_dataset/step_1_step_2_combined/clustered/$3.csv \
-    --model_path $dir_path_1/sbc806/RumHKNet_develop/models_step_1_step_2_combined_both \
+    --model_path $dir_path/sbc806/RumHKNet_develop/models_step_1_step_2_combined_both \
     --save_path $dir_path/predictions/predicted_results/step_1_step_2_combined/both/clustered/$3_predicted_$2$5.csv \
     --dataset_name step_1_step_2_combined \
     --dataset_type protein \

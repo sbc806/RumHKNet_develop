@@ -3,9 +3,9 @@
 #SBATCH --gpus-per-node=h100:1
 #SBATCH --mem=32G
 #SBATCH --time=3-0
-#SBATCH --job-name=prediction-both-step-1-sequences-large-sorted-last-1250
-#SBATCH --output=output/prediction_both_step_1_sequences_large_sorted_last_1250_%j.out
-#SBATCH --err=output/prediction_both_step_1_sequences_large_sorted_last_1250_%j.err
+#SBATCH --job-name=prediction-both-step-1-sequences-large
+#SBATCH --output=output/prediction_both_step_1_sequences_large_%j.out
+#SBATCH --err=output/prediction_both_step_1_sequences_large_%j.err
 
 
 module load python/3.11

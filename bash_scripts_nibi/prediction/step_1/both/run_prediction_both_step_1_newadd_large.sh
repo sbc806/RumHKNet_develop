@@ -18,7 +18,7 @@ source TEST/bin/activate
 
 cd /home/schen123/scratch/kinases/sbc806/RumHKNet_develop/src/
 # cat transformer_step_2_4_1.sh > /home/schen123/projects/rrg-guanuofa/schen123/kinases/sbc806/RumHKNet/bash_scripts_nibi/step_2/transformer/output/transformer_step_2_4_1_$SLURM_JOB_ID.txt
-./prediction_scripts/step_1/both/prediction_both_step_1.sh 0.2 02 clustered_rep_seq95_large_sorted_largest_1 13000 _v2
+./prediction_scripts/step_1/both/prediction_both_step_1.sh 0.2 02 newadd_155098MAGs_large 13000 _v2
 
 
 deactivate

@@ -4,8 +4,8 @@
 #SBATCH --mem=32G
 #SBATCH --time=1-0
 #SBATCH --job-name=prediction-both-step-2-small-0-v3
-#SBATCH --output=output/prediction_both_step_2_small_v3_0_%j.out
-#SBATCH --err=output/prediction_both_step_2_small_v3_0_%j.err
+#SBATCH --output=output/prediction_both_step_2_small_0_v3_%j.out
+#SBATCH --err=output/prediction_both_step_2_small_0_v3_%j.err
 
 
 module load python/3.11

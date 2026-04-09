@@ -1,13 +1,14 @@
 # Binary Classification
 export CUDA_VISIBLE_DEVICES="0"
 dir_path="/home/schen123/projects/rrg-guanuofa/schen123/kinases"
+dir_path_1="/home/schen123/scratch/kinases"
 threshold=$1
 echo $threshold
 
 python -u prediction_v2.py \
     --seq_type prot \
     --input_file $dir_path/predictions/predictions_dataset/step_4/clustered/$3.csv \
-    --model_path $dir_path/sbc806/RumHKNet/models_both_step_3_batch_1 \
+    --model_path $dir_path_1/sbc806/RumHKNet_develop/models_both_step_3_batch_1 \
     --save_path $dir_path/predictions/predicted_results/step_4/both/clustered/$3_predicted_$2$5.csv \
     --dataset_name extra_p_133_class_v3_batch \
     --dataset_type protein \

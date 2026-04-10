@@ -18,7 +18,7 @@ source TEST/bin/activate
 
 cd ../sbc806/RumHKNet/src/
 # cat transformer_step_2_4_1.sh > /home/schen123/projects/rrg-guanuofa/schen123/kinases/sbc806/RumHKNet/bash_scripts_nibi/step_2/transformer/output/transformer_step_2_4_1_$SLURM_JOB_ID.txt
-./prediction_scripts/step_1/both/prediction_both_step_1.sh 0.2 02 newrun_seqs_large 34551 _v2
+./prediction_scripts/step_1/both/prediction_both_step_1.sh 0.2 02 5_isolate_large 34551 _v2
 
 
 deactivate

@@ -3,9 +3,9 @@
 #SBATCH --gpus-per-node=nvidia_h100_80gb_hbm3_3g.40gb:1
 #SBATCH --mem=32G
 #SBATCH --time=12:0:0
-#SBATCH --job-name=prediction-both-step-4-large-v4
-#SBATCH --output=output/prediction_both_step_4_large_v4_%j.out
-#SBATCH --err=output/prediction_both_step_4_large_v4_%j.err
+#SBATCH --job-name=prediction-both-step-4-small-v4
+#SBATCH --output=output/prediction_both_step_4_small_v4_%j.out
+#SBATCH --err=output/prediction_both_step_4_small_v4_%j.err
 
 
 module load python/3.11

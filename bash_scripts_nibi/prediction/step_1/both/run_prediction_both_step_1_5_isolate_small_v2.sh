@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --account=def-guanuofa
-#SBATCH --gpus-per-node=nbidia_h100:1
+#SBATCH --gpus-per-node=nvidia_h100_80gb_hbm3_3g.40gb:1
 #SBATCH --mem=32G
 #SBATCH --time=3:0:0
 #SBATCH --job-name=prediction-both-step-1-sequences-small

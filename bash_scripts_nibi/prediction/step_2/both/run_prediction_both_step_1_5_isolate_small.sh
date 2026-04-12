@@ -4,8 +4,8 @@
 #SBATCH --mem=32G
 #SBATCH --time=3:0:0
 #SBATCH --job-name=prediction-both-step-2-sequences-small
-#SBATCH --output=output/prediction_both_step_2_sequences_large_%j.out
-#SBATCH --err=output/prediction_both_step_2_sequences_large_%j.err
+#SBATCH --output=output/prediction_both_step_2_sequences_small_%j.out
+#SBATCH --err=output/prediction_both_step_2_sequences_small_%j.err
 
 
 module load python/3.11
@@ -18,7 +18,7 @@ source TEST/bin/activate
 
 cd ../sbc806/RumHKNet/src/
 # cat transformer_step_2_4_1.sh > /home/schen123/projects/rrg-guanuofa/schen123/kinases/sbc806/RumHKNet/bash_scripts_nibi/step_2/transformer/output/transformer_step_2_4_1_$SLURM_JOB_ID.txt
-./prediction_scripts/step_2/both/prediction_both_step_2.sh 0.3 03 clustered_rep_seq95_large_sorted_kinase
+./prediction_scripts/step_2/both/prediction_both_step_2.sh 0.2 02 5_isolate_step_1_kinase_small
 
 
 deactivate

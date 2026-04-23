@@ -18,7 +18,7 @@ source TEST/bin/activate
 
 
 cd ../sbc806/RumHKNet_develop/src/training/V3
-cat both_step_3_batch_no_matrix_dirpath.sh > /home/schen123/links/projects/def-guanuofa/schen123/kinases/sbc806_2/RumHKNet/bash_scripts_rorqual/step_3/both/output/both_step_3_class_no_matrix_dirpath_$SLURM_JOB_ID.txt
+cat both_step_3_batch_no_matrix_dirpath.sh > /home/schen123/links/projects/def-guanuofa/schen123/kinases/sbc806/RumHKNet_develop/bash_scripts_rorqual/step_3/both/output/2026_04_22_both_step_3_class_no_matrix_dirpath_$SLURM_JOB_ID.txt
 ./2026_04_22_both_step_3_batch_no_matrix_dirpath.sh
 
 

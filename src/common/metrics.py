@@ -79,7 +79,7 @@ def multi_class_pr_auc(targets, probs, average='macro'):
     return pr_auc
 
 
-def metrics_multi_class(targets, probs, average="macro",filter_131=False):
+def metrics_multi_class(targets, probs, average="macro",filter_131=True):
     '''
     metrics of multi-class classification
     :param targets: 1d-array class index (n_samples, )

@@ -131,10 +131,10 @@ def metrics_multi_class(targets, probs, average="macro",filter_131=False):
         z = probs.shape[1]
         new_targets = np.eye(z)[targets]
         pr_auc = average_precision_score(new_targets, probs, average=average)
-        if tiler_131:
+        if filter_131:
             print()
             print("PR-AUC, Filtering out column 131")
-            probs=np.concatenate((probs[:,131],probs[:,132:]),axis=-1)
+            probs=np.concatenate((probs[:,0:131],probs[:,132:]),axis=-1)
             print()
             pr_auc= average_precision_score(targets, probs, average=average)
         result.update({

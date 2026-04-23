@@ -84,7 +84,7 @@ weight=0.11074463418874006,0.11168330452632248,0.1242982812716562,0.146934738403
 time_str=$(date "+%Y%m%d%H%M%S")
 
 cd ../..
-python -u run.py \
+python -u run_step_4.py \
   --train_data_dir ../kinases_dataset/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/train/ \
   --dev_data_dir ../kinases_dataset/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/dev/ \
   --test_data_dir ../kinases_dataset/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/test/ \
@@ -100,7 +100,7 @@ python -u run.py \
   --seq_subword \
   --codes_file ../subword/$tokenizer_dir/$codes_file \
   --label_filepath ../kinases_dataset/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/label.txt  \
-  --output_dir ../models_both_step_3_batch_1/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/$MODEL_TYPE/$INPUT_TYPE/$time_str \
+  --output_dir ../2026_04_22_models_both_step_3_batch_1/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/$MODEL_TYPE/$INPUT_TYPE/$time_str \
   --log_dir ../logs/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/$MODEL_TYPE/$INPUT_TYPE/$time_str \
   --tb_log_dir ../tb-logs/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/$MODEL_TYPE/$INPUT_TYPE/$time_str \
   --config_path ../config/$MODEL_TYPE/$CONFIG_NAME \

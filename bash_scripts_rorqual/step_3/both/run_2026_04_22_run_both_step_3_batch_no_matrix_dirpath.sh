@@ -1,0 +1,25 @@
+#!/bin/bash
+#SBATCH --account=def-guanuofa
+#SBATCH --gpus=h100:1
+#SBATCH --mem=100G
+#SBATCH --time=12:0:0
+#SBATCH --job-name=2026-04-22-both-step-3-batch-no-matrix-dirpath
+#SBATCH --output=output/2026_04_22_both_step_3_batch_no_matrix_dirpath_%j.out
+#SBATCH --err=output/2026_04_22_both_step_3_batch_no_matrix_dirpath_%j.err
+
+
+module load python/3.11
+module load scipy-stack
+module load gcc arrow/19.0.1
+
+
+cd /home/schen123/links/projects/def-guanuofa/schen123/kinases/virtual_environments
+source TEST/bin/activate
+
+
+cd ../sbc806_2/RumHKNet/src/training/V3
+cat both_step_3_class_no_matrix_dirpath.sh > /home/schen123/links/projects/def-guanuofa/schen123/kinases/sbc806_2/RumHKNet/bash_scripts_rorqual/step_3/both/output/both_step_3_class_no_matrix_dirpath_$SLURM_JOB_ID.txt
+./both_step_3_class_no_matrix_dirpath.sh
+
+
+deactivate

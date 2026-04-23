@@ -110,18 +110,13 @@ def metrics_multi_class(targets, probs, average="macro",filter_131=False):
     })
     try:
         if filter_131:
-            print()
-            print("ROC-AUC, Filtering out column 131")
-            print("targets.shape:",targets.shape)
-            print("Unique targets:",np.unique(targets).shape)
-            for i in range(0,133):
-                if i not in targets:
-                    print(f"Missing {i}")
-            print("probs.shape",probs.shape)
-            probs=np.concatenate((probs[:,0:131],probs[:,132:]),axis=-1)
-            print("probs.shape after filtering:",probs.shape)
-            print()
-        roc_auc = roc_auc_score(targets, probs, average=average, multi_class='ovr')
+            roc_auc_scores=roc_auc_score(targets,probs,average=None,multi_class="ovr")
+            score_nan=np.where(np.isnan(roc_auc))[0]
+            assert len(score_nan)==1
+            assert score_nan[0]==131
+            roc_auc=np.mean(np.concatenate(roc_auc_scores[:131],roc_auc_scores[132:]))
+        else:
+            roc_auc = roc_auc_score(targets, probs, average=average, multi_class='ovr')
         result.update({
             "roc_auc": round(float(roc_auc), 6)
         })

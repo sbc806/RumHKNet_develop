@@ -123,6 +123,7 @@ def metrics_multi_class(targets, probs, average="macro",filter_131=True):
             "roc_auc": round(float(roc_auc), 6)
         })
     except Exception as e:
+        print(e)
         pass
     try:
         z = probs.shape[1]

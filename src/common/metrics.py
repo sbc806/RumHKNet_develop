@@ -113,7 +113,7 @@ def metrics_multi_class(targets, probs, average="macro",filter_131=False):
             roc_auc_scores=roc_auc_score(targets,probs,average=None,multi_class="ovr")
             score_nan=np.where(np.isnan(roc_auc))[0]
             assert len(score_nan)==1
-            assert score_nan[0]==131
+            assert int(score_nan[0])==131
             roc_auc=np.mean(np.concatenate((roc_auc_scores[:131],roc_auc_scores[132:])))
         else:
             roc_auc = roc_auc_score(targets, probs, average=average, multi_class='ovr')

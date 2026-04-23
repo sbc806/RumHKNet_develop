@@ -919,7 +919,8 @@ def main():
     if args.do_predict and args.local_rank in [-1, 0]:
         logger.info("++++++++++++Testing+++++++++++++")
         log_fp.write("++++++++++++Testing+++++++++++++\n")
-        global_step = max_metric_model_info["global_step"]
+        # global_step = max_metric_model_info["global_step"]
+        global_step = 1
         logger.info("best %s global step: %d" % (args.best_metric_type, global_step))
         log_fp.write("best %s global step: %d\n" % (args.best_metric_type, global_step))
         prefix = "checkpoint-{}".format(global_step)

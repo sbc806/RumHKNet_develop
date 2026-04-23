@@ -111,7 +111,7 @@ def metrics_multi_class(targets, probs, average="macro",filter_131=False):
     try:
         if filter_131:
             print()
-            print("Filtering out column 131")
+            print("ROC-AUC, Filtering out column 131")
             print("targets.shape:",targets.shape)
             print("Unique targets:",np.unique(targets).shape)
             for i in range(0,133):
@@ -131,6 +131,11 @@ def metrics_multi_class(targets, probs, average="macro",filter_131=False):
         z = probs.shape[1]
         new_targets = np.eye(z)[targets]
         pr_auc = average_precision_score(new_targets, probs, average=average)
+        if tiler_131:
+            print()
+            print("PR-AUC, Filtering out column 131")
+            probs=np.concatenate((probs[:,131],probs[:,132:]),axis=-1)
+            print()
         result.update({
             "pr_auc": round(float(pr_auc), 6),
         })

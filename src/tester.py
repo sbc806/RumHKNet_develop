@@ -25,7 +25,7 @@ except ImportError:
 logger = logging.getLogger(__name__)
 
 
-def test(args, model, parse_row_func, batch_data_func, prefix="", log_fp=None):
+def test(args, model, parse_row_func, batch_data_func, prefix="", log_fp=None,filter_131=False):
     '''
     evaluation
     :param args:

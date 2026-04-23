@@ -36,6 +36,8 @@ def test(args, model, parse_row_func, batch_data_func, prefix="", log_fp=None,fi
     :param log_fp:
     :return:
     '''
+    print("filter_131:",filter_131)
+    
     if hasattr(model, "module"):
         model = model.module
     save_output_dir = os.path.join(args.output_dir, prefix)

@@ -936,8 +936,6 @@ def main():
         model = model_class.from_pretrained(os.path.join(model_trained_dir_path,"extra_p_133_class_v3_batch/protein/multi_class/lucaprot/seq_matrix/20251209201835/checkpoint-100221"), args=args)
         model.to(args.device)
         result = test(args, model, parse_row_func, batch_data_func, prefix=prefix, log_fp=log_fp,filter_131=True)
-        for k,v in result.items():
-            print(k,v)
         result = dict(("evaluation_" + k + "_{}".format(global_step), v) for k, v in result.items())
         logger.info(json.dumps(result, ensure_ascii=False))
         log_fp.write(json.dumps(result, ensure_ascii=False) + "\n")

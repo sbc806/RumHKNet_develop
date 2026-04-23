@@ -930,7 +930,9 @@ def main():
             seq_tokenizer = seq_tokenizer_class.from_pretrained(checkpoint, do_lower_case=args.do_lower_case)
         logger.info("checkpoint path: %s" % checkpoint)
         log_fp.write("checkpoint path: %s\n" % checkpoint)
-        model = model_class.from_pretrained(checkpoint, args=args)
+        # model = model_class.from_pretrained(checkpoint, args=args)
+        model_trained_dir_path = "/home/schen123/scratch/kinases/sbc806/RumHKNet_develop/models_both_step_3_batch_1/models"
+        model = model_class.from_pretrained(os.path.join(model_trained_dir_path,"extra_p_133_class_v3_batch/protein/multi_class/lucaprot/seq_matrix/20251209201835/checkpoint-100221"))
         model.to(args.device)
         result = test(args, model, parse_row_func, batch_data_func, prefix=prefix, log_fp=log_fp)
         result = dict(("evaluation_" + k + "_{}".format(global_step), v) for k, v in result.items())

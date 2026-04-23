@@ -79,7 +79,7 @@ def multi_class_pr_auc(targets, probs, average='macro'):
     return pr_auc
 
 
-def metrics_multi_class(targets, probs, average="macro"):
+def metrics_multi_class(targets, probs, average="macro",filter_131=False):
     '''
     metrics of multi-class classification
     :param targets: 1d-array class index (n_samples, )
@@ -109,6 +109,15 @@ def metrics_multi_class(targets, probs, average="macro"):
         "top10_acc": round(float(topk_accuracy_score(targets, probs, k=10)), 6)
     })
     try:
+        if filter_131:
+            print()
+            print("Filtering out column 131")
+            print("targets.shape:",targets.shape)
+            print("Unique tragets:",np.unique(targets))
+            print("probs.shape",probs.shape)
+            probs=np.concatenate((probs[:,0:131],probs[:,132:]))
+            print("probs.shape after filtering:",probs.shape)
+            print()
         roc_auc = roc_auc_score(targets, probs, average=average, multi_class='ovr')
         result.update({
             "roc_auc": round(float(roc_auc), 6)

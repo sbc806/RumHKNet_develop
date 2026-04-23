@@ -119,7 +119,7 @@ def test(args, model, parse_row_func, batch_data_func, prefix="", log_fp=None,fi
             "total_loss": round(float(test_loss), 6)
         }
         if args.do_metrics and truths is not None and len(truths) > 0:
-            cur_test_metrics = eval_metrics(args.output_mode, truths, preds, threshold=0.5)
+            cur_test_metrics = eval_metrics(args.output_mode, truths, preds, threshold=0.5,filter_131=filter_131)
             cur_all_result.update(
                 cur_test_metrics
             )

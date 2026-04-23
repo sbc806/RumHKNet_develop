@@ -136,7 +136,9 @@ def metrics_multi_class(targets, probs, average="macro",filter_131=False):
             print("PR-AUC, Filtering out column 131")
             probs=np.concatenate((probs[:,0:131],probs[:,132:]),axis=-1)
             print()
+            print("Old PR-AUC:",round(float(pr_auc), 6))
             pr_auc= average_precision_score(targets, probs, average=average)
+            print("New PR-AUC:",round(float(pr_auc), 6))
         result.update({
             "pr_auc": round(float(pr_auc), 6),
         })

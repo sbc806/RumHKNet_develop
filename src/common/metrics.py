@@ -114,7 +114,7 @@ def metrics_multi_class(targets, probs, average="macro",filter_131=False):
             score_nan=np.where(np.isnan(roc_auc))[0]
             assert len(score_nan)==1
             assert score_nan[0]==131
-            roc_auc=np.mean(np.concatenate(roc_auc_scores[:131],roc_auc_scores[132:]))
+            roc_auc=np.mean(np.concatenate((roc_auc_scores[:131],roc_auc_scores[132:])))
         else:
             roc_auc = roc_auc_score(targets, probs, average=average, multi_class='ovr')
         result.update({
@@ -126,14 +126,6 @@ def metrics_multi_class(targets, probs, average="macro",filter_131=False):
         z = probs.shape[1]
         new_targets = np.eye(z)[targets]
         pr_auc = average_precision_score(new_targets, probs, average=average)
-        if filter_131:
-            print()
-            print("PR-AUC, Filtering out column 131")
-            probs=np.concatenate((probs[:,0:131],probs[:,132:]),axis=-1)
-            print()
-            print("Old PR-AUC:",round(float(pr_auc), 6))
-            pr_auc= average_precision_score(targets, probs, average=average)
-            print("New PR-AUC:",round(float(pr_auc), 6))
         result.update({
             "pr_auc": round(float(pr_auc), 6),
         })

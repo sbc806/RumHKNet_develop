@@ -112,6 +112,8 @@ def metrics_multi_class(targets, probs, average="macro",filter_131=True):
         if filter_131 == True:
             print("Using filter_131 for ROC-AUC")
             roc_auc_scores=roc_auc_score(targets,probs,average=None,multi_class="ovr")
+            print(targets.shape,probs.shape)
+            print(roc_auc_scores)
             score_nan=np.where(np.isnan(roc_auc_scores))[0]
             # assert len(score_nan)==1
             # assert int(score_nan[0])==131

@@ -113,9 +113,12 @@ def metrics_multi_class(targets, probs, average="macro",filter_131=False):
             print()
             print("Filtering out column 131")
             print("targets.shape:",targets.shape)
-            print("Unique tragets:",np.unique(targets))
+            print("Unique targets:",np.unique(targets).shape)
+            for i in range(0,133):
+                if i not in targets:
+                    print(f"Missing {i}")
             print("probs.shape",probs.shape)
-            probs=np.concatenate((probs[:,0:131],probs[:,132:]))
+            probs=np.concatenate((probs[:,0:131],probs[:,132:]),axis=-1)
             print("probs.shape after filtering:",probs.shape)
             print()
         roc_auc = roc_auc_score(targets, probs, average=average, multi_class='ovr')

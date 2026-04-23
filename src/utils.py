@@ -483,6 +483,7 @@ def eval_metrics(output_mode, truths, preds, threshold=0.5,filter_131=True):
     if output_mode in ["multi-label", "multi_label"]:
         return metrics_multi_label(truths, preds, threshold=threshold)
     elif output_mode in ["multi-class", "multi_class"]:
+        print("filter_131:",filter_131)
         return metrics_multi_class(truths, preds,filter_131=filter_131)
     elif output_mode == "regression":
         return metrics_regression(truths, preds)

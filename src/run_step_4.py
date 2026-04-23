@@ -926,6 +926,7 @@ def main():
         prefix = "checkpoint-{}".format(global_step)
         checkpoint = os.path.join(args.output_dir, prefix)
         if seq_tokenizer is None and seq_tokenizer_class:
+            print("seq_tokenizer is None and seq_tokenizer_class")
             sys.exit(1)
             seq_tokenizer = seq_tokenizer_class.from_pretrained(checkpoint, do_lower_case=args.do_lower_case)
         logger.info("checkpoint path: %s" % checkpoint)

@@ -871,6 +871,8 @@ def main():
         )
 
     # Training
+    # Start commented out here to do testing only
+    """
     max_metric_model_info = None
     if args.do_train:
         logger.info("++++++++++++Training+++++++++++++")
@@ -910,7 +912,9 @@ def main():
         result = dict(("evaluation_" + k + "_{}".format(global_step), v) for k, v in result.items())
         logger.info(json.dumps(result, ensure_ascii=False))
         log_fp.write(json.dumps(result, ensure_ascii=False) + "\n")
-
+    """
+    # End commented out here to do testing only
+    
     # Testing
     if args.do_predict and args.local_rank in [-1, 0]:
         logger.info("++++++++++++Testing+++++++++++++")

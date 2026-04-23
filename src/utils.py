@@ -469,7 +469,7 @@ def available_gpu_id():
     return max_available_gpu
 
 
-def eval_metrics(output_mode, truths, preds, threshold=0.5,filter_131=False):
+def eval_metrics(output_mode, truths, preds, threshold=0.5,filter_131=True):
     '''
     eval metrics
     :param output_mode:

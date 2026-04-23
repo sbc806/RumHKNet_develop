@@ -469,7 +469,7 @@ def available_gpu_id():
     return max_available_gpu
 
 
-def eval_metrics(output_mode, truths, preds, threshold=0.5):
+def eval_metrics(output_mode, truths, preds, threshold=0.5,filter_131=False):
     '''
     eval metrics
     :param output_mode:
@@ -483,7 +483,7 @@ def eval_metrics(output_mode, truths, preds, threshold=0.5):
     if output_mode in ["multi-label", "multi_label"]:
         return metrics_multi_label(truths, preds, threshold=threshold)
     elif output_mode in ["multi-class", "multi_class"]:
-        return metrics_multi_class(truths, preds)
+        return metrics_multi_class(truths, preds,filter_131=filter_131)
     elif output_mode == "regression":
         return metrics_regression(truths, preds)
     elif output_mode in ["binary-class", "binary_class"]:

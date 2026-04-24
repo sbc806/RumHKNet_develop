@@ -111,7 +111,9 @@ def metrics_multi_class(targets, probs, average="macro",filter_131=True):
     try:
         if filter_131 == True:
             print("Using filter_131 for ROC-AUC")
-            roc_auc_scores=roc_auc_score(targets,probs,average=None,multi_class="ovr")
+            z=probs.shape[1]
+            new_targets=np.eye(z)[targets]
+            roc_auc_scores=roc_auc_score(new_targets,probs,average=None,multi_class="ovr")
             print(targets.shape,probs.shape)
             print(roc_auc_scores)
             score_nan=np.where(np.isnan(roc_auc_scores))[0]
@@ -125,7 +127,7 @@ def metrics_multi_class(targets, probs, average="macro",filter_131=True):
             "roc_auc": round(float(roc_auc), 6)
         })
     except Exception as e:
-        print(e)
+        print("Exception:",e)
         pass
     try:
         z = probs.shape[1]

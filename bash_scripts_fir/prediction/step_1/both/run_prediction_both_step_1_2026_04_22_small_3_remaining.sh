@@ -5,7 +5,7 @@
 #SBATCH --time=1-0
 #SBATCH --job-name=prediction-both-step-1-2026-04-22-small-3-remaining
 #SBATCH --output=output/prediction_both_step_1_2026_04_22_small_3_remaining_%j.out
-#SBATCH --err=output/prediction_both_step_1_2026_04_22_small_3_%j.err
+#SBATCH --err=output/prediction_both_step_1_2026_04_22_small_3_remaining_%j.err
 
 
 module load python/3.11

@@ -3,9 +3,9 @@
 #SBATCH --gpus-per-node=h100:1
 #SBATCH --mem=64G
 #SBATCH --time=1-0
-#SBATCH --job-name=prediction-both-step-1-sequences-2026-04-22-small-2-remaining
-#SBATCH --output=output/prediction_both_step_1_sequences_2026_04_22_small_2_remaining_%j.out
-#SBATCH --err=output/prediction_both_step_1_sequences_2026_04_22_small_10_%j.err
+#SBATCH --job-name=prediction-both-step-1-2026-04-22-small-2-remaining
+#SBATCH --output=output/prediction_both_step_1_2026_04_22_small_2_remaining_%j.out
+#SBATCH --err=output/prediction_both_step_1_2026_04_22_small_10_%j.err
 
 
 module load python/3.11

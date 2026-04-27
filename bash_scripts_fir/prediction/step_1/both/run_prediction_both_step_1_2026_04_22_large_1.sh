@@ -2,7 +2,7 @@
 #SBATCH --account=def-guanuofa
 #SBATCH --gpus-per-node=h100:1
 #SBATCH --mem=64G
-#SBATCH --time=3-0
+#SBATCH --time=4:0:0
 #SBATCH --job-name=prediction-both-step-1-sequences-2026-04-22-large-1
 #SBATCH --output=output/prediction_both_step_1_sequences_2026_04_22_large_1_%j.out
 #SBATCH --err=output/prediction_both_step_1_sequences_2026_04_22_large_1_%j.err

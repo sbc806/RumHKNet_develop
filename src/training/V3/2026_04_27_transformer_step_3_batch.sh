@@ -84,7 +84,7 @@ weight=0.11074463418874006,0.11168330452632248,0.1242982812716562,0.146934738403
 time_str=$(date "+%Y%m%d%H%M%S")
 
 cd ../..
-python -u run.py \
+python -u run_transformer_step_4.py \
   --train_data_dir ../kinases_dataset/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/train/ \
   --dev_data_dir ../kinases_dataset/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/dev/ \
   --test_data_dir ../kinases_dataset/$DATASET_NAME/$DATASET_TYPE/$TASK_TYPE/test/ \

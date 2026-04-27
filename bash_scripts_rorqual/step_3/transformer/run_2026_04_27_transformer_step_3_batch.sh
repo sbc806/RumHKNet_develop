@@ -2,7 +2,7 @@
 #SBATCH --account=def-guanuofa
 #SBATCH --gpus-per-node=h100_3g.40gb:1
 #SBATCH --mem=32G
-#SBATCH --time=4-0
+#SBATCH --time=6:0:0
 #SBATCH --job-name=2026_04_27_transformer-step-3-batch
 #SBATCH --output=output/2026_04_27_transformer_step_3_batch_%j.out
 #SBATCH --err=output/2026_04_27_transformer_step_3_batch_%j.err

@@ -18,7 +18,7 @@ source TEST/bin/activate
 
 cd /home/schen123/scratch/kinases/sbc806/RumHKNet_develop/src/
 # cat transformer_step_2_4_1.sh > /home/schen123/projects/rrg-guanuofa/schen123/kinases/sbc806/RumHKNet/bash_scripts_nibi/step_2/transformer/output/transformer_step_2_4_1_$SLURM_JOB_ID.txt
-./prediction_scripts/step_3/both/prediction_both_step_3.sh 0.2 02 2026_clustered95_rep_seq_step_2_histidine_kinase_small 34551
+./prediction_scripts/step_3/both/prediction_both_step_3.sh 0.2 02 2026_04_22_clustered95_rep_seq_step_2_histidine_kinase_small 34551
 
 
 deactivate

@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --account=def-guanuofa
-#SBATCH --gpus-per-node=h100:1
+#SBATCH --gpus-per-node=nvidia_h100_80gb_hbm3_3g.40gb:1
 #SBATCH --mem=32G
-#SBATCH --time=1-0
+#SBATCH --time=6:0:0
 #SBATCH --job-name=prediction-both-step-4-2026-04-22-small-v2
 #SBATCH --output=output/prediction_both_step_4_2026_04_22_small_1_v2_%j.out
 #SBATCH --err=output/prediction_both_step_4_2026_04_22_small_1_v2_%j.err

@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --account=def-guanuofa
-#SBATCH --gpus=nvidia_h100_80gb_hbm3_3g.40gb:1
+#SBATCH --gpus=h100:1
 #SBATCH --mem=100G
 #SBATCH --time=7:0:0
 #SBATCH --job-name=2026-04-27-esm-step-3-batch-no-matrix-dirpath

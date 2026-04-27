@@ -932,8 +932,8 @@ def main():
         logger.info("checkpoint path: %s" % checkpoint)
         log_fp.write("checkpoint path: %s\n" % checkpoint)
         # model = model_class.from_pretrained(checkpoint, args=args)
-        model_trained_dir_path = "/home/schen123/scratch/kinases/sbc806/RumHKNet_develop/models_transformer_step_3_batch"
-        model = model_class.from_pretrained(os.path.join(model_trained_dir_path,"extra_p_133_class_v3_batch/protein/multi_class/lucaprot/seq/20251209200204/checkpoint-100221"), args=args)
+        model_trained_dir_path = "/home/schen123/links/projects/def-guanuofa/schen123/kinases/sbc806/RumHKNet_develop/models_transformer_step_3_batch"
+        model = model_class.from_pretrained(os.path.join(model_trained_dir_path,"extra_p_133_class_v3_batch/protein/multi_class/lucaprot/seq/20251112092645/checkpoint-534512"), args=args)
         model.to(args.device)
         result = test(args, model, parse_row_func, batch_data_func, prefix=prefix, log_fp=log_fp,filter_131=True)
         result = dict(("evaluation_" + k + "_{}".format(global_step), v) for k, v in result.items())

@@ -3,7 +3,7 @@
 #SBATCH --gpus-per-node=h100:1
 #SBATCH --mem=32G
 #SBATCH --time=3-0
-#SBATCH --job-name=prediction-both-step-1-9342-all-proteins-newrun-1-small-0-v3
+#SBATCH --job-name=prediction-both-step-1-9342-all-proteins-newrun-1-small-2-v3
 #SBATCH --output=output/prediction_both_step_1_9342_all_proteins_newrun_1_small_2_v3_%j.out
 #SBATCH --err=output/prediction_both_step_1_9342_all_proteins_newrun_1_small_2_v3_%j.err
 

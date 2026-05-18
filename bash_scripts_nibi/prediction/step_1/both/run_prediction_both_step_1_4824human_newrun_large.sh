@@ -5,7 +5,7 @@
 #SBATCH --time=3:0:0
 #SBATCH --job-name=prediction-both-step-1-4824human-newrun-large
 #SBATCH --output=output/prediction_both_step_1_4824human_newrun_large_%j.out
-#SBATCH --err=output/prediction_both_step_1_sequences_large_%j.err
+#SBATCH --err=output/prediction_both_step_1_4824human_newrun_large_%j.err
 
 
 module load python/3.11

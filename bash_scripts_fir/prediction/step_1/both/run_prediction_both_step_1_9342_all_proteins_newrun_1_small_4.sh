@@ -18,7 +18,7 @@ source TEST/bin/activate
 
 cd ../sbc806/RumHKNet_develop/src/
 # cat transformer_step_2_4_1.sh > /home/schen123/projects/rrg-guanuofa/schen123/kinases/sbc806/RumHKNet/bash_scripts_nibi/step_2/transformer/output/transformer_step_2_4_1_$SLURM_JOB_ID.txt
-./prediction_scripts/step_1/both/prediction_both_step_1_v3_fir.sh 0.2 02 9342_all_proteins_newrun_1_small_4_remaining 1500 50 _v3
+./prediction_scripts/step_1/both/prediction_both_step_1_v3_fir.sh 0.2 02 9342_all_proteins_newrun_1_small_4 1500 50 _v3
 
 
 deactivate

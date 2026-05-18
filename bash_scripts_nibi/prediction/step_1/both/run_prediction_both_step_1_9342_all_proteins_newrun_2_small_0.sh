@@ -1,11 +1,11 @@
 #!/bin/bash
 #SBATCH --account=rrg-guanuofa
-#SBATCH --gpus-per-node=h100:1
+#SBATCH --gpus-per-node=nvidia_h100_80gb_hbm3_3g.40gb:1
 #SBATCH --mem=32G
 #SBATCH --time=3-0
-#SBATCH --job-name=prediction-both-step-1-4824human-newrun-small-0-v3
-#SBATCH --output=output/prediction_both_step_1_4824human_newrun_small_0_v3_%j.out
-#SBATCH --err=output/prediction_both_step_1_4824human_newrun_small_0_v3_%j.err
+#SBATCH --job-name=prediction-both-step-1-9342-all-proteins-newrun-2-small-0-v3
+#SBATCH --output=output/prediction_both_step_1_9342_all_proteins_newrun_2_small_0_v3_%j.out
+#SBATCH --err=output/prediction_both_step_1_9342_all_proteins_newrun_2_small_0_v3_%j.err
 
 
 module load python/3.11

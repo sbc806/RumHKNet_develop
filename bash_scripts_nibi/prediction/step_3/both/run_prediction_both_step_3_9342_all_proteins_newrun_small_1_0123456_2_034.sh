@@ -4,7 +4,7 @@
 #SBATCH --mem=32G
 #SBATCH --time=1-0
 #SBATCH --job-name=prediction-both-step-3-9342-all-proteins-newrun-small-1-0123456-2-034-v3
-#SBATCH --output=output/prediction_both_step_3_9342_all_proteins_newrun_small-1_0123456_2_034_v3_%j.out
+#SBATCH --output=output/prediction_both_step_3_9342_all_proteins_newrun_small_1_0123456_2_034_v3_%j.out
 #SBATCH --err=output/prediction_both_step_3_9342_all_proteins_newrun_small-1_0123456_2_034_v3_%j.err
 
 

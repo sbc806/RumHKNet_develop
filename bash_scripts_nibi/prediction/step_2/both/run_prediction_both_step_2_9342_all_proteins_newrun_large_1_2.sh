@@ -3,9 +3,9 @@
 #SBATCH --gpus-per-node=h100:1
 #SBATCH --mem=32G
 #SBATCH --time=0:30:0
-#SBATCH --job-name=prediction-both-step-2-9342-all-proteins-newrun-large-1-2-v2
-#SBATCH --output=output/prediction_both_step_2_9342_all_proteins_newrun_large_1_2_v2_%j.out
-#SBATCH --err=output/prediction_both_step_2_9342_all_proteins_newrun_large_1_2_v2_%j.err
+#SBATCH --job-name=prediction-both-step-2-9342-all-proteins-newrun-large-1-2
+#SBATCH --output=output/prediction_both_step_2_9342_all_proteins_newrun_large_1_2_%j.out
+#SBATCH --err=output/prediction_both_step_2_9342_all_proteins_newrun_large_1_2_%j.err
 
 
 module load python/3.11

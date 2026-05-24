@@ -16,7 +16,7 @@ cd /home/schen123/projects/rrg-guanuofa/schen123/kinases/virtual_environments
 source TEST/bin/activate
 
 
-cd /home/schen123/scratch/kinases/sbc806/RumHKNet_develop/src/
+cd /home/schen123/scratch/kinases/sbc806_1/RumHKNet_develop/src/
 # cat transformer_step_2_4_1.sh > /home/schen123/projects/rrg-guanuofa/schen123/kinases/sbc806/RumHKNet/bash_scripts_nibi/step_2/transformer/output/transformer_step_2_4_1_$SLURM_JOB_ID.txt
 ./prediction_scripts/step_4/both/prediction_both_step_4.sh 0.2 02 4824human_newrun_step_3_histidine_kinase_family 34551 _v2
 

@@ -2,7 +2,7 @@
 #SBATCH --account=rrg-guanuofa
 #SBATCH --gpus-per-node=nvidia_h100_80gb_hbm3_3g.40gb:1
 #SBATCH --mem=32G
-#SBATCH --time=12:0:0
+#SBATCH --time=3:0:0
 #SBATCH --job-name=prediction-both-step-4-9342-all-proteins-remove2-small-3-large-v4
 #SBATCH --output=output/prediction_both_step_4_9342_all_proteins_remove2_small_3_large_v4_%j.out
 #SBATCH --err=output/prediction_both_step_4_9342_all_proteins_remove2_small_3_large_v4_%j.err

@@ -14,7 +14,7 @@ echo $extra
 python -u prediction_v4.py \
     --seq_type prot \
     --input_file $dir_path/predictions/predictions_dataset/step_3/clustered/$3.csv \
-    --model_path $dir_path_1/sbc806/RumHKNet_develop/models_step_3_both_11_family \
+    --model_path $dir_path_1/sbc806_1/RumHKNet_develop/models_step_3_both_11_family \
     --save_path $dir_path/predictions/predicted_results/step_3/both/clustered/ \
     --dataset_name step_3_11_family \
     --dataset_type protein \
